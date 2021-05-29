@@ -1,0 +1,27 @@
+{
+    "remotePath": "./jennjunseo.com/public_html/staging/wp-content/themes/hello-theme-child-master/",
+    "host": "jennjunseo.com",
+    "username": "brian@jennjunseo.com",
+    "password": "@*^5fgj?i?l@",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ""
+        ],
+        "path": ""
+    }
+}
