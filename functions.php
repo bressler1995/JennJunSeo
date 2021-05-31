@@ -27,8 +27,10 @@ function hello_elementor_child_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts' );
 
 function eccent_load_scripts() {
-    wp_register_script('eccentrik_ui', get_stylesheet_directory_uri() . '/js/uicontrol.js', '', 1, true);
+    wp_register_script('eccentrik_ui', get_stylesheet_directory_uri() . '/js/uicontrol.js', array('jquery'), 1, true);
     wp_enqueue_script('eccentrik_ui');
+	wp_localize_script( 'eccentrik_ui', 'themeDirURI', get_stylesheet_directory_uri() ) ;
+
 }
 
 add_action('wp_enqueue_scripts', 'eccent_load_scripts');

@@ -78,6 +78,10 @@ input:focus, input:active, textarea:focus, textarea:active {
     font-family: 'Montserrat', sans-serif !important;
 }
 
+a {
+    font-family: 'Montserrat', sans-serif;
+}
+
 input, textarea  {
     font-family: 'Montserrat', sans-serif !important;
 }
@@ -428,6 +432,14 @@ input, textarea  {
     box-sizing: border-box;
 }
 
+.jseo_pcontrols_left {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+
 .jseo_portfolio_controls {
     display: flex;
     flex-flow: row wrap;
@@ -442,7 +454,7 @@ input, textarea  {
     display: block;
     position: relative;
     width:35px !important;
-    height:35px !important;
+    height:37px !important;
     border:none !important;
     background: transparent;
     padding: 0 !important;
@@ -460,24 +472,24 @@ input, textarea  {
   display: block;
   margin:0 !important;
   width:35px !important;
-  height:35px !important;
+  height:37px !important;
 }
 
 .jseo_portfolio_select {
     display: block !important;
-    height: 35px !important;
-    line-height: 35px;
+    height: 37px !important;
+    line-height: 37px;
     width: 100% !important;
     padding: 0 !important;
     padding-left: 25px !important;
     padding-right: 25px !important;
-    font-size:14px;
+    font-size:13px !important;
     text-transform: uppercase;
     box-sizing: border-box !important;
     margin-right: 7px !important;
     border:none !important;
     color:#FFF !important;
-    font-weight: 400 !important;
+    font-weight: 600 !important;
     background-color: #302E4A !important;
     letter-spacing: 0.7px !important;
     border-radius: 5px !important;
@@ -506,7 +518,7 @@ input, textarea  {
     transform: scale(0.7);
 }
 
-.jseo_portfolio_select:hover .jseo_portofolio_description, .jseo_portfolio_select:active .jseo_portofolio_description, .jseo_portfolio_select:focus .jseo_portofolio_description {
+.jseo_portfolio_select:hover .jseo_portofolio_description, .jseo_portfolio_select:active .jseo_portofolio_description {
     visibility: visible;
     opacity: 1;
     transform: scale(1.0);
@@ -552,6 +564,7 @@ input, textarea  {
 
 .jseo_portfolio_content.grid {
     flex-flow: row wrap;
+    overflow: hidden;
 }
 
 .jseo_portfolio_content.grid .jseo_column {
@@ -574,19 +587,20 @@ input, textarea  {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    transition-delay: 0.15s;
     transform-origin: center;
     display: block;
     width:90%;
     height: auto;
     color: #FFF;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 23px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif !important;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0.6);
+    transform: translate(-50%, -50%);
     text-align: center;
     z-index: 3;
     opacity: 0;
@@ -596,20 +610,21 @@ input, textarea  {
 .jseo_portfolio_content.grid .jseo_column a:hover .jseo_portfolio_title, .jseo_portfolio_content.grid .jseo_column a:active .jseo_portfolio_title, .jseo_portfolio_content.grid .jseo_column a:focus .jseo_portfolio_title {
     opacity: 1 !important;
     visibility: visible !important;
-    transform: translate(-50%, -50%) scale(1.0) !important;
 }
 
 .jseo_portfolio_content.grid .jseo_column a:after {
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   content: '';
   width:100%;
   height:100%;
-  top:0;
-  left:0;
+  top:50%;
+  left:50%;
+  transform-origin: center;
+  transform:translate(-50%, -50%) scale(0.5);
   position:absolute;
   opacity:0;
   z-index:2;
@@ -624,10 +639,20 @@ input, textarea  {
 }
 
 .jseo_portfolio_content.grid .jseo_column a:hover:after, .jseo_portfolio_content.grid .jseo_column a:active:after, .jseo_portfolio_content.grid .jseo_column a:focus:after    {
-  opacity: 0.77 !important;
+    transform:translate(-50%, -50%) scale(1.0) !important;
+    opacity: 0.85 !important;
+}
+
+.jseo_portfolio_content.grid .jseo_column a:hover img {
+    transform: scale(1.2);
 }
 
 .jseo_portfolio_content.grid .jseo_column img {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
     display:block;
     position:absolute;
     width:100%;
@@ -645,18 +670,18 @@ input, textarea  {
     margin-top:30px;
 }
 
-.jseo_pagination span, .jseo_pagination a {
+.jseo_pagination span, .jseo_pagination a, .jseo_pagination button {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 3px;
-    line-height: 40px !important;
-    font-size: 13px !important;
+    line-height: 42px !important;
+    font-size: 14px !important;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     background-color: transparent;
@@ -666,16 +691,122 @@ input, textarea  {
     font-weight: 600;
 }
 
+.jseo_pagination button {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 3px;
+    text-align: center;
+    background-color: transparent;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    font-weight: 600;
+    box-sizing: border-box;
+    border: none !important;
+}
+
+.jseo_pagination button span {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    display: block;
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin:0;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #222;
+    background-color: transparent;
+}
+
 .jseo_pagination span, .jseo_pagination a:hover, .jseo_pagination span, .jseo_pagination a:active, .jseo_pagination span, .jseo_pagination a:focus {
     background-color: #E1E1E1;
 }
 
-.jseo_pagination .page-numbers.current {
+.jseo_pagination button:hover, .jseo_pagination button:active, .jseo_pagination button:focus {
+    background-color: #E1E1E1;
+    outline: none;
+}
+
+.jseo_pagination .page-numbers.current, .jseo_pagination button.current {
     background-color: #302E4A !important;
     color: #FFF !important;
 }
 
+.jseo_pagination button.current span {
+    color: #FFF !important;
+}
+
+.jseo_pcontrols_right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+.jseo_portfolio_catui {
+    display: flex;
+    flex-flow: row wrap;
+    padding:0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.jseo_portfolio_catui a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    font-size: 15px;
+    line-height: 19px;
+    color: #222;
+    font-weight: 400;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 7px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    color:#222;
+    letter-spacing: 0.5px;
+}
+
+.jseo_portfolio_catui a:hover, .jseo_portfolio_catui a:active, .jseo_portfolio_catui a:focus {
+    background-color: #E1E1E1;
+}
+
+.jseo_portfolio_catui a.active {
+    background-color: #4AB0ED;
+    color: #FFF;
+}
+
 @media (max-width: 767.9px) {
+    .jseo_portfolio_catui {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .jseo_pcontrols_left {
+        width: 100%;
+    }
+
+    .jseo_pcontrols_right {
+        width: 100%;
+    }
+
     .jseo_portfolio_select {
         max-width: calc(100% - 92px) !important;
     }
@@ -762,8 +893,24 @@ input, textarea  {
 }
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
+    .jseo_portfolio_catui {
+        justify-content: flex-end;
+    }
+
+    .jseo_portfolio_content.grid {
+        border-radius: 5px;
+    }
+
+    .jseo_pcontrols_left {
+        width: 250px;
+    }
+
+    .jseo_pcontrols_right {
+        width: calc(100% - 250px);
+    }
+
     .jseo_portfolio_select {
-        max-width: 250px !important;
+        max-width: calc(100% - 84px - 7px) !important;
     }
 
     .jseo_portfolio_select .jseo_portofolio_description {
@@ -896,8 +1043,24 @@ input, textarea  {
 }
 
 @media (min-width: 1025px) {
+    .jseo_portfolio_catui {
+        justify-content: flex-end;
+    }
+
+    .jseo_portfolio_content.grid {
+        border-radius: 5px;
+    }
+
+    .jseo_pcontrols_left {
+        width: 330px;
+    }
+
+    .jseo_pcontrols_right {
+        width: calc(100% - 330px);
+    }
+
     .jseo_portfolio_select {
-        max-width: 220px !important;
+        max-width: calc(100% - 84px - 7px) !important;
     }
 
     .jseo_portfolio_select .jseo_portofolio_description {
@@ -915,8 +1078,8 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.grid .jseo_column {
-        width:33%;
-        height:380px;
+        width:25%;
+        height:350px;
     }
 
     .eccent_story_image:before {
