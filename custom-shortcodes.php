@@ -8,23 +8,10 @@
     function jseo_show_function() {
         global $jseo_filterparam;
 
+        $jseo_currentopt_name = '';
         $jseo_hoverDescription = '';
         $jseo_contentClass = '';
-
-        if($jseo_filterparam == 'all') {
-            $jseo_hoverDescription = 'All projects are being displayed.';
-        } else if($jseo_filterparam == 'graphic-design') {
-            $jseo_hoverDescription = 'Graphic Design projects are being displayed.';
-        } else if($jseo_filterparam == 'visual-design') {
-            $jseo_hoverDescription = 'Visual Design projects are being displayed.';
-        } else if($jseo_filterparam == 'game-design') {
-            $jseo_hoverDescription = 'Game Design projects are being displayed.';
-        } else if($jseo_filterparam == 'uiux-design') {
-            $jseo_hoverDescription = 'UX / UI projects are being displayed.';
-        } else {
-            $jseo_filterparam = 'all';
-            $jseo_hoverDescription = 'All projects are being displayed.';
-        }
+        $jseo_has_cat = false;
 
         $jseo_catui_output = '<div id="jseo_portfolio_catui" class="jseo_portfolio_catui">';
         $jseo_taxcategories = get_terms( array(
@@ -34,6 +21,9 @@
 
         if($jseo_filterparam == 'all') {
             $jseo_catui_output .= '<a class="active" data-slug="all" href="javascript:void(0);">All</a>';
+            $jseo_hoverDescription = 'All projects are being displayed.';
+            $jseo_has_cat = true;
+            $jseo_currentopt_name = 'All';
         } else {
             $jseo_catui_output .= '<a data-slug="all" href="javascript:void(0);">All</a>';
         }
@@ -47,6 +37,9 @@
                     $jseo_cat_class = '';
                     if($jseo_cat_slug == $jseo_filterparam) {
                         $jseo_cat_class = 'active';
+                        $jseo_hoverDescription = $jseo_cat_name . ' projects are being displayed.';
+                        $jseo_has_cat = true;
+                        $jseo_currentopt_name = $jseo_cat_name;
                     }
 
                     $jseo_catui_output .= '<a class="' . $jseo_cat_class . '" data-slug="' . $jseo_cat_slug . '" href="javascript:void(0);">' . $jseo_cat_name . '</a>';
@@ -55,14 +48,21 @@
          }
 
          $jseo_catui_output .= '</div>';
-        
+
+
+         if($jseo_has_cat == false) {
+             $jseo_filterparam = 'all';
+             $jseo_hoverDescription = 'Something weird happened...';
+             $jseo_currentopt_name = 'All';
+         }
 
         $jseo_markdown = '<div class="jseo_portfolio" id="jseo_portfolio">
         <div class="jseo_portfolio_controls">
             <div class="jseo_pcontrols_left">
                 <button type="button" class="jseo_portfolio_opt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_left.png"></button>
-                <button type="button" id="jseo_portfolio_all" class="jseo_portfolio_select">All
-                    <div class="jseo_portofolio_description"><span>' . $jseo_hoverDescription . '</span></div>
+                <button type="button" id="jseo_portfolio_all" class="jseo_portfolio_select">' . 
+                    $jseo_currentopt_name . 
+                    '<div class="jseo_portofolio_description"><span>' . $jseo_hoverDescription . '</span></div>
                 </button>
                 <button type="button" class="jseo_portfolio_opt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_right.png"></button>
             </div>
