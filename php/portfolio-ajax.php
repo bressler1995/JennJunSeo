@@ -121,6 +121,31 @@
                 $the_featured_image = get_the_post_thumbnail_url($the_id);
                 $the_permalink = get_permalink($the_id);
                 $the_title = get_the_title($the_id);
+                $the_excerpt = get_the_excerpt($the_id);
+                $the_date = get_the_date('Y-m-d', $the_id);
+
+                if($the_date == false) {
+                    $the_date = 'Date Missing';
+                }
+
+                $the_gallery_array = get_field('gallery_images', $the_id);
+                $the_files_array = get_field('downloadable_files', $the_id);
+                $the_collab_array = get_field('collaborators', $the_id);
+                $the_gallery_count = 0;
+                $the_files_count = 0;
+                $the_collab_count = 0;
+
+                if(empty($the_gallery_array) == false && isset($the_gallery_array)) {
+                    $the_gallery_count = count($the_gallery_array);
+                }
+
+                if(empty($the_files_array) == false && isset($the_files_array)) {
+                    $the_files_count = count($the_files_array);
+                }
+
+                if(empty($the_collab_array) == false && isset($the_collab_array)) {
+                    $the_collab_count = count($the_collab_array);
+                }
 
                 if(isset($the_featured_image)) {
                     // $jseo_markdown .= '<div class="jseo_column"><a href="' . $the_permalink . '"><img src="' . $the_featured_image . '"><span class="jseo_portfolio_title">' . $the_title . '</span></a></div>';
@@ -128,7 +153,12 @@
                         "the_id"=>$the_id,
                         "the_featured_image"=>$the_featured_image,
                         "the_permalink"=>$the_permalink,
-                        "the_title"=>$the_title
+                        "the_title"=>$the_title,
+                        "the_excerpt"=>$the_excerpt,
+                        "the_gallery_count"=>$the_gallery_count,
+                        "the_files_count"=>$the_files_count,
+                        "the_collab_count"=>$the_collab_count,
+                        "the_date"=>$the_date
                     );
     
                     array_push($jseo_post_storage, $the_post_object);

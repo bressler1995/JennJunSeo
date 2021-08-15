@@ -13,6 +13,7 @@ jQuery( document ).ready(function() {
     let current_entry_max = 0;
     let no_of_pages = 0;
     let current_page = 0;
+    let voff_init = false;
 
     let urlParams = new URLSearchParams(window.location.search);
     let filterParam = urlParams.get('filter');
@@ -73,6 +74,8 @@ jQuery( document ).ready(function() {
     }
 
     function changePage(targetPage) {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        
         current_page = targetPage;
         console.log("Change Page: " + current_page);
 
@@ -81,13 +84,17 @@ jQuery( document ).ready(function() {
         for(z = 0 + (targetPage * current_entry_max - current_entry_max); z < targetPage * current_entry_max; z++) {
             if(current_post_storage[z] != null) {
                 if(jseo_portfolio_content.classList.contains("grid")) {
-                    jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                    // jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
                     // jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
                 }
             } 
+        }
+
+        if(jseo_portfolio_content.classList.contains("voffset")) {
+            voff_animation();
         }
 
         setTimeout(function(){
@@ -96,12 +103,12 @@ jQuery( document ).ready(function() {
             }
         }, 300);
 
-        window.scrollTo(0,document.body.scrollHeight - jseo_footer.clientHeight - 170);
     }
 
     function load_portfolio(slug) {
 
         console.log("Attempting to load slug: " + slug);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         jseo_portfolio_content.innerHTML = "";
         jseo_pagination.innerHTML = "";
 
@@ -162,13 +169,17 @@ jQuery( document ).ready(function() {
                     for(z = 0; z < current_entry_max; z++) {
                         if(current_post_storage[z] != null) {
                             if(jseo_portfolio_content.classList.contains("grid")) {
-                                jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                                // jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
                                 // jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
                             }
                         } 
+                    }
+
+                    if(jseo_portfolio_content.classList.contains("voffset")) {
+                        voff_animation();
                     }
 
                     setTimeout(function(){
@@ -181,15 +192,18 @@ jQuery( document ).ready(function() {
                 
         }
         };
+
         xhttp.open("POST", themeDirURI + "/php/portfolio-ajax.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("filter=" + slug);
     }
 
-    if(filterParam == '' || filterParam == null) {
-        load_portfolio('all');
-    } else {
-        load_portfolio(filterParam);
+    if(jseo_portfolio_content != null) {
+        if(filterParam == '' || filterParam == null) {
+            load_portfolio('all');
+        } else {
+            load_portfolio(filterParam);
+        }
     }
 
     function grid_animation() {
@@ -200,8 +214,58 @@ jQuery( document ).ready(function() {
         }
     }
 
+    function voff_animation() {
+        if(voff_init == false) {
+            voff_init = true;
+            window.addEventListener('scroll',(event) => {
+                console.log('Scrolling...');
+                let voff_animation = document.getElementsByClassName("voff_animation");
+                for(v = 0; v < voff_animation.length; v++) {
+                    if(isElementInViewport(voff_animation[v])) {
+                        voff_animation[v].classList.add("show");
+                    }
+                }
+            });
+
+            window.addEventListener('resize', function(){
+                console.log('Resizing...');
+                let voff_animation = document.getElementsByClassName("voff_animation");
+                for(v = 0; v < voff_animation.length; v++) {
+                    if(isElementInViewport(voff_animation[v])) {
+                        voff_animation[v].classList.add("show");
+                    }
+                }
+            });
+
+        }
+
+        setTimeout(function(){
+            let voff_animation = document.getElementsByClassName("voff_animation");
+            for(v = 0; v < voff_animation.length; v++) {
+                if(isElementInViewport(voff_animation[v])) {
+                    voff_animation[v].classList.add("show");
+                }
+            }
+        }, 300);
+    }
+
     function doSetGridTimeOut(gridobject, multiplier) {
         setTimeout(function() { gridobject.classList.add("show") }, multiplier * 100);
-      }
+    }
+
+    function isElementInViewport(el) {
+
+        // Special bonus for those using jQuery
+        if (typeof jQuery === "function" && el instanceof jQuery) {
+            el = el[0];
+        }
+    
+        var rect = el.getBoundingClientRect();
+        console.log(rect);
+    
+        return (
+            rect.top < window.innerHeight && rect.bottom >= 0
+        );
+    }
 
 });
