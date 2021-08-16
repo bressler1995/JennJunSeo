@@ -777,6 +777,7 @@ input, textarea  {
 }
 
 .jseo_portfolio_content.voffset .jseo_portfolio_meta .jseo_portfolio_meta_item {
+  cursor: default;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -785,6 +786,8 @@ input, textarea  {
   display: flex;
   flex-flow: row wrap;
   padding: 7px;
+  padding-left: 9px;
+  padding-right: 9px;
   line-height: 24px;
   width: auto;
   height: auto;
@@ -793,6 +796,10 @@ input, textarea  {
   font-weight: 400;
   border-right: 0.5px solid rgba(255, 255, 255, 0.2);
   margin-right: 7px;
+}
+
+.jseo_portfolio_content.voffset .jseo_portfolio_meta .jseo_portfolio_meta_item:last-of-type {
+    border:none !important;
 }
 
 .jseo_portfolio_content.voffset .jseo_portfolio_meta .jseo_portfolio_meta_item:hover, .jseo_portfolio_content.voffset .jseo_portfolio_meta .jseo_portfolio_meta_item:active, .jseo_portfolio_content.voffset .jseo_portfolio_meta .jseo_portfolio_meta_item:focus {
@@ -1027,7 +1034,9 @@ input, textarea  {
 
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f2 {
         width: 100%;
-        padding: 25px;
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
