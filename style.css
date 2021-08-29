@@ -1200,6 +1200,20 @@ input, textarea  {
     color: #FFF;
 }
 
+.jseo_portfolio_content.vplain .jseo_column.vplain_animation {
+    -webkit-transition: all 0.7s 0s ease !important;
+    -moz-transition: all 0.7s 0s ease !important;
+    -o-transition: all 0.7s 0s ease !important;
+    transition: all 0.7s 0s ease !important;
+    transform: rotate3d(0.5,0.5,0, 50deg);
+    opacity: 0;
+}
+
+.jseo_portfolio_content.vplain .jseo_column.vplain_animation.show {
+    transform: rotate3d(1,0,1, 0deg) !important;
+    opacity: 1 !important;
+}
+
 @media (max-width: 767.9px) {
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {

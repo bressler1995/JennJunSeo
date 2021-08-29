@@ -82,13 +82,23 @@ jQuery( document ).ready(function() {
         jseo_portfolio_content.innerHTML = "";
 
         for(z = 0 + (targetPage * current_entry_max - current_entry_max); z < targetPage * current_entry_max; z++) {
+            let thenum = z + 1;
+            let thenumformatted = "";
+            
+            if(thenum < 10) {
+                thenumformatted = "0" + thenum;
+            } else {
+                thenumformatted = thenum;
+            }
+
             if(current_post_storage[z] != null) {
                 if(jseo_portfolio_content.classList.contains("grid")) {
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
-                    // jseo_portfolio_content.innerHTML = jseo_portfolio_content.innerHTML + '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                    let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '"><span>Files: ' + current_post_storage[z]['the_files_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/collaboration.svg" + '"><span>Collaborators: ' + current_post_storage[z]['the_collab_count'] + '</span></li></ul></div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                 }
             } 
         }
@@ -96,6 +106,12 @@ jQuery( document ).ready(function() {
         if(jseo_portfolio_content.classList.contains("voffset")) {
             voff_animation();
         }
+
+        setTimeout(function(){
+            if(jseo_portfolio_content.classList.contains("vplain")) {
+                vplain_animation();
+            }
+        }, 300);
 
         setTimeout(function(){
             if(jseo_portfolio_content.classList.contains("grid")) {
@@ -182,7 +198,7 @@ jQuery( document ).ready(function() {
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
                                 let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '"><span>Files: ' + current_post_storage[z]['the_files_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/collaboration.svg" + '"><span>Collaborators: ' + current_post_storage[z]['the_collab_count'] + '</span></li></ul></div></div>';
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                             }
                         } 
                     }
@@ -190,6 +206,12 @@ jQuery( document ).ready(function() {
                     if(jseo_portfolio_content.classList.contains("voffset")) {
                         voff_animation();
                     }
+
+                    setTimeout(function(){
+                        if(jseo_portfolio_content.classList.contains("vplain")) {
+                            vplain_animation();
+                        }
+                    }, 300);
 
                     setTimeout(function(){
                         if(jseo_portfolio_content.classList.contains("grid")) {
@@ -220,6 +242,14 @@ jQuery( document ).ready(function() {
         
         for(i = 0; i < jseo_grid_link.length; i++) {
             doSetGridTimeOut(jseo_grid_link[i], i);
+        }
+    }
+
+    function vplain_animation() {
+        let vplain_link = document.getElementsByClassName("vplain_animation");
+        
+        for(i = 0; i < vplain_link.length; i++) {
+            doSetVPlainTimeOut(vplain_link[i], i);
         }
     }
 
@@ -256,6 +286,10 @@ jQuery( document ).ready(function() {
                 }
             }
         }, 300);
+    }
+
+    function doSetVPlainTimeOut(vplainobject, multiplier) {
+        setTimeout(function() { vplainobject.classList.add("show") }, multiplier * 300);
     }
 
     function doSetGridTimeOut(gridobject, multiplier) {
