@@ -59,12 +59,12 @@
         $jseo_markdown = '<div class="jseo_portfolio" id="jseo_portfolio">
         <div class="jseo_portfolio_controls">
             <div class="jseo_pcontrols_left">
-                <button type="button" class="jseo_portfolio_opt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_left.png"></button>
+                <button type="button" class="jseo_portfolio_opt" id="jseo_portfolio_prevOpt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_left.png"></button>
                 <button type="button" id="jseo_portfolio_all" class="jseo_portfolio_select">' . 
                     $jseo_currentopt_name . 
                     '<div class="jseo_portofolio_description"><span>' . $jseo_hoverDescription . '</span></div>
                 </button>
-                <button type="button" class="jseo_portfolio_opt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_right.png"></button>
+                <button type="button" class="jseo_portfolio_opt" id="jseo_portfolio_nextOpt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_right.png"></button>
             </div>
             <div class="jseo_pcontrols_right">' .
                 $jseo_catui_output .

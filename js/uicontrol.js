@@ -4,7 +4,11 @@ jQuery( document ).ready(function() {
     let eccent_mobile_close = document.getElementById("eccent_mobile_close");
     let eccent_menu_mobile = document.getElementById("eccent_menu_mobile");
     let jseo_portfolio_content = document.getElementById("jseo_portfolio_content");
+
     let jseo_portfolio_catui = document.getElementById("jseo_portfolio_catui");
+    let jseo_portfolio_nextOpt = document.getElementById("jseo_portfolio_nextOpt");
+    let jseo_portfolio_prevOpt = document.getElementById("jseo_portfolio_prevOpt");
+
     let jseo_pagination = document.getElementById("jseo_pagination");
     let jseo_footer = document.getElementById("jseo_footer");
     let jseo_portfolio_all = document.getElementById("jseo_portfolio_all");
@@ -84,7 +88,7 @@ jQuery( document ).ready(function() {
         for(z = 0 + (targetPage * current_entry_max - current_entry_max); z < targetPage * current_entry_max; z++) {
             let thenum = z + 1;
             let thenumformatted = "";
-            
+
             if(thenum < 10) {
                 thenumformatted = "0" + thenum;
             } else {
@@ -237,6 +241,22 @@ jQuery( document ).ready(function() {
         }
     }
 
+    function inject_portfolio_ui_controls() {
+        console.log("Injecting portfolio UI controls...");
+
+        jseo_portfolio_prevOpt.addEventListener("click", function(){
+
+        });
+
+        jseo_portfolio_nextOpt.addEventListener("click", function(){
+            
+        });
+    }
+
+    if(jseo_portfolio_catui != null && jseo_portfolio_prevOpt != null && jseo_portfolio_nextOpt != null) {
+        inject_portfolio_ui_controls();
+    }
+
     function grid_animation() {
         let jseo_grid_link = document.getElementsByClassName("jseo_grid_link");
         
@@ -257,23 +277,31 @@ jQuery( document ).ready(function() {
         if(voff_init == false) {
             voff_init = true;
             window.addEventListener('scroll',(event) => {
-                console.log('Scrolling...');
-                let voff_animation = document.getElementsByClassName("voff_animation");
-                for(v = 0; v < voff_animation.length; v++) {
-                    if(isElementInViewport(voff_animation[v])) {
-                        voff_animation[v].classList.add("show");
+
+                if(jseo_portfolio_content.classList.contains("voffset")) {
+                    // console.log('Scrolling...');
+                    let voff_animation = document.getElementsByClassName("voff_animation");
+                    for(v = 0; v < voff_animation.length; v++) {
+                        if(isElementInViewport(voff_animation[v])) {
+                            voff_animation[v].classList.add("show");
+                        }
                     }
                 }
+                
             });
 
-            window.addEventListener('resize', function(){
-                console.log('Resizing...');
-                let voff_animation = document.getElementsByClassName("voff_animation");
-                for(v = 0; v < voff_animation.length; v++) {
-                    if(isElementInViewport(voff_animation[v])) {
-                        voff_animation[v].classList.add("show");
+            window.addEventListener('resize', function() {
+
+                if(jseo_portfolio_content.classList.contains("voffset")) {
+                    // console.log('Resizing...');
+                    let voff_animation = document.getElementsByClassName("voff_animation");
+                    for(v = 0; v < voff_animation.length; v++) {
+                        if(isElementInViewport(voff_animation[v])) {
+                            voff_animation[v].classList.add("show");
+                        }
                     }
                 }
+
             });
 
         }
@@ -304,7 +332,7 @@ jQuery( document ).ready(function() {
         }
     
         var rect = el.getBoundingClientRect();
-        console.log(rect);
+        // console.log(rect);
     
         return (
             rect.top < window.innerHeight && rect.bottom >= 0
