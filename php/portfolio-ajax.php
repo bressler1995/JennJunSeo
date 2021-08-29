@@ -27,6 +27,10 @@
         if($request_filter == 'all') {
             $jseo_category_exists = true;
         } else {
+            if($request_filter == 'game-design') {
+                $jseo_entrymax = 6;
+            }
+
             for($x = 0; $x < count($jseo_catslug_array); $x++) {
                 if($request_filter == $jseo_catslug_array[$x]) {
                    $jseo_category_exists = true;
