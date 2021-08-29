@@ -1072,7 +1072,7 @@ input, textarea  {
     object-position: center;
 }
 
-.jseo_portfolio_content.vplain .jseo_column:hover .vplain_information {
+.jseo_portfolio_content.vplain .jseo_column:hover .vplain_information, .jseo_portfolio_content.vplain .jseo_column:active .vplain_information, .jseo_portfolio_content.vplain .jseo_column:focus .vplain_information {
     transform: translateY(-15px);
 }
 
@@ -1086,8 +1086,7 @@ input, textarea  {
   height: auto;
   padding: 12px;
   position: absolute;
-  left: -45px;
-  bottom: 30px;
+  bottom: 35px;
   color: #FFF;
   border-radius: 3px;
   -webkit-box-shadow: 5px 5px 10px 2px rgba(0,0,0,0.20); 
@@ -1096,15 +1095,26 @@ input, textarea  {
 }
 
 .jseo_portfolio_content.vplain .jseo_column div.vplain_information .jseo_portfolio_title {
+    -webkit-transition: all 0.3s 0s ease;
+    -moz-transition: all 0.3s 0s ease;
+    -o-transition: all 0.3s 0s ease;
+    transition: all 0.3s 0s ease;
     display: block;
     font-family: 'Moon' !important;
     font-size: 18px;
     line-height: 22px;
     font-weight: 600;
     text-transform: uppercase;
+    margin:0;
     margin-bottom: 7px !important;
     letter-spacing: 0.7;
     width: 100%;
+    text-decoration: none;
+    color: #FFF !important;
+}
+
+.jseo_portfolio_content.vplain .jseo_column div.vplain_information .jseo_portfolio_title:hover, .jseo_portfolio_content.vplain .jseo_column div.vplain_information .jseo_portfolio_title:active, .jseo_portfolio_content.vplain .jseo_column div.vplain_information .jseo_portfolio_title:focus {
+    opacity: 0.7;
 }
 
 .jseo_portfolio_content.vplain .jseo_column div.vplain_information .jseo_portfolio_description {
@@ -1192,6 +1202,10 @@ input, textarea  {
 
 @media (max-width: 767.9px) {
 
+    .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
+        left: -32px;
+    }
+
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
         font-size: 40px;
         font-size: 42px;
@@ -1202,8 +1216,9 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
-        margin: 30px;
-        width: calc(100% - 60px);
+        margin: 35px;
+        margin-right: 0 !important;
+        width: calc(100% - 35px);
     }
 
     .jseo_portfolio_content.voffset {
@@ -1340,6 +1355,10 @@ input, textarea  {
 }
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
+
+    .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
+        left: -40px;
+    }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
         font-size: 46px;
@@ -1563,6 +1582,7 @@ input, textarea  {
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
         padding-top: 25px;
         padding-bottom: 25px;
+        left: -45px;
     }
 
     .jseo_portfolio_catui {
