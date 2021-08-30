@@ -8,6 +8,8 @@ jQuery( document ).ready(function() {
     let jseo_portfolio_catui = document.getElementById("jseo_portfolio_catui");
     let jseo_portfolio_nextOpt = document.getElementById("jseo_portfolio_nextOpt");
     let jseo_portfolio_prevOpt = document.getElementById("jseo_portfolio_prevOpt");
+    let uicurrent = -1;
+    let uilength = - 1;
 
     let jseo_pagination = document.getElementById("jseo_pagination");
     let jseo_footer = document.getElementById("jseo_footer");
