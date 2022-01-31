@@ -51,6 +51,32 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 					</div>
 				</div>
 			</div>
+			<div id="jseo_lightbox_pdf" class="jseo_lightbox_pdf">
+				<div id="jseo_lightbox_pdf_container" class="jseo_lightbox_pdf_container">
+					<div id="jseo_lightbox_pdf_media" class="jseo_lightbox_pdf_media">
+
+					    <div id="jseo_pdfreader_container" class="jseo_pdfreader_container">
+							<!-- <div class="jseo_pdfreader_loader" id="loader">Loading ......</div>
+							<div class="jseo_pdfreader_controls">
+								<button class="pdfviewer_nav" id="prev_page">Previous Page</button>
+								<button class="pdfviewer_nav" id="next_page">Next Page</button>
+								<span id="current_page_num"></span>
+									of
+								<span id="total_page_num"></span>
+									
+								<input type="text" id="page_num">
+								<button id="go_to_page">Go To Page</button>
+							</div>
+							<canvas class="pdf_canvas" id="pdf_canvas"></canvas> -->
+							
+						</div>
+
+					</div>
+					<div class="jseo_lightbox_pdf_text">
+						<h3 id="jseo_lbpdf_title">Lorem Ipsum</h3>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>

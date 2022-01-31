@@ -30,6 +30,7 @@ function eccent_load_scripts() {
     wp_register_script('eccentrik_ui', get_stylesheet_directory_uri() . '/js/uicontrol.js', array('jquery'), 1, true);
     wp_enqueue_script('eccentrik_ui');
 	wp_localize_script( 'eccentrik_ui', 'themeDirURI', get_stylesheet_directory_uri() ) ;
+	// wp_enqueue_script('eccentrik_pdfjs', get_stylesheet_directory_uri() . '/js/pdf.js', array('jquery'), 1, true);
 
 }
 
