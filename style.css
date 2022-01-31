@@ -103,7 +103,7 @@ input, textarea  {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    max-width: 1700px;
+    max-width: 1740px;
     box-sizing: border-box;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -137,6 +137,10 @@ input, textarea  {
     letter-spacing: 0.7px;
     border-radius: 3px;
     margin-right: 7px;
+}
+
+.eccent_menu_desktop li:last-of-type a {
+    margin:0;
 }
 
 .eccent_menu_desktop .current-menu-item a {
@@ -573,13 +577,16 @@ input, textarea  {
     position: relative;
     background-color:#000;
     overflow: hidden;
+    height: auto;
 }
 
 .jseo_portfolio_content.grid .jseo_column a {
     display:block;
-    position:relative;
+    position:absolute;
     width:100%;
     height:100%;
+    left:0;
+    top:0;
 }
 
 .jseo_portfolio_content.voffset {
@@ -675,19 +682,60 @@ input, textarea  {
     display: block;
     width:90%;
     height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.jseo_portfolio_content.grid .jseo_grid_icon {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+    justify-content: center;
+}
+
+.jseo_portfolio_content.grid .jseo_grid_icon .jgrid_iconobj {
+    display: block;
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.jseo_portfolio_content.grid .jseo_grid_icon .jgrid_iconobj img.jgrid_iconobj_img {
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.jseo_portfolio_content.grid .jseo_column:nth-child(odd) .jseo_grid_icon .jgrid_iconobj img.jgrid_iconobj_img {
+    filter: invert(75%) sepia(44%) saturate(4255%) hue-rotate(174deg) brightness(97%) contrast(92%);
+}
+
+.jseo_portfolio_content.grid .jseo_column:nth-child(even) .jseo_grid_icon .jgrid_iconobj img.jgrid_iconobj_img {
+    filter: invert(82%) sepia(39%) saturate(856%) hue-rotate(279deg) brightness(93%) contrast(96%);
+}
+
+.jseo_portfolio_content.grid .jseo_portfolio_title span {
+    display: block;
     color: #FFF;
     font-size: 15px;
     line-height: 23px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif !important;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 3;
-    opacity: 0;
-    visibility: hidden;
+    width: 100%;
 }
 
 .jseo_portfolio_content.voffset .jseo_portfolio_title {
@@ -871,11 +919,11 @@ input, textarea  {
     opacity: 0.85 !important;
 }
 
-.jseo_portfolio_content.grid .jseo_column a:hover img {
+.jseo_portfolio_content.grid .jseo_column a:hover img.the_featured_image, .jseo_portfolio_content.grid .jseo_column a:active img.the_featured_image, .jseo_portfolio_content.grid .jseo_column a:focus img.the_featured_image {
     transform: scale(1.2);
 }
 
-.jseo_portfolio_content.grid .jseo_column img {
+.jseo_portfolio_content.grid .jseo_column img.the_featured_image {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
@@ -1107,7 +1155,7 @@ input, textarea  {
     text-transform: uppercase;
     margin:0;
     margin-bottom: 7px !important;
-    letter-spacing: 0.7;
+    letter-spacing: 1.2px;
     width: 100%;
     text-decoration: none;
     color: #FFF !important;
@@ -1214,7 +1262,305 @@ input, textarea  {
     opacity: 1 !important;
 }
 
+.jseo_lightbox {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:-9999px;
+    visibility: hidden;
+    z-index: -9999;
+}
+
+.jseo_lightbox.show {
+    left:0 !important;
+    z-index: 999 !important;
+    visibility: visible !important;
+}
+
+.jseo_lightbox_overlay {
+    -webkit-transition: opacity 0.7s 0s ease;
+    -moz-transition: opacity 0.7s 0s ease;
+    -o-transition: opacity 0.7s 0s ease;
+    transition: opacity 0.7s 0s ease;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    z-index: 1;
+}
+
+.jseo_lightbox .jseo_lightbox_overlay.show {
+    opacity: 1 !important;
+}
+
+.jseo_lightbox_ui {
+    display: flex;
+    position: absolute;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    justify-content: flex-start;
+}
+
+.jseo_lightbox .jseo_lightbox_ui_top {
+    -webkit-transition: all 0.5s 0.1s ease;
+    -moz-transition: all 0.5s 0.1s ease;
+    -o-transition: all 0.5s 0.1s ease;
+    transition: all 0.5s 0.1s ease;
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(-110px);
+}
+
+.jseo_lightbox_ui_content {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+}
+
+.jseo_lightbox_image {
+    -webkit-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
+    -moz-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
+    -o-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
+    transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0.8) translateZ(0);
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.jseo_lightbox_video {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transform-origin: center; 
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.jseo_lightbox_video .jseo_lightbox_video_container {
+    -webkit-transition: all 0.5s 0.1s ease;
+    -moz-transition: all 0.5s 0.1s ease;
+    -o-transition: all 0.5s 0.1s ease;
+    transition: all 0.5s 0.1s ease;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0.8) translateZ(0);
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.jseo_lightbox_image img {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    display: block;
+    position: absolute;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 97%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    transform-origin: center;
+    z-index: 3;
+}
+
+.jseo_lightbox_image img.zoom {
+    transform: translateX(-50%) translateY(-50%) scale(2.0);
+
+}
+
+.jseo_lightbox_image.show {
+    opacity: 1 !important;
+    transform: scale(1.0) !important;
+    visibility: visible !important;
+}
+
+.jseo_lightbox_video .jseo_lightbox_video_container.show {
+    opacity: 1 !important;
+    transform: scale(1.0) !important;
+    visibility: visible !important;
+}
+
+.jseo_lightbox_video.show {
+    visibility: visible !important;
+}
+
+.jseo_lightbox_image_media, .jseo_lightbox_video_media {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: calc(100% - 170px);
+    z-index: 6;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.jseo_lightbox_video_media .jseo_lbvideo_iframe_container {
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+    padding-top:30px;
+}
+
+.jseo_lightbox_video_media .jseo_lbvideo_iframe_container iframe {
+    position: absolute;
+    background-color: #000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.jseo_lightbox_image_text, .jseo_lightbox_video_text {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 170px;
+    z-index: 5;
+    margin:0;
+    padding:0;
+    padding-right: 30px;
+    padding-left: 30px;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.jseo_lightbox_image_text h3, .jseo_lightbox_video_text h3 {
+    color: #FFF;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFF;
+    margin: 0;
+    margin-bottom: 12px;
+    max-width: 1200px;
+    text-transform: capitalize;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+}
+
+.jseo_lightbox .jseo_lightbox_ui_top.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col {
+    display: flex;
+    box-sizing: border-box;
+    flex-flow: row wrap;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col:first-of-type {
+    padding-right: 15px;
+    justify-content: flex-start;
+    width: 35%;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col:last-of-type {
+    padding-left: 15px;
+    justify-content: flex-end;
+    width: 65%;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt {
+    display: block;
+    position: relative;
+    padding:0;
+    margin:0;
+    border: none;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    margin-right: 7px;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.jseo_lbui_opt.jseo_lbui_disabled {
+    opacity: 0.5;
+    cursor: initial;
+    pointer-events: none;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt:hover, .jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt:active, .jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt:focus {
+    outline: none;
+    background-color: transparent;
+    opacity: 0.5;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt:last-of-type {
+    margin-right: 0px !important;
+}
+
+.jseo_lightbox_ui_top .jseo_lbui_col .jseo_lbui_opt img {
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
+}
+
 @media (max-width: 767.9px) {
+
+    .jseo_lightbox_video_media .jseo_lbvideo_iframe_container {
+        max-height: 350px;
+    }
+
+    .jseo_lightbox .jseo_lightbox_ui_top {
+        padding: 20px;
+    }
+
+    .jseo_lightbox_ui_content {
+        height: calc(100% - 90px);
+    }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
         left: -32px;
@@ -1292,7 +1638,7 @@ input, textarea  {
     
     .jseo_portfolio_content.grid .jseo_column {
         width:100%;
-        height:300px;
+        padding-top: 80%;
         margin-bottom: 12px;
     }
 
@@ -1369,6 +1715,18 @@ input, textarea  {
 }
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
+
+    .jseo_lightbox_video_media .jseo_lbvideo_iframe_container {
+        max-height: 550px;
+    }
+
+    .jseo_lightbox .jseo_lightbox_ui_top {
+        padding: 25px;
+    }
+
+    .jseo_lightbox_ui_content {
+        height: calc(100% - 100px);
+    }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
         left: -40px;
@@ -1451,7 +1809,7 @@ input, textarea  {
 
     .jseo_portfolio_content.grid .jseo_column {
         width:50%;
-        height:400px;
+        padding-top: 50%;
     }
 
     .eccent_story_image:before {
@@ -1529,6 +1887,7 @@ input, textarea  {
 
 @media(max-width: 1024.9px) {
 
+
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
         padding-top: 20px;
         padding-bottom: 20px;
@@ -1584,6 +1943,18 @@ input, textarea  {
 
 @media (min-width: 1025px) {
 
+    .jseo_lightbox_video_media .jseo_lbvideo_iframe_container {
+        max-height: 650px;
+    }
+
+    .jseo_lightbox .jseo_lightbox_ui_top {
+        padding: 30px;
+    }
+
+    .jseo_lightbox_ui_content {
+        height: calc(100% - 110px);
+    }
+
     .jseo_portfolio_content.vplain .jseo_column {
       margin: 40px;
       width: calc(33.3% - 80px);
@@ -1635,7 +2006,7 @@ input, textarea  {
 
     .jseo_portfolio_content.grid .jseo_column {
         width:25%;
-        height:350px;
+        padding-top: 25%;
     }
 
     .eccent_story_image:before {

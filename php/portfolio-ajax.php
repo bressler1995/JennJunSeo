@@ -27,7 +27,7 @@
         if($request_filter == 'all') {
             $jseo_category_exists = true;
         } else {
-            if($request_filter == 'game-design') {
+            if($request_filter == 'motion-design') {
                 $jseo_entrymax = 6;
             }
 
@@ -127,28 +127,32 @@
                 $the_title = get_the_title($the_id);
                 $the_excerpt = get_the_excerpt($the_id);
                 $the_date = get_the_date('Y-m-d', $the_id);
+                $the_author_id = get_post_field( 'post_author', $the_id );
+                $the_author_name = get_the_author_meta('display_name', $the_author_id);
 
                 if($the_date == false) {
                     $the_date = 'Date Missing';
                 }
 
+                $the_custom_file = get_field('custom_file', $the_id);
+                $the_video = get_field('the_video', $the_id);
                 $the_gallery_array = get_field('gallery_images', $the_id);
-                $the_files_array = get_field('downloadable_files', $the_id);
-                $the_collab_array = get_field('collaborators', $the_id);
                 $the_gallery_count = 0;
-                $the_files_count = 0;
-                $the_collab_count = 0;
+
+                if($the_custom_file) {
+                    $the_custom_file = $the_custom_file;
+                } else {
+                    $the_custom_file = -1;
+                }
+
+                if($the_video) {
+                    $the_video = $the_video;
+                } else {
+                    $the_video = -1;
+                }
 
                 if(empty($the_gallery_array) == false && isset($the_gallery_array)) {
                     $the_gallery_count = count($the_gallery_array);
-                }
-
-                if(empty($the_files_array) == false && isset($the_files_array)) {
-                    $the_files_count = count($the_files_array);
-                }
-
-                if(empty($the_collab_array) == false && isset($the_collab_array)) {
-                    $the_collab_count = count($the_collab_array);
                 }
 
                 if(isset($the_featured_image)) {
@@ -159,10 +163,11 @@
                         "the_permalink"=>$the_permalink,
                         "the_title"=>$the_title,
                         "the_excerpt"=>$the_excerpt,
+                        "the_custom_file"=>$the_custom_file,
+                        "the_video"=>$the_video,
                         "the_gallery_count"=>$the_gallery_count,
-                        "the_files_count"=>$the_files_count,
-                        "the_collab_count"=>$the_collab_count,
-                        "the_date"=>$the_date
+                        "the_date"=>$the_date,
+                        "the_author"=>$the_author_name
                     );
     
                     array_push($jseo_post_storage, $the_post_object);

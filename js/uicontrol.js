@@ -15,6 +15,22 @@ jQuery( document ).ready(function() {
     let jseo_footer = document.getElementById("jseo_footer");
     let jseo_portfolio_all = document.getElementById("jseo_portfolio_all");
 
+    let jseo_lightbox = document.getElementById("jseo_lightbox");
+    let jseo_lbui_close = document.getElementById("jseo_lbui_close");
+    let jseo_lbui_zoom = document.getElementById("jseo_lbui_zoom");
+    let jseo_lightbox_ui_top = document.getElementById("jseo_lightbox_ui_top");
+    let jseo_lightbox_image = document.getElementById("jseo_lightbox_image");
+    let jseo_lightbox_video = document.getElementById("jseo_lightbox_video");
+    let jseo_lightbox_video_container = document.getElementById("jseo_lightbox_video_container");
+    let jseo_lbvideo_iframe = document.getElementById("jseo_lbvideo_iframe");
+    let jseo_lbvideo_title = document.getElementById("jseo_lbvideo_title");
+    let jseo_lbimage_img = document.getElementById("jseo_lbimage_img");
+    let jseo_lbimage_title = document.getElementById("jseo_lbimage_title");
+    let jseo_lightbox_image_media = document.getElementById("jseo_lightbox_image_media");
+    let jseo_lightbox_zoom = -1;
+    let jseo_lbimage_x = -50;
+    let jseo_lbimage_y = -50;
+
     let current_post_storage = [];
     let current_entry_max = 0;
     let no_of_pages = 0;
@@ -26,6 +42,32 @@ jQuery( document ).ready(function() {
 
     eccent_toggle.addEventListener("click", eccent_show_navigation);
     eccent_mobile_close.addEventListener("click", eccent_hide_navigation);
+
+    if (jseo_lightbox != null && jseo_lbui_close != null) {
+        jseo_lbui_close.addEventListener("click", jseo_lbui_closefunc);
+    }
+
+    if (jseo_lightbox != null && jseo_lbui_zoom != null) {
+        jseo_lbui_zoom.addEventListener("click", jseo_lbui_zoomfunc);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        var name = event.key;
+        var code = event.code;
+        // Alert the key name and key code on keydown
+        console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+
+        if(name == 'ArrowUp') {
+            jseo_lbui_zoomfunc_nav(0);
+        } else if(name == 'ArrowRight') {
+            jseo_lbui_zoomfunc_nav(1);
+        } else if(name == 'ArrowDown') {
+            jseo_lbui_zoomfunc_nav(2);
+        } else if(name == 'ArrowLeft') {
+            jseo_lbui_zoomfunc_nav(3);
+        }
+      }, false);
+
 
     function eccent_show_navigation() {
         if(eccent_mobile_holder.classList.contains("eccent_mobile_holder_hide")) {
@@ -98,12 +140,37 @@ jQuery( document ).ready(function() {
             }
 
             if(current_post_storage[z] != null) {
+
+                let jseo_current_featured = current_post_storage[z]['the_featured_image'];
+                let jseo_current_video = current_post_storage[z]['the_video'];
+                let jseo_current_file = current_post_storage[z]['the_custom_file'];
+                let jseo_current_output = '';
+
+                if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
+                    //Featured
+                    jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/image.svg"></div></div>';
+                } else {
+                    if(jseo_current_video != "-1" && jseo_current_file == "-1") {
+                        //Video
+                        jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/film.svg"></div></div>';
+                    } else if(jseo_current_video == "-1" && jseo_current_file != "-1") {
+                        //PDF File
+                        jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/pdf.svg"></div></div>';
+                    } else if(jseo_current_video != "-1" && jseo_current_file != "-1") {
+                        //PDF File
+                        jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/pdf.svg"></div></div>';
+                    } else {
+                        //Featured
+                        jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/image.svg"></div></div>';
+                    }
+                }
+
                 if(jseo_portfolio_content.classList.contains("grid")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
-                    let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '"><span>Files: ' + current_post_storage[z]['the_files_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/collaboration.svg" + '"><span>Collaborators: ' + current_post_storage[z]['the_collab_count'] + '</span></li></ul></div></div>';
+                    let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li></ul></div></div>';
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                 }
             } 
@@ -179,7 +246,7 @@ jQuery( document ).ready(function() {
 
                     if(slug == 'all' || slug == 'graphic-design' || slug == 'visual-design') {
                         jseo_portfolio_content.classList.add("grid");
-                    } else if(slug == 'game-design') {
+                    } else if(slug == 'motion-design') {
                         jseo_portfolio_content.classList.add("voffset");
                     } else if(slug == 'uiux-design') {
                         jseo_portfolio_content.classList.add("vplain");
@@ -198,12 +265,37 @@ jQuery( document ).ready(function() {
                         }
 
                         if(current_post_storage[z] != null) {
+
+                            let jseo_current_featured = current_post_storage[z]['the_featured_image'];
+                            let jseo_current_video = current_post_storage[z]['the_video'];
+                            let jseo_current_file = current_post_storage[z]['the_custom_file'];
+                            let jseo_current_output = '';
+
+                            if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
+                                //Featured
+                                jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/image.svg"></div></div>';
+                            } else {
+                                if(jseo_current_video != "-1" && jseo_current_file == "-1") {
+                                    //Video
+                                    jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/film.svg"></div></div>';
+                                } else if(jseo_current_video == "-1" && jseo_current_file != "-1") {
+                                    //PDF File
+                                    jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/pdf.svg"></div></div>';
+                                } else if(jseo_current_video != "-1" && jseo_current_file != "-1") {
+                                    //PDF File
+                                    jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/pdf.svg"></div></div>';
+                                } else {
+                                    //Featured
+                                    jseo_current_output = '<div class="jseo_grid_icon"><div class="jgrid_iconobj"><img class="jgrid_iconobj_img" src="' + themeDirURI + '/svg/lightbox/image.svg"></div></div>';
+                                }
+                            }
+
                             if(jseo_portfolio_content.classList.contains("grid")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"><span class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</span></a></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '">Files<span>' + current_post_storage[z]['the_files_count'] + '</span></div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/collaboration.svg" + '">Collaborators<span>' + current_post_storage[z]['the_collab_count'] + '</span></div> </div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
-                                let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/download-to-storage-drive.svg" + '"><span>Files: ' + current_post_storage[z]['the_files_count'] + '</span></li><li><img src="' + themeDirURI + "/svg/collaboration.svg" + '"><span>Collaborators: ' + current_post_storage[z]['the_collab_count'] + '</span></li></ul></div></div>';
+                                let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li></ul></div></div>';
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                             }
                         } 
@@ -263,8 +355,260 @@ jQuery( document ).ready(function() {
         let jseo_grid_link = document.getElementsByClassName("jseo_grid_link");
         
         for(i = 0; i < jseo_grid_link.length; i++) {
+            let jseo_grid_link_a = jseo_grid_link[i].getElementsByTagName('a');
+
             doSetGridTimeOut(jseo_grid_link[i], i);
+
+            if (jseo_grid_link_a != null) {
+                if(jseo_grid_link_a.length == 1) {
+                    console.log(jseo_grid_link_a[0]);
+                    jseo_grid_link_a[0].addEventListener("click", jseo_lbui_showfunc);
+                }
+            }
         }
+    }
+
+    function jseo_lbui_showfunc() {
+        let jseo_current_file = this.dataset.cfile;
+        let jseo_current_video = this.dataset.video;
+        let jseo_current_featured = this.dataset.featured;
+        let jseo_current_mode = 0;
+        let jseo_current_title = this.dataset.title;
+
+        if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
+            jseo_current_mode = 0;
+        } else {
+            if(jseo_current_video != "-1" && jseo_current_file == "-1") {
+                jseo_current_mode = 1;
+            } else if(jseo_current_video == "-1" && jseo_current_file != "-1") {
+                jseo_current_mode = 2;
+            } else if(jseo_current_video != "-1" && jseo_current_file != "-1") {
+                jseo_current_mode = 2;
+            } else {
+                jseo_current_mode = 0;
+            }
+        }
+
+        console.log("trigger lightbox");
+        console.log(jseo_current_mode);
+        if(jseo_lightbox != null) {
+            document.body.style.overflowY = 'hidden';
+            document.documentElement.style.overflowY = 'hidden';
+
+            eccent_hide_navigation();
+            
+            console.log("PDF FIle: " + jseo_current_file + ", Video: " + jseo_current_video + ", Featured: " + jseo_current_featured);
+            
+            if(jseo_lightbox.classList.contains("show") == false) {
+                jseo_lightbox.classList.add("show");
+            }
+
+            if(jseo_lightbox_overlay != null) {
+                if(jseo_lightbox_overlay.classList.contains("show") == false) {
+                    jseo_lightbox_overlay.classList.add("show");
+                }
+            }
+
+            if(jseo_lightbox_ui_top != null) {
+                if(jseo_lightbox_ui_top.classList.contains("show") == false) {
+                    jseo_lightbox_ui_top.classList.add("show");
+                }
+
+            }
+
+            if(jseo_current_mode == 0) {
+                if(jseo_lightbox_image != null && jseo_lightbox_video != null) {
+                    jseo_lightbox_image.style.height = "100%";
+                    jseo_lightbox_video.style.height = "0%";
+                }
+
+                if(jseo_lightbox_image != null) {
+                    if(jseo_lightbox_image.classList.contains("show") == false) {
+                        jseo_lightbox_image.classList.add("show");
+                    }
+    
+                    if(jseo_current_featured != null && jseo_current_featured != "" && jseo_current_featured != "-1") {
+                        if(jseo_lbimage_img != null) {
+                            jseo_lbimage_img.src = jseo_current_featured;
+                        }
+                    }
+                }
+    
+                if(jseo_lbimage_title != null) {
+                    jseo_lbimage_title.innerHTML = jseo_current_title;
+                }       
+            } else if(jseo_current_mode == 1) {
+                if(jseo_lightbox_image != null && jseo_lightbox_video != null) {
+                    jseo_lightbox_image.style.height = "0%";
+                    jseo_lightbox_video.style.height = "100%";
+                }
+
+                if(jseo_lbui_zoom.classList.contains("jseo_lbui_disabled") == false) {
+                    jseo_lbui_zoom.classList.add("jseo_lbui_disabled");
+                }
+
+                if(jseo_lightbox_video != null) {
+                    if(jseo_lightbox_video.classList.contains("show") == false) {
+                        jseo_lightbox_video.classList.add("show");
+
+                    }
+                }
+
+                if(jseo_lbvideo_iframe != null) {
+                    if(jseo_current_video.includes("youtube.com/watch?v=")) {
+                        let splitstring = jseo_current_video.split('v=');
+                        if(splitstring != null) {
+                            if(splitstring.length == 2) {
+                                let finalstring = 'https://youtube.com/embed/' + splitstring[1];
+                                jseo_lbvideo_iframe.src = finalstring;
+                            }
+                        }
+                    } else if(jseo_current_video.includes("youtu.be")) {
+                        let splitstring = jseo_current_video.split('.be/');
+                        if(splitstring != null) {
+                            if(splitstring.length == 2) {
+                                let finalstring = 'https://youtube.com/embed/' + splitstring[1];
+                                jseo_lbvideo_iframe.src = finalstring;
+                            }
+                        }
+                    }
+                }
+
+                if(jseo_lbvideo_title != null) {
+                    jseo_lbvideo_title.innerHTML = jseo_current_title;
+                }  
+
+                if(jseo_lightbox_video_container != null) {
+                    setTimeout(function(){
+                        if(jseo_lightbox_video_container.classList.contains("show") == false) {
+                            jseo_lightbox_video_container.classList.add("show")
+                        }
+                    }, 100);
+                }
+
+            } else if(jseo_current_mode == 2) {
+                if(jseo_lightbox_image != null && jseo_lightbox_video != null) {
+                    jseo_lightbox_image.style.height = "0%";
+                    jseo_lightbox_video.style.height = "0%";
+                }
+
+                if(jseo_lbui_zoom.classList.contains("jseo_lbui_disabled") == false) {
+                    jseo_lbui_zoom.classList.add("jseo_lbui_disabled");
+                }
+            }
+
+        }
+    }
+
+    function jseo_lbui_closefunc() {
+        document.body.style.overflowY = 'initial';
+        document.documentElement.style.overflowY = 'initial';
+
+        if(jseo_lightbox_overlay != null) {
+            if(jseo_lightbox_overlay.classList.contains("show") == true) {
+                jseo_lightbox_overlay.classList.remove("show");
+            }
+        }
+
+        if(jseo_lightbox_ui_top != null) {
+            if(jseo_lightbox_ui_top.classList.contains("show") == true) {
+                jseo_lightbox_ui_top.classList.remove("show");
+            }
+        }
+
+        if(jseo_lightbox_image != null) {
+            if(jseo_lightbox_image.classList.contains("show") == true) {
+                jseo_lightbox_image.classList.remove("show");
+            }
+
+            if(jseo_lightbox_zoom == 1) {
+                jseo_lbui_zoomfunc(true);
+            }
+        }
+
+        if(jseo_lightbox_video_container != null) {
+            if(jseo_lightbox_video_container.classList.contains("show") == true) {
+                jseo_lightbox_video_container.classList.remove("show");
+            }
+        }
+
+        setTimeout(function(){
+            
+            if(jseo_lightbox.classList.contains("show") == true) {
+                jseo_lightbox.classList.remove("show");
+            }
+
+            if(jseo_lbui_zoom != null) {
+                if(jseo_lbui_zoom.classList.contains("jseo_lbui_disabled") == true) {
+                    jseo_lbui_zoom.classList.remove("jseo_lbui_disabled");
+                }
+            }
+
+            if(jseo_lightbox_video != null) {
+                if(jseo_lightbox_video.classList.contains("show") == true) {
+                    jseo_lightbox_video.classList.remove("show");
+    
+                }
+            }
+
+            if(jseo_lbvideo_iframe != null) {
+                jseo_lbvideo_iframe.src = '';
+            }
+        }, 1000);
+    }
+
+    function jseo_lbui_zoomfunc(override = false) {
+
+        if(jseo_lightbox_image.classList.contains("show") || override == true) {
+            jseo_lightbox_zoom *= -1;
+
+            if(jseo_lightbox_zoom == 1) {
+                if(jseo_lbimage_img != null) {
+                    if(jseo_lbimage_img.classList.contains("zoom") == false) {
+                        jseo_lbimage_img.classList.add("zoom");
+                    }
+                }
+            } else if(jseo_lightbox_zoom == -1) {
+                if(jseo_lbimage_img != null) {
+                    if(jseo_lbimage_img.classList.contains("zoom") == true) {
+                        jseo_lbimage_img.classList.remove("zoom");
+                    }
+    
+                    jseo_lbimage_img.style.transform = "";
+                    jseo_lbimage_x = -50;
+                    jseo_lbimage_y = -50;
+                }
+            }
+        }
+
+    }
+
+    function jseo_lbui_zoomfunc_nav(direction) {
+        if(jseo_lbimage_img != null && jseo_lightbox_zoom == 1) {
+
+            if(direction == 0) {
+                if(jseo_lbimage_y + 7 <= 20) {
+                    jseo_lbimage_y += 7;
+                }
+                
+            } else if(direction == 1) {
+                if(jseo_lbimage_x - 7 >= -120) {
+                    jseo_lbimage_x -= 7;
+                }
+            } else if(direction == 2) {
+
+                if(jseo_lbimage_y - 7 >= -120) {
+                    jseo_lbimage_y -= 7;
+                }
+            } else if(direction == 3) {
+                if(jseo_lbimage_x + 7 <= 20) {
+                    jseo_lbimage_x += 7;
+                }
+            }
+
+            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.0)';
+        }
+        
     }
 
     function vplain_animation() {
