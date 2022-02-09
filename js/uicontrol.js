@@ -44,6 +44,69 @@ jQuery( document ).ready(function() {
     let urlParams = new URLSearchParams(window.location.search);
     let filterParam = urlParams.get('filter');
 
+    let down = false;
+    let downXStart = 0;
+    let downYStart = 0;
+    let downXDelta = 0;
+    let downYDelta = 0;
+    let directionX = 0;
+    let directionY = 0;
+
+    let downListener = (event) => {
+        down = true;
+        downXStart = event.clientX;
+        downYStart = event.clientY;
+    }
+
+    let upListener = (e) => {
+        down = false;
+    }
+
+    let moveListener = (event) => {
+        if(down == true && jseo_lightbox_zoom == 1) {
+            downXDelta = event.clientX - downXStart;
+            downYDelta = event.clientY - downYStart;
+
+            if(downXDelta > downXStart) {
+                if(directionX == -1) {
+                    downXStart = event.clientX;
+                }
+                directionX = 1;
+            }
+
+            if(downXDelta < downXStart) {
+                if(directionX == 1) {
+                    downXStart = event.clientX;
+                }
+                directionX = -1;
+            }
+
+            if(downYDelta > downYStart) {
+                if(directionY == -1) {
+                    downYStart = event.clientY;
+                }
+                directionY = 1;
+            }
+
+            if(downYDelta < downYStart) {
+                if(directionY == 1) {
+                    downYStart = event.clientY;
+                }
+                directionY = -1;
+            }
+
+            if(jseo_lbimage_x + (downXDelta * 0.01) >= -120  && jseo_lbimage_x + (downXDelta * 0.01) <= 20) {
+                jseo_lbimage_x += downXDelta * 0.01;
+            }
+
+            if(jseo_lbimage_y + (downYDelta * 0.01) >= -120  && jseo_lbimage_y + (downYDelta * 0.01) <= 20) {
+                jseo_lbimage_y += downYDelta * 0.01;
+            }
+
+            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.0)';
+        }
+    }
+
     eccent_toggle.addEventListener("click", eccent_show_navigation);
     eccent_mobile_close.addEventListener("click", eccent_hide_navigation);
 
@@ -59,7 +122,7 @@ jQuery( document ).ready(function() {
         var name = event.key;
         var code = event.code;
         // Alert the key name and key code on keydown
-        console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+        // console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
 
         if(name == 'ArrowUp') {
             jseo_lbui_zoomfunc_nav(0);
@@ -72,6 +135,14 @@ jQuery( document ).ready(function() {
         }
       }, false);
 
+      if(jseo_lightbox_image_media != null && jseo_lbimage_img != null) {
+        jseo_lightbox_image_media.addEventListener('mousedown', downListener);
+        jseo_lightbox_image_media.addEventListener('mouseup', upListener);
+        jseo_lightbox_image_media.addEventListener('mousemove', moveListener);
+        jseo_lightbox_image_media.addEventListener("dragstart", function(){
+            return false;
+        });
+      }
 
     function eccent_show_navigation() {
         if(eccent_mobile_holder.classList.contains("eccent_mobile_holder_hide")) {
@@ -615,12 +686,15 @@ jQuery( document ).ready(function() {
 
             if(jseo_lightbox_zoom == 1) {
                 if(jseo_lbimage_img != null) {
+                    jseo_lightbox_image_media.style.cursor = "grabbing";
                     if(jseo_lbimage_img.classList.contains("zoom") == false) {
                         jseo_lbimage_img.classList.add("zoom");
                     }
                 }
             } else if(jseo_lightbox_zoom == -1) {
                 if(jseo_lbimage_img != null) {
+                    jseo_lightbox_image_media.style.cursor = "initial";
+
                     if(jseo_lbimage_img.classList.contains("zoom") == true) {
                         jseo_lbimage_img.classList.remove("zoom");
                     }

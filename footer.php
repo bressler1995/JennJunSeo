@@ -32,8 +32,8 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 		</div>
 		<div class="jseo_lightbox_ui_content">
 			<div id="jseo_lightbox_image" class="jseo_lightbox_image">
-				<div id="jseo_lightbox_image_media" class="jseo_lightbox_image_media">
-					<img id="jseo_lbimage_img" src="<?php echo get_stylesheet_directory_uri() . '/img/defaultimg.png'?>">
+				<div draggable="false" id="jseo_lightbox_image_media" class="jseo_lightbox_image_media">
+					<img draggable="false" id="jseo_lbimage_img" src="<?php echo get_stylesheet_directory_uri() . '/img/defaultimg.png'?>">
 				</div>
 				<div class="jseo_lightbox_image_text">
 					<h3 id="jseo_lbimage_title">Lorem Ipsum</h3>

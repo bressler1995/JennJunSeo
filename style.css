@@ -1428,6 +1428,14 @@ input, textarea  {
     object-fit: contain;
     transform-origin: center;
     z-index: 3;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -webkit-user-drag: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none;
 }
 
 .jseo_lightbox_image img.zoom {
@@ -1478,7 +1486,7 @@ input, textarea  {
 .jseo_lightbox_video_media .jseo_lbvideo_iframe_container {
     display: block;
     width: 90%;
-    max-width: 1200px;
+    max-width: 992px;
     height: 90%;
     position: relative;
     background-color: #000;
@@ -1596,8 +1604,10 @@ input, textarea  {
     display: flex;
     width: 90%;
     max-width: 1200px;
-    height: auto;
+    height: 100%;
     flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .jseo_pdfreader_container iframe {
