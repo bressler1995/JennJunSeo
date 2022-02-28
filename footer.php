@@ -35,7 +35,7 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 				<div draggable="false" id="jseo_lightbox_image_media" class="jseo_lightbox_image_media">
 					<img draggable="false" id="jseo_lbimage_img" src="<?php echo get_stylesheet_directory_uri() . '/img/defaultimg.png'?>">
 				</div>
-				<div class="jseo_lightbox_image_text">
+				<div id="jseo_lightbox_image_text" class="jseo_lightbox_image_text">
 					<h3 id="jseo_lbimage_title">Lorem Ipsum</h3>
 				</div>
 			</div>

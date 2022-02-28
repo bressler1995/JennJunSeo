@@ -31,6 +31,7 @@ jQuery( document ).ready(function() {
     let jseo_lbimage_title = document.getElementById("jseo_lbimage_title");
     let jseo_lbpdf_title = document.getElementById("jseo_lbpdf_title");
     let jseo_lightbox_image_media = document.getElementById("jseo_lightbox_image_media");
+    let jseo_single_content = document.getElementById("jseo_single_content");
     let jseo_lightbox_zoom = -1;
     let jseo_lbimage_x = -50;
     let jseo_lbimage_y = -50;
@@ -51,6 +52,10 @@ jQuery( document ).ready(function() {
     let downYDelta = 0;
     let directionX = 0;
     let directionY = 0;
+
+    let uitopListener = (event) => {
+        
+    }
 
     let downListener = (event) => {
         down = true;
@@ -141,6 +146,22 @@ jQuery( document ).ready(function() {
         jseo_lightbox_image_media.addEventListener('mousemove', moveListener);
         jseo_lightbox_image_media.addEventListener("dragstart", function(){
             return false;
+        });
+      }
+
+      if(jseo_lightbox_ui_top != null) {
+        jseo_lightbox_ui_top.addEventListener("mouseenter", function(){
+            down = false;
+        });
+      }
+
+      if(jseo_single_content != null) {
+        jQuery(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+        
+            jQuery('html, body').animate({
+                scrollTop: jQuery(jQuery.attr(this, 'href')).offset().top
+            }, 500);
         });
       }
 
@@ -734,6 +755,98 @@ jQuery( document ).ready(function() {
             jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.0)';
         }
         
+    }
+
+    function inject_single_lightbox() {
+
+        let jseo_single_theproblem = document.getElementById("theproblem");
+        let jseo_single_userstudy = document.getElementById("userstudy");
+        let jseo_single_branding = document.getElementById("branding");
+        let jseo_single_wireframes = document.getElementById("wireframes");
+        let jseo_single_designiterations = document.getElementById("designiterations");
+        let jseo_single_mockup = document.getElementById("mockup");
+
+        if(jseo_single_theproblem != null) {
+            let single_problem_lightboxitems = jseo_single_theproblem.getElementsByClassName("single_lightboxitem");
+            if(single_problem_lightboxitems != null) {
+                if(single_problem_lightboxitems.length > 0) {
+                    for(i = 0; i < single_problem_lightboxitems.length; i++) {
+                        let current_item = single_problem_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+        if(jseo_single_userstudy != null) {
+            let single_userstudy_lightboxitems = jseo_single_userstudy.getElementsByClassName("single_lightboxitem");
+
+            if(single_userstudy_lightboxitems != null) {
+                if(single_userstudy_lightboxitems.length > 0) {
+                    for(i = 0; i < single_userstudy_lightboxitems.length; i++) {
+                        let current_item = single_userstudy_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+        if(jseo_single_branding != null) {
+            let single_branding_lightboxitems = jseo_single_branding.getElementsByClassName("single_lightboxitem");
+
+            if(single_branding_lightboxitems != null) {
+                if(single_branding_lightboxitems.length > 0) {
+                    for(i = 0; i < single_branding_lightboxitems.length; i++) {
+                        let current_item = single_branding_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+        if(jseo_single_wireframes != null) {
+            let single_wireframes_lightboxitems = jseo_single_wireframes.getElementsByClassName("single_lightboxitem");
+
+            if(single_wireframes_lightboxitems != null) {
+                if(single_wireframes_lightboxitems.length > 0) {
+                    for(i = 0; i < single_wireframes_lightboxitems.length; i++) {
+                        let current_item = single_wireframes_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+        if(jseo_single_designiterations != null) {
+            let single_designiterations_lightboxitems = jseo_single_designiterations.getElementsByClassName("single_lightboxitem");
+
+            if(single_designiterations_lightboxitems != null) {
+                if(single_designiterations_lightboxitems.length > 0) {
+                    for(i = 0; i < single_designiterations_lightboxitems.length; i++) {
+                        let current_item = single_designiterations_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+        if(jseo_single_mockup != null) {
+            let single_mockup_lightboxitems = jseo_single_mockup.getElementsByClassName("single_lightboxitem");
+
+            if(single_mockup_lightboxitems != null) {
+                if(single_mockup_lightboxitems.length > 0) {
+                    for(i = 0; i < single_mockup_lightboxitems.length; i++) {
+                        let current_item = single_mockup_lightboxitems[i];
+                        current_item.addEventListener("click", jseo_lbui_showfunc);
+                    }
+                }
+            }
+        }
+
+    }
+
+    if(jseo_single_content != null) {
+        inject_single_lightbox();
     }
 
     function vplain_animation() {
