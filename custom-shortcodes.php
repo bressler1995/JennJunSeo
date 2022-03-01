@@ -123,7 +123,7 @@
         $args = array(  
             'post_type' => 'portfolio',
             'post_status' => 'publish',
-            'posts_per_page' => 8, 
+            'posts_per_page' => 4, 
             'orderby' => 'publish_date', 
             'order' => 'DESC', 
         );
