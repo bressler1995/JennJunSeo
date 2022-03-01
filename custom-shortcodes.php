@@ -118,4 +118,38 @@
     }
 
     add_shortcode('jseoshow', 'jseo_show_function');
+
+    function jseo_mini_function() {
+        $args = array(  
+            'post_type' => 'portfolio',
+            'post_status' => 'publish',
+            'posts_per_page' => 8, 
+            'orderby' => 'publish_date', 
+            'order' => 'DESC', 
+        );
+    
+        $loop = new WP_Query( $args ); 
+        
+        $result = '';
+        $result .= '<div class="jseo_mini_works">';
+
+        if ($loop->have_posts()) {
+            while ( $loop->have_posts() ) : $loop->the_post(); 
+                $the_mini_id = get_the_id();
+                $the_mini_title = get_the_title();
+                $the_mini_perma = get_the_permalink();
+                $the_mini_thumb = get_the_post_thumbnail_url($the_mini_id);
+                
+                $result .= '<a data-title="' . $the_mini_title . '" class="jseo_mini_workitem" href="' . $the_mini_perma . '"><img class="jseo_mini_workimage" src="' . $the_mini_thumb . '"><div class="jseo_mini_worktext"><span class="jseo_mini_worktitle">' . $the_mini_title . '</span></div></a>';
+            endwhile;
+        } else {
+            $result .= '<span class="noresultsmini">No results to display...</span>';
+        }
+        wp_reset_postdata(); 
+
+        $result .= '</div>';
+        return $result;
+    }
+
+    add_shortcode('jseomini', 'jseo_mini_function');
 ?>

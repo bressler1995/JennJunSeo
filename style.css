@@ -1096,7 +1096,7 @@ input, textarea  {
     position: relative;
     width: 100%;
     height: auto;
-    border-radius: 3px;
+    border-radius: 5px;
     overflow: hidden;
     transform-origin: center;
 }
@@ -2531,6 +2531,117 @@ input, textarea  {
     color: #FFF !important;
 }
 
+.jseo_mini_works {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+    justify-content: center;
+}
+
+.jseo_mini_works span.noresultsmini {
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    background-color: #E891CF;
+    color: #FFF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+}
+
+.jseo_mini_works a.jseo_mini_workitem {
+    display: block;
+    position: relative;
+    background-color: #000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.jseo_mini_works a.jseo_mini_workitem:after {
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    left:0%;
+    top:0%;
+    transform-origin: center;
+    transform: scale(0.7);
+    background-color: rgba(232, 145, 207, 0.88);
+    z-index: 3;
+    opacity: 0;
+}
+
+.jseo_mini_works a.jseo_mini_workitem .jseo_mini_workimage {
+    display: block;
+    position: absolute;
+    width: 102% !important;
+    height: 102% !important;
+    top: 0;
+    left: 0;
+    transform-origin: center;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 2;
+    border:none;
+}
+
+.jseo_mini_works a.jseo_mini_workitem:hover .jseo_mini_worktext, .jseo_mini_works a.jseo_mini_workitem:active .jseo_mini_worktext, .jseo_mini_works a.jseo_mini_workitem:focus .jseo_mini_worktext {
+    opacity: 1 !important;
+}
+
+.jseo_mini_works a.jseo_mini_workitem:hover:after, .jseo_mini_works a.jseo_mini_workitem:active:after, .jseo_mini_works a.jseo_mini_workitem:focus:after {
+    transform: scale(1.0) !important;
+    opacity: 1 !important;
+}
+
+.jseo_mini_works a.jseo_mini_workitem .jseo_mini_worktext {
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
+    transition-delay: 0.15s;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    transform-origin: center;
+    top: 50%;
+    left:0;
+    z-index: 4;
+    font-size: 15px;
+    line-height: 23px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+.jseo_mini_works a.jseo_mini_workitem .jseo_mini_worktext span.jseo_mini_worktitle {
+    display: block;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    color: #FFF;
+}
+
 .jseo_search_archive .elementor-pagination .page-numbers:not(.current):hover {
     background-color: #EEE;
 }
@@ -2778,9 +2889,19 @@ input, textarea  {
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:hover, .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:active, .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:focus {
         opacity: 0.75;
     }
+
+    .jseo_mini_works a.jseo_mini_workitem {
+        width: calc(50% - 14px);
+        padding-bottom: 50%;
+        margin: 7px;
+    }
 }
 
 @media(min-width: 768px) {
+    #finalthoughts {
+        margin-bottom: 0;
+    }
+
     .jseo_single_content_sidebar.hideondesktoptablet {
         display: none !important;
     }
@@ -3020,6 +3141,12 @@ input, textarea  {
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:hover, .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:active, .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1:focus {
         transform: scale(1.05);
         opacity: 0.85;
+    }
+
+    .jseo_mini_works a.jseo_mini_workitem {
+        width: calc(33% - 14px);
+        padding-bottom: 27%;
+        margin: 7px;
     }
 }
 
@@ -3466,6 +3593,12 @@ input, textarea  {
         padding-top: 15px;
         padding-bottom: 15px;
         font-size: 13px;
+    }
+
+    .jseo_mini_works a.jseo_mini_workitem {
+        width: calc(25% - 20px);
+        padding-bottom: 18.5%;
+        margin: 10px;
     }
 }
 
