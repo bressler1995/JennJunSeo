@@ -32,6 +32,7 @@ jQuery( document ).ready(function() {
     let jseo_lbpdf_title = document.getElementById("jseo_lbpdf_title");
     let jseo_lightbox_image_media = document.getElementById("jseo_lightbox_image_media");
     let jseo_single_content = document.getElementById("jseo_single_content");
+    let jseo_mini_works = document.getElementById("jseo_mini_works");
     let jseo_lightbox_zoom = -1;
     let jseo_lbimage_x = -50;
     let jseo_lbimage_y = -50;
@@ -847,6 +848,23 @@ jQuery( document ).ready(function() {
 
     if(jseo_single_content != null) {
         inject_single_lightbox();
+    }
+
+    function inject_mini_lightbox() {
+        let miniworkitems = jseo_mini_works.getElementsByClassName("jseo_mini_workitem");
+
+        if(miniworkitems != null) {
+            if(miniworkitems.length > 0) {
+                for(i = 0; i < miniworkitems.length; i++) {
+                    let current_item = miniworkitems[i];
+                    current_item.addEventListener("click", jseo_lbui_showfunc);
+                }
+            }
+        }
+    }
+
+    if(jseo_mini_works != null) {
+        inject_mini_lightbox();
     }
 
     function vplain_animation() {

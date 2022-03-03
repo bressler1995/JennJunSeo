@@ -131,7 +131,7 @@
         $loop = new WP_Query( $args ); 
         
         $result = '';
-        $result .= '<div class="jseo_mini_works">';
+        $result .= '<div id="jseo_mini_works" class="jseo_mini_works">';
 
         if ($loop->have_posts()) {
             while ( $loop->have_posts() ) : $loop->the_post(); 
@@ -139,8 +139,51 @@
                 $the_mini_title = get_the_title();
                 $the_mini_perma = get_the_permalink();
                 $the_mini_thumb = get_the_post_thumbnail_url($the_mini_id);
+                $the_mini_custom_file = get_field('custom_file', $the_mini_id);
+                $the_mini_video = get_field('the_video', $the_mini_id);
+                $the_mini_mode = 0;
+                $the_mini_icon_output = '';
+
+                if($the_mini_custom_file) {
+                    $the_mini_custom_file = $the_mini_custom_file;
+                } else {
+                    $the_mini_custom_file = -1;
+                }
+
+                if($the_mini_video) {
+                    $the_mini_video = $the_mini_video;
+                } else {
+                    $the_mini_video = -1;
+                }
+
+                if($the_mini_thumb  != -1 && isset($the_mini_thumb) && $the_mini_video == -1 && $the_mini_custom_file == -1) {
+                    $the_mini_mode = 0;
+                } else {
+                    if($the_mini_video != -1 && $the_mini_custom_file == -1) {
+                        $the_mini_mode = 1;
+                    } else if($the_mini_video == -1 && $the_mini_custom_file != -1) {
+                        $the_mini_mode = 2;
+                    } else if($the_mini_video != -1 && $the_mini_custom_file != -1) {
+                        $the_mini_mode = 2;
+                    } else {
+                        $the_mini_mode = 0;
+                    }
+                }
+
+                if($the_mini_mode == 0) {
+                    $the_mini_icon_output = get_stylesheet_directory_uri() . '/svg/lightbox/image.svg';
+                } else if($the_mini_mode == 1) {
+                    $the_mini_icon_output = get_stylesheet_directory_uri() . '/svg/lightbox/film.svg';
+                } else if($the_mini_mode == 2) {
+                    $the_mini_icon_output = get_stylesheet_directory_uri() . '/svg/lightbox/pdf.svg';
+                }
+
+                if(isset($the_mini_thumb)) {
+
+                    $result .= '<a data-title="' . $the_mini_title . '" data-cfile="' . $the_mini_custom_file . '" data-video="' . $the_mini_video . '" data-featured="' . $the_mini_thumb . '" class="jseo_mini_workitem" href="javascript:void(0)"><img class="jseo_mini_workimage" src="' . $the_mini_thumb . '"><div class="jseo_mini_worktext"><div class="jseo_mini_icon"><img src="' . $the_mini_icon_output . '"></div><span class="jseo_mini_worktitle">' . $the_mini_title . '</span></div></a>';
+                }
                 
-                $result .= '<a data-title="' . $the_mini_title . '" class="jseo_mini_workitem" href="' . $the_mini_perma . '"><img class="jseo_mini_workimage" src="' . $the_mini_thumb . '"><div class="jseo_mini_worktext"><span class="jseo_mini_worktitle">' . $the_mini_title . '</span></div></a>';
+                
             endwhile;
         } else {
             $result .= '<span class="noresultsmini">No results to display...</span>';
