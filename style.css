@@ -616,6 +616,7 @@ input, textarea  {
     display: block;
     height: 100%;
     z-index: 2;
+    overflow: hidden;
 }
 
 .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1 a img {
@@ -1186,6 +1187,7 @@ input, textarea  {
 .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry {
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
     width: 100%;
     position: absolute;
     top: 0;
@@ -1291,7 +1293,7 @@ input, textarea  {
     height: 100%;
     left:0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.82);
     opacity: 0;
     z-index: 1;
 }
@@ -1335,10 +1337,10 @@ input, textarea  {
 }
 
 .jseo_lightbox_image {
-    -webkit-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
-    -moz-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
-    -o-transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
-    transition: transform 0.5s 0.1s ease, opacity 0.5s 0.1s ease;
+    -webkit-transition: all 0.5s 0.1s ease;
+    -moz-transition: all 0.5s 0.1s ease;
+    -o-transition: all 0.5s 0.1s ease;
+    transition: all 0.5s 0.1s ease;
     display: flex;
     width: 100%;
     height: 100%;
@@ -1419,7 +1421,7 @@ input, textarea  {
     transition: all 0.3s ease;
     display: block;
     position: absolute;
-    width: 90%;
+    width: 88%;
     max-width: 1200px;
     height: auto;
     max-height: 97%;
@@ -1440,7 +1442,7 @@ input, textarea  {
 }
 
 .jseo_lightbox_image img.zoom {
-    transform: translateX(-50%) translateY(-50%) scale(2.0);
+    transform: translateX(-50%) translateY(-50%) scale(2.5);
 
 }
 
@@ -1474,7 +1476,6 @@ input, textarea  {
     display: flex;
     position: relative;
     width: 100%;
-    height: calc(100% - 170px);
     z-index: 6;
     margin:0;
     padding:0;
@@ -1508,30 +1509,78 @@ input, textarea  {
     display: flex;
     position: relative;
     width: 100%;
-    height: 170px;
     z-index: 5;
     margin:0;
     padding:0;
     padding-right: 30px;
     padding-left: 30px;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
 }
 
 .jseo_lightbox_image_text h3, .jseo_lightbox_video_text h3, .jseo_lightbox_pdf_text h3 {
     display: block;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 18.5px;
+    line-height: 22px;
     color: #FFF;
     margin: 0;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     width: 100%;
     max-width: 1200px;
     text-transform: capitalize;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 1.2px;
     text-align: center;
+}
+
+.jseo_lightbox_image_text p, .jseo_lightbox_video_text p, .jseo_lightbox_pdf_text p {
+    display: block;
+    font-size: 14.2px;
+    line-height: 25px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    text-align: center;
+}
+
+.jseo_lightbox_image_text p.hidelbdesc, .jseo_lightbox_video_text p.hidelbdesc, .jseo_lightbox_pdf_text p.hidelbdesc {
+    display: none !important;
+    height: 0;
+    margin:0;
+}
+
+.jseo_lightbox_image_text a, .jseo_lightbox_video_text a, .jseo_lightbox_pdf_text a {
+    -webkit-transition: all 0.3s 0s ease;
+    -moz-transition: all 0.3s 0s ease;
+    -o-transition: all 0.3s 0s ease;
+    transition: all 0.3s 0s ease;
+    display: block;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    color: #FFF;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+}
+
+.jseo_lightbox_image_text a.hidelbbutton, .jseo_lightbox_video_text a.hidelbbutton, .jseo_lightbox_pdf_text a.hidelbbutton {
+    visibility: hidden !important;
+    height: 0 !important;
+    margin:0 !important;
+}
+
+.jseo_lightbox_image_text a:hover, .jseo_lightbox_video_text a:hover, .jseo_lightbox_pdf_text a:hover, .jseo_lightbox_image_text a:active, .jseo_lightbox_video_text a:active, .jseo_lightbox_pdf_text a:active, .jseo_lightbox_image_text a:focus, .jseo_lightbox_video_text a:focus, .jseo_lightbox_pdf_text a:focus {
+    background-color: #FFF;
+    color: #222;
 }
 
 .jseo_lightbox .jseo_lightbox_ui_top.show {
@@ -2667,7 +2716,34 @@ input, textarea  {
     background-color: #EEE;
 }
 
+@media (orientation: landscape) and (max-width: 896.9px) and (max-height: 420px) {
+    .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
+        height: 40% !important;
+    }
+    
+    .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
+        height: 60% !important;
+    }
+
+    .jseo_lightbox_video_media .jseo_lbvideo_iframe_container, .jseo_lightbox_pdf_media .jseo_pdfreader_container  {
+        max-width: 250px;
+    }
+
+    .jseo_lightbox_image_text p, .jseo_lightbox_video_text p, .jseo_lightbox_pdf_text p {
+        font-size: 12.5px !important;
+        line-height: 20px !important;
+    }
+}
+
 @media (max-width: 767.9px) {
+
+    .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
+        height: 60%;
+    }
+    
+    .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
+        height: 40%;
+    }
 
     .jseo_about_whole {
         flex-flow: column-reverse wrap;
@@ -2753,11 +2829,11 @@ input, textarea  {
     }
 
     .jseo_lightbox .jseo_lightbox_ui_top {
-        padding: 20px;
+        padding: 15px;
     }
 
     .jseo_lightbox_ui_content {
-        height: calc(100% - 90px);
+        height: calc(100% - 80px);
     }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
@@ -2800,6 +2876,8 @@ input, textarea  {
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f1 a {
         position: relative;
         width:100%;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
     }
 
     .jseo_portfolio_catui {
@@ -2931,6 +3009,14 @@ input, textarea  {
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
 
+    .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
+        height: 70%;
+    }
+    
+    .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
+        height: 30%;
+    }
+
     .jseo_about_whole {
         flex-flow: column wrap;
     }
@@ -3002,11 +3088,11 @@ input, textarea  {
     }
 
     .jseo_lightbox .jseo_lightbox_ui_top {
-        padding: 25px;
+        padding: 20px;
     }
 
     .jseo_lightbox_ui_content {
-        height: calc(100% - 100px);
+        height: calc(100% - 90px);
     }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
@@ -3052,6 +3138,7 @@ input, textarea  {
         min-width: 115%;
         z-index: 3;
         box-shadow: 8px 8px 20px 5px rgba(0,0,0,0.22);
+        border-radius: 5px;
     }
 
     .jseo_portfolio_catui {
@@ -3063,11 +3150,11 @@ input, textarea  {
     }
 
     .jseo_pcontrols_left {
-        width: 250px;
+        width: 270px;
     }
 
     .jseo_pcontrols_right {
-        width: calc(100% - 250px);
+        width: calc(100% - 270px);
     }
 
     .jseo_portfolio_select {
@@ -3395,11 +3482,11 @@ input, textarea  {
     }
 
     .jseo_lightbox .jseo_lightbox_ui_top {
-        padding: 30px;
+        padding: 25px;
     }
 
     .jseo_lightbox_ui_content {
-        height: calc(100% - 110px);
+        height: calc(100% - 100px);
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
@@ -3566,6 +3653,7 @@ input, textarea  {
         min-width: 125%;
         z-index: 3;
         box-shadow: 8px 8px 20px 5px rgba(0,0,0,0.22);
+        border-radius: 5px;
     }
 
     .jseo_portfolio_content.voffset .jseo_column {
@@ -3622,6 +3710,14 @@ input, textarea  {
         padding-bottom: 18.5%;
         margin: 8px;
     }
+
+    .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
+        height: 68%;
+    }
+    
+    .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
+        height: 32%;
+    }
 }
 
 @media(min-width: 1300px) {
@@ -3636,5 +3732,13 @@ input, textarea  {
 
     .jseo_about_whole {
         flex-flow: column wrap;
+    }
+
+    .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
+        height: 72%;
+    }
+    
+    .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
+        height: 28%;
     }
 }

@@ -19,6 +19,7 @@ jQuery( document ).ready(function() {
     let jseo_lbui_close = document.getElementById("jseo_lbui_close");
     let jseo_lbui_zoom = document.getElementById("jseo_lbui_zoom");
     let jseo_lightbox_ui_top = document.getElementById("jseo_lightbox_ui_top");
+    let jseo_lightbox_video_text = document.getElementById("jseo_lightbox_video_text");
     let jseo_lightbox_image = document.getElementById("jseo_lightbox_image");
     let jseo_lightbox_video = document.getElementById("jseo_lightbox_video");
     let jseo_lightbox_video_container = document.getElementById("jseo_lightbox_video_container");
@@ -36,6 +37,14 @@ jQuery( document ).ready(function() {
     let jseo_lightbox_zoom = -1;
     let jseo_lbimage_x = -50;
     let jseo_lbimage_y = -50;
+
+    let jseo_lbimage_description = document.getElementById("jseo_lbimage_description");
+    let jseo_lbvideo_description = document.getElementById("jseo_lbvideo_description");
+    let jseo_lbpdf_description = document.getElementById("jseo_lbpdf_description");
+
+    let jseo_lbimage_button = document.getElementById("jseo_lbimage_button");
+    let jseo_lbvideo_button = document.getElementById("jseo_lbvideo_button");
+    let jseo_lbpdf_button = document.getElementById("jseo_lbpdf_button");
 
     let current_post_storage = [];
     let current_entry_max = 0;
@@ -109,7 +118,7 @@ jQuery( document ).ready(function() {
                 jseo_lbimage_y += downYDelta * 0.01;
             }
 
-            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.0)';
+            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.5)';
         }
     }
 
@@ -152,6 +161,12 @@ jQuery( document ).ready(function() {
 
       if(jseo_lightbox_ui_top != null) {
         jseo_lightbox_ui_top.addEventListener("mouseenter", function(){
+            down = false;
+        });
+      }
+
+      if(jseo_lightbox_video_text != null) {
+        jseo_lightbox_video_text.addEventListener("mouseenter", function(){
             down = false;
         });
       }
@@ -263,11 +278,11 @@ jQuery( document ).ready(function() {
                 }
 
                 if(jseo_portfolio_content.classList.contains("grid")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
-                    let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li></ul></div></div>';
+                    let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li></ul></div></div>';
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                 }
             } 
@@ -388,11 +403,11 @@ jQuery( document ).ready(function() {
                             }
 
                             if(jseo_portfolio_content.classList.contains("grid")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/gallery.svg" + '">Gallery Images<span>' + current_post_storage[z]['the_gallery_count'] + '</span></div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
-                                let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li><li><img src="' + themeDirURI + "/svg/gallery.svg" + '"><span>Gallery: ' + current_post_storage[z]['the_gallery_count'] + '</span></li></ul></div></div>';
+                                let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li></ul></div></div>';
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                             }
                         } 
@@ -468,7 +483,10 @@ jQuery( document ).ready(function() {
     function jseo_lbui_showfunc() {
         let jseo_current_file = this.dataset.cfile;
         let jseo_current_video = this.dataset.video;
+        let jseo_current_desc = this.dataset.desc;
         let jseo_current_featured = this.dataset.featured;
+        let jseo_current_hasarticle = this.dataset.hasarticle;
+        let jseo_current_permalink = this.dataset.permalink;
         let jseo_current_mode = 0;
         let jseo_current_title = this.dataset.title;
 
@@ -515,15 +533,22 @@ jQuery( document ).ready(function() {
 
             if(jseo_current_mode == 0) {
                 if(jseo_lightbox_image != null && jseo_lightbox_video != null && jseo_lightbox_pdf != null) {
-                    jseo_lightbox_image.style.height = "100%";
-                    jseo_lightbox_video.style.height = "0%";
-                    jseo_lightbox_pdf.style.height = "0%";
+                    // jseo_lightbox_image.style.height = "100%";
+                    // jseo_lightbox_video.style.height = "0%";
+                    // jseo_lightbox_pdf.style.height = "0%";
+
+                    jseo_lightbox_image.style.display = "flex";
+                    jseo_lightbox_video.style.display = "none";
+                    jseo_lightbox_pdf.style.display = "none";
                 }
 
                 if(jseo_lightbox_image != null) {
-                    if(jseo_lightbox_image.classList.contains("show") == false) {
-                        jseo_lightbox_image.classList.add("show");
-                    }
+
+                    setTimeout(function(){
+                        if(jseo_lightbox_image.classList.contains("show") == false) {
+                            jseo_lightbox_image.classList.add("show")
+                        }
+                    }, 300);
     
                     if(jseo_current_featured != null && jseo_current_featured != "" && jseo_current_featured != "-1") {
                         if(jseo_lbimage_img != null) {
@@ -534,12 +559,39 @@ jQuery( document ).ready(function() {
     
                 if(jseo_lbimage_title != null) {
                     jseo_lbimage_title.innerHTML = jseo_current_title;
-                }       
+                }      
+
+                if(jseo_lbimage_description != null) {
+                    if(jseo_current_desc != null && jseo_current_desc != "-1" && jseo_current_desc != -1) {
+                        jseo_lbimage_description.innerHTML = jseo_current_desc;
+
+                        if(jseo_lbimage_description.classList.contains("hidelbdesc") == true) {
+                            jseo_lbimage_description.classList.remove("hidelbdesc");
+                        }
+                    }
+                }
+
+                if(jseo_lbimage_button != null) {
+                    if(jseo_current_permalink != null && jseo_current_permalink != "-1" && jseo_current_permalink != -1 && jseo_current_hasarticle != null && jseo_current_hasarticle != "-1" && jseo_current_hasarticle != -1) {
+                        if(jseo_current_hasarticle == 'true') {
+                            jseo_lbimage_button.href = jseo_current_permalink;
+
+                            if(jseo_lbimage_button.classList.contains("hidelbbutton") == true) {
+                                jseo_lbimage_button.classList.remove("hidelbbutton");
+                            }
+                        }
+                    }
+                }
+
             } else if(jseo_current_mode == 1) {
                 if(jseo_lightbox_image != null && jseo_lightbox_video != null && jseo_lightbox_pdf != null) {
-                    jseo_lightbox_image.style.height = "0%";
-                    jseo_lightbox_video.style.height = "100%";
-                    jseo_lightbox_pdf.style.height = "0%";
+                    // jseo_lightbox_image.style.height = "0%";
+                    // jseo_lightbox_video.style.height = "100%";
+                    // jseo_lightbox_pdf.style.height = "0%";
+
+                    jseo_lightbox_image.style.display = "none";
+                    jseo_lightbox_video.style.display = "flex";
+                    jseo_lightbox_pdf.style.display = "none";
                 }
 
                 if(jseo_lbui_zoom.classList.contains("jseo_lbui_disabled") == false) {
@@ -577,19 +629,45 @@ jQuery( document ).ready(function() {
                     jseo_lbvideo_title.innerHTML = jseo_current_title;
                 }  
 
+                if(jseo_lbvideo_description != null) {
+                    if(jseo_current_desc != null && jseo_current_desc != "-1" && jseo_current_desc != -1) {
+                        jseo_lbvideo_description.innerHTML = jseo_current_desc;
+
+                        if(jseo_lbvideo_description.classList.contains("hidelbdesc") == true) {
+                            jseo_lbvideo_description.classList.remove("hidelbdesc");
+                        }
+                    }
+                }
+
+                if(jseo_lbvideo_button != null) {
+                    if(jseo_current_permalink != null && jseo_current_permalink != "-1" && jseo_current_permalink != -1 && jseo_current_hasarticle != null && jseo_current_hasarticle != "-1" && jseo_current_hasarticle != -1) {
+                        if(jseo_current_hasarticle == 'true') {
+                            jseo_lbvideo_button.href = jseo_current_permalink;
+
+                            if(jseo_lbvideo_button.classList.contains("hidelbbutton") == true) {
+                                jseo_lbvideo_button.classList.remove("hidelbbutton");
+                            }
+                        }
+                    }
+                }
+
                 if(jseo_lightbox_video_container != null) {
                     setTimeout(function(){
                         if(jseo_lightbox_video_container.classList.contains("show") == false) {
                             jseo_lightbox_video_container.classList.add("show")
                         }
-                    }, 100);
+                    }, 500);
                 }
 
             } else if(jseo_current_mode == 2) {
                 if(jseo_lightbox_image != null && jseo_lightbox_video != null && jseo_lightbox_pdf != null) {
-                    jseo_lightbox_image.style.height = "0%";
-                    jseo_lightbox_video.style.height = "0%";
-                    jseo_lightbox_pdf.style.height = "100%";
+                    // jseo_lightbox_image.style.height = "0%";
+                    // jseo_lightbox_video.style.height = "0%";
+                    // jseo_lightbox_pdf.style.height = "100%";
+
+                    jseo_lightbox_image.style.display = "none";
+                    jseo_lightbox_video.style.display = "none";
+                    jseo_lightbox_pdf.style.display = "flex";
                 }
 
                 if(jseo_lbui_zoom.classList.contains("jseo_lbui_disabled") == false) {
@@ -616,12 +694,34 @@ jQuery( document ).ready(function() {
                     jseo_lbpdf_title.innerHTML = jseo_current_title;
                 }  
 
+                if(jseo_lbpdf_description != null) {
+                    if(jseo_current_desc != null && jseo_current_desc != "-1" && jseo_current_desc != -1) {
+                        jseo_lbpdf_description.innerHTML = jseo_current_desc;
+
+                        if(jseo_lbpdf_description.classList.contains("hidelbdesc") == true) {
+                            jseo_lbpdf_description.classList.remove("hidelbdesc");
+                        }
+                    }
+                }
+
+                if(jseo_lbpdf_button != null) {
+                    if(jseo_current_permalink != null && jseo_current_permalink != "-1" && jseo_current_permalink != -1 && jseo_current_hasarticle != null && jseo_current_hasarticle != "-1" && jseo_current_hasarticle != -1) {
+                        if(jseo_current_hasarticle == 'true') {
+                            jseo_lbpdf_button.href = jseo_current_permalink;
+
+                            if(jseo_lbpdf_button.classList.contains("hidelbbutton") == true) {
+                                jseo_lbpdf_button.classList.remove("hidelbbutton");
+                            }
+                        }
+                    }
+                }
+
                 if(jseo_lightbox_pdf_container != null) {
                     setTimeout(function(){
                         if(jseo_lightbox_pdf_container.classList.contains("show") == false) {
                             jseo_lightbox_pdf_container.classList.add("show")
                         }
-                    }, 100);
+                    }, 300);
                 }
 
                 
@@ -698,6 +798,44 @@ jQuery( document ).ready(function() {
             if(jseo_lbvideo_iframe != null) {
                 jseo_lbvideo_iframe.src = '';
             }
+
+            if(jseo_lbimage_description != null) {
+                if(jseo_lbimage_description.classList.contains("hidelbdesc") == false) {
+                    jseo_lbimage_description.classList.add("hidelbdesc");
+                }
+            }
+
+            if(jseo_lbvideo_description != null) {
+                if(jseo_lbvideo_description.classList.contains("hidelbdesc") == false) {
+                    jseo_lbvideo_description.classList.add("hidelbdesc");
+                }
+            }
+
+            if(jseo_lbpdf_description != null) {
+                if(jseo_lbpdf_description.classList.contains("hidelbdesc") == false) {
+                    jseo_lbpdf_description.classList.add("hidelbdesc");
+                }
+            }
+
+            if(jseo_lbimage_button != null) {
+                if(jseo_lbimage_button.classList.contains("hidelbbutton") == false) {
+                    jseo_lbimage_button.classList.add("hidelbbutton");
+                }
+            }
+
+            if(jseo_lbvideo_button != null) {
+                if(jseo_lbvideo_button.classList.contains("hidelbbutton") == false) {
+                    jseo_lbvideo_button.classList.add("hidelbbutton");
+                }
+            }
+
+            if(jseo_lbpdf_button != null) {
+                if(jseo_lbpdf_button.classList.contains("hidelbbutton") == false) {
+                    jseo_lbpdf_button.classList.add("hidelbbutton");
+                }
+            }
+
+            
         }, 1000);
     }
 
@@ -940,114 +1078,5 @@ jQuery( document ).ready(function() {
             rect.top < window.innerHeight && rect.bottom >= 0
         );
     }
-
-//     // intial params
-// let pdf ;
-// let canvas;
-// let isPageRendering;
-// let  pageRenderingQueue = null;
-// let canvasContext;
-// let totalPages;
-// let currentPageNum = 1;
-
-// // events
-// function triggerpdfload(thefile) {
-//     document.getElementById("loader").style.display = "block";
-//     isPageRendering= false;
-//     pageRenderingQueue = null;
-//     canvas = document.getElementById('pdf_canvas');
-//     canvasContext = canvas.getContext('2d');
-    
-//     initEvents();
-//     initPDFRenderer(thefile);
-// }
-
-// function initEvents() {
-//     let prevPageBtn = document.getElementById('prev_page');
-//     let nextPageBtn = document.getElementById('next_page');
-//     let goToPage = document.getElementById('go_to_page');
-//     prevPageBtn.addEventListener('click', renderPreviousPage);
-//     nextPageBtn.addEventListener('click',renderNextPage);
-//     goToPage.addEventListener('click', goToPageNum);
-// }
-
-// // init when window is loaded
-// function initPDFRenderer(thefile) {
-    
-//     var url = thefile;
-
-//     // const url = 'test1.pdf'; // replace with your pdf location
-
-//     let option  = { url};
-    
-
-//     pdfjsLib.getDocument(option).promise.then(pdfData => {
-//         totalPages = pdfData.numPages;
-//         let pagesCounter= document.getElementById('total_page_num');
-//         pagesCounter.textContent = totalPages;
-//         // assigning read pdfContent to global variable
-//         pdf = pdfData;
-//         renderPage(currentPageNum);
-//     });
-// }
-
-// function renderPage(pageNumToRender = 1, scale = 1) {
-//     isPageRendering = true;
-//     document.getElementById('current_page_num').textContent = pageNumToRender;
-//     pdf.getPage(pageNumToRender).then(page => {
-//         document.getElementById("loader").style.display = "none";
-//         const viewport = page.getViewport({scale :1});
-//         canvas.height = viewport.height;
-//         canvas.width = viewport.width;  
-//         let renderCtx = {canvasContext ,viewport};
-//         page.render(renderCtx).promise.then(()=> {
-//             isPageRendering = false;
-//             if(pageRenderingQueue !== null) { // this is to check of there is next page to be rendered in the queue
-//                 renderPage(pageNumToRender);
-//                 pageRenderingQueue = null; 
-//             }
-//         });        
-//     }); 
-// }
-
-// function renderPageQueue(pageNum) {
-//     if(pageRenderingQueue != null) {
-//         pageRenderingQueue = pageNum;
-//     } else {
-//         renderPage(pageNum);
-//     }
-// }
-
-// function renderNextPage(ev) {
-//     if(currentPageNum >= totalPages) {
-//         alert("This is the last page");
-//         return ;
-//     } 
-//     currentPageNum++;
-//     renderPageQueue(currentPageNum);
-// }
-
-// function renderPreviousPage(ev) {
-//     if(currentPageNum<=1) {
-//         alert("This is the first page");
-//         return ;
-//     }
-//     currentPageNum--;
-//     renderPageQueue(currentPageNum);
-// }
-
-// function goToPageNum(ev) {
-//     let numberInput = document.getElementById('page_num');
-//     let pageNumber = parseInt(numberInput.value);
-//     if(pageNumber) {
-//         if(pageNumber <= totalPages && pageNumber >= 1){
-//             currentPageNum = pageNumber;
-//             numberInput.value ="";
-//             renderPageQueue(pageNumber);
-//             return ;
-//         }
-//     }
-//         alert("Enter a valide page numer");
-// }
 
 });

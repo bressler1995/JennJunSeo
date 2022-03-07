@@ -8,6 +8,7 @@
     if ( ! defined( 'ABSPATH' ) ) {
         exit; // Exit if accessed directly.
     }
+
     get_header();
 
 
@@ -19,6 +20,16 @@
         $author_id = get_post_field( 'post_author', $the_id );
         $author_name = get_the_author_meta('display_name');
         $the_date = get_the_date("m/d/Y", $the_id );
+
+        $jseo_term_args = array(
+            'taxonomy' => 'portfolio_category',
+            'hide_empty' => false,
+        );
+
+        $jseo_taxcategories = get_terms($jseo_term_args);
+        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design';
+        $jseo_customordered_terms = get_terms_ordered( 'portfolio_category', $jseo_term_args, $custom_slug_order, 'name');
+        
         $the_terms = get_terms(array(
             'taxonomy' => 'portfolio_category',
             'hide_empty' => false,
@@ -84,10 +95,10 @@
         $wireframes_displayed = false;
         $results_displayed = false;
 
-        for($x = 0; $x < count($the_terms); $x++) {
-            // echo d($the_terms[$x]);
+        for($x = 0; $x < count($jseo_customordered_terms); $x++) {
+            // echo d($jseo_customordered_terms[$x]);
 
-            $the_current = $the_terms[$x];
+            $the_current = $jseo_customordered_terms[$x];
             $the_name = $the_current->name;
             $the_meta_id = $the_current->term_id;
             $the_term_meta = get_term_meta($the_meta_id);
@@ -189,7 +200,7 @@
                             . $content_the_problem['problem_content'] . 
                         '</div>
                         <div class="jseo_content_problem_col">
-                            <a data-title="The Problem" data-cfile="-1" data-video="-1" data-featured="'. $content_the_problem['problem_screenshot'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $content_the_problem['problem_screenshot'] . '"></a>' . 
+                            <a data-title="The Problem" data-cfile="-1" data-video="-1" data-featured="'. $content_the_problem['problem_screenshot'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $content_the_problem['problem_screenshot'] . '"></a>' . 
                         '</div>
                     </div>';
                 } else {
@@ -239,7 +250,7 @@
                         if(count($study_images) > 0) {
                             $content_user_study_output .= '<div class="jseo_contentwimg_gallery">';
                             for($y = 0; $y < count($study_images); $y++) {
-                                $content_user_study_output .= '<a data-title="User Study ' . ($y + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $study_images[$y]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $study_images[$y]['url'] . '"></a>';
+                                $content_user_study_output .= '<a data-title="User Study ' . ($y + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $study_images[$y]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $study_images[$y]['url'] . '"></a>';
                             }
                             $content_user_study_output .= '</div>';
                         }
@@ -268,7 +279,7 @@
                         if(count($the_images) > 0) {
                             $content_branding_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_branding_output .= '<a data-title="Branding ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_branding_output .= '<a data-title="Branding ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_branding_output .= '</div>';
                         }
@@ -297,7 +308,7 @@
                         if(count($the_images) > 0) {
                             $content_wireframes_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_wireframes_output .= '<a data-title="Wireframes ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_wireframes_output .= '<a data-title="Wireframes ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_wireframes_output .= '</div>';
                         }
@@ -326,14 +337,15 @@
                         if(count($the_images) > 0) {
                             $content_design_iterations_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_design_iterations_output .= '<a data-title="Design Iterations ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_design_iterations_output .= '<a data-title="Design Iterations ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_design_iterations_output .= '</div>';
                         }
                     }
-                }
 
-                $content_design_iterations_output .= '</div>';
+                    $content_design_iterations_output .= '</div>';
+                }
+                
             }
 
             //WYSIWYG with images
@@ -353,14 +365,15 @@
                         if(count($the_images) > 0) {
                             $content_mockups_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_mockups_output .= '<a data-title="Mockup ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_mockups_output .= '<a data-title="Mockup ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_mockups_output .= '</div>';
                         }
                     }
+
+                    $content_mockups_output .= '</div>';
                 }
 
-                $content_mockups_output .= '</div>';
             }
 
             //WYSIWYG

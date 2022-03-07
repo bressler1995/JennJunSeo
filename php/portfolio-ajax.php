@@ -130,14 +130,21 @@
                 $the_author_id = get_post_field( 'post_author', $the_id );
                 $the_author_name = get_the_author_meta('display_name', $the_author_id);
 
+                $the_current_terms = get_the_terms($the_id, 'portfolio_category');
+                $the_terms_string = join(', ', wp_list_pluck($the_current_terms, 'name'));
+                $has_article = 'false';
+
+                if(str_contains($the_terms_string, 'UI/UX Design')) {
+                    $has_article = 'true';
+                }
+
                 if($the_date == false) {
                     $the_date = 'Date Missing';
                 }
 
                 $the_custom_file = get_field('custom_file', $the_id);
                 $the_video = get_field('the_video', $the_id);
-                $the_gallery_array = get_field('gallery_images', $the_id);
-                $the_gallery_count = 0;
+                $the_lightbox_description = get_field('lightbox_description', $the_id);
 
                 if($the_custom_file) {
                     $the_custom_file = $the_custom_file;
@@ -151,8 +158,10 @@
                     $the_video = -1;
                 }
 
-                if(empty($the_gallery_array) == false && isset($the_gallery_array)) {
-                    $the_gallery_count = count($the_gallery_array);
+                if($the_lightbox_description) {
+                    $the_lightbox_description = $the_lightbox_description;
+                } else {
+                    $the_lightbox_description = -1;
                 }
 
                 if(isset($the_featured_image)) {
@@ -165,9 +174,10 @@
                         "the_excerpt"=>$the_excerpt,
                         "the_custom_file"=>$the_custom_file,
                         "the_video"=>$the_video,
-                        "the_gallery_count"=>$the_gallery_count,
+                        "the_lightbox_description"=>$the_lightbox_description,
                         "the_date"=>$the_date,
-                        "the_author"=>$the_author_name
+                        "the_author"=>$the_author_name,
+                        'has_article'=>$has_article
                     );
     
                     array_push($jseo_post_storage, $the_post_object);

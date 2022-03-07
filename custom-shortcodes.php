@@ -1,4 +1,6 @@
 <?php
+    include('custom-functions.php');
+
     $jseo_filterparam = $_GET['filter'];
 
     if(isset($jseo_filterparam) == false && empty($jseo_filterparam)) {
@@ -14,10 +16,14 @@
         $jseo_has_cat = false;
 
         $jseo_catui_output = '<div id="jseo_portfolio_catui" class="jseo_portfolio_catui">';
-        $jseo_taxcategories = get_terms( array(
+        $jseo_term_args = array(
             'taxonomy' => 'portfolio_category',
             'hide_empty' => false,
-        ));
+        );
+
+        $jseo_taxcategories = get_terms($jseo_term_args);
+        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design';
+        $jseo_customordered_terms = get_terms_ordered( 'portfolio_category', $jseo_term_args, $custom_slug_order, 'name');
 
         if($jseo_filterparam == 'all') {
             $jseo_catui_output .= '<a class="active" data-slug="all" href="javascript:void(0);">All</a>';
@@ -29,8 +35,8 @@
         }
         
 
-        if ( !empty($jseo_taxcategories) ) {
-            foreach( $jseo_taxcategories as $category ) {
+        if ( !empty($jseo_customordered_terms) ) {
+            foreach( $jseo_customordered_terms as $category ) {
                 if( $category->parent == 0 ) {
                     $jseo_cat_name = $category->name;
                     $jseo_cat_slug = $category->slug;
@@ -141,8 +147,17 @@
                 $the_mini_thumb = get_the_post_thumbnail_url($the_mini_id);
                 $the_mini_custom_file = get_field('custom_file', $the_mini_id);
                 $the_mini_video = get_field('the_video', $the_mini_id);
+                $the_mini_lbdescription = get_field('lightbox_description', $the_mini_id);
                 $the_mini_mode = 0;
                 $the_mini_icon_output = '';
+
+                $the_current_terms = get_the_terms($the_mini_id, 'portfolio_category');
+                $the_terms_string = join(', ', wp_list_pluck($the_current_terms, 'name'));
+                $has_article = 'false';
+
+                if(str_contains($the_terms_string, 'UI/UX Design')) {
+                    $has_article = 'true';
+                }
 
                 if($the_mini_custom_file) {
                     $the_mini_custom_file = $the_mini_custom_file;
@@ -154,6 +169,12 @@
                     $the_mini_video = $the_mini_video;
                 } else {
                     $the_mini_video = -1;
+                }
+
+                if($the_mini_lbdescription) {
+                    $the_mini_lbdescription = $the_mini_lbdescription;
+                } else {
+                    $the_mini_lbdescription = -1;
                 }
 
                 if($the_mini_thumb  != -1 && isset($the_mini_thumb) && $the_mini_video == -1 && $the_mini_custom_file == -1) {
@@ -180,7 +201,7 @@
 
                 if(isset($the_mini_thumb)) {
 
-                    $result .= '<a data-title="' . $the_mini_title . '" data-cfile="' . $the_mini_custom_file . '" data-video="' . $the_mini_video . '" data-featured="' . $the_mini_thumb . '" class="jseo_mini_workitem" href="javascript:void(0)"><img class="jseo_mini_workimage" src="' . $the_mini_thumb . '"><div class="jseo_mini_worktext"><div class="jseo_mini_icon"><img src="' . $the_mini_icon_output . '"></div><span class="jseo_mini_worktitle">' . $the_mini_title . '</span></div></a>';
+                    $result .= '<a data-title="' . $the_mini_title . '" data-desc="' . $the_mini_lbdescription . '" data-cfile="' . $the_mini_custom_file . '" data-video="' . $the_mini_video . '" data-featured="' . $the_mini_thumb . '" data-hasarticle="' . $has_article . '" data-permalink="' . $the_mini_perma . '" class="jseo_mini_workitem" href="javascript:void(0)"><img class="jseo_mini_workimage" src="' . $the_mini_thumb . '"><div class="jseo_mini_worktext"><div class="jseo_mini_icon"><img src="' . $the_mini_icon_output . '"></div><span class="jseo_mini_worktitle">' . $the_mini_title . '</span></div></a>';
                 }
                 
                 
