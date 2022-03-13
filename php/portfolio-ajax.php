@@ -27,7 +27,7 @@
         if($request_filter == 'all') {
             $jseo_category_exists = true;
         } else {
-            if($request_filter == 'motion-design') {
+            if($request_filter == 'uiux-design') {
                 $jseo_entrymax = 6;
             }
 
@@ -145,6 +145,7 @@
                 $the_custom_file = get_field('custom_file', $the_id);
                 $the_video = get_field('the_video', $the_id);
                 $the_lightbox_description = get_field('lightbox_description', $the_id);
+                $the_brightness = get_field('brightness', $the_id);
 
                 if($the_custom_file) {
                     $the_custom_file = $the_custom_file;
@@ -164,6 +165,12 @@
                     $the_lightbox_description = -1;
                 }
 
+                if($the_brightness) {
+                    $the_brightness = $the_brightness;
+                } else {
+                    $the_brightness = 100;
+                }
+
                 if(isset($the_featured_image)) {
                     // $jseo_markdown .= '<div class="jseo_column"><a href="' . $the_permalink . '"><img src="' . $the_featured_image . '"><span class="jseo_portfolio_title">' . $the_title . '</span></a></div>';
                     $the_post_object = array(
@@ -175,6 +182,7 @@
                         "the_custom_file"=>$the_custom_file,
                         "the_video"=>$the_video,
                         "the_lightbox_description"=>$the_lightbox_description,
+                        "the_brightness"=>$the_brightness,
                         "the_date"=>$the_date,
                         "the_author"=>$the_author_name,
                         'has_article'=>$has_article

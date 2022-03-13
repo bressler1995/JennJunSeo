@@ -178,6 +178,8 @@
                 $content_present = false;
                 $content_screen_present = false;
                 $content_problem_pass = false;
+                $temp_problem_caption = -1;
+                $temp_problem_caption_output = '';
 
                 if($content_the_problem['problem_content'] != '' && empty($content_the_problem['problem_content']) == false && isset($content_the_problem['problem_screenshot']) == true) {
                     $content_present = true;
@@ -185,6 +187,11 @@
 
                 if($content_the_problem['problem_screenshot'] != '' && empty($content_the_problem['problem_screenshot']) == false && isset($content_the_problem['problem_screenshot']) == true) {
                     $content_screen_present = true;
+                }
+
+                if($content_the_problem['problem_screenshot_caption'] != '' && empty($content_the_problem['problem_screenshot_caption']) == false && isset($content_the_problem['problem_screenshot_caption']) == true) {
+                    $temp_problem_caption = $content_the_problem['problem_screenshot_caption'];
+                    $temp_problem_caption_output = '<p class="the_problem_caption">' . $temp_problem_caption . '</p>';
                 }
 
                 if($content_present == true && $content_screen_present == true) {
@@ -200,7 +207,8 @@
                             . $content_the_problem['problem_content'] . 
                         '</div>
                         <div class="jseo_content_problem_col">
-                            <a data-title="The Problem" data-cfile="-1" data-video="-1" data-featured="'. $content_the_problem['problem_screenshot'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $content_the_problem['problem_screenshot'] . '"></a>' . 
+                            <a data-title="The Problem" data-cfile="-1" data-video="-1" data-featured="'. $content_the_problem['problem_screenshot'] . '" data-desc="' . $temp_problem_caption . '" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $content_the_problem['problem_screenshot'] . '"></a>' . 
+                            $temp_problem_caption_output . 
                         '</div>
                     </div>';
                 } else {

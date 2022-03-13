@@ -4,7 +4,7 @@
     $jseo_filterparam = $_GET['filter'];
 
     if(isset($jseo_filterparam) == false && empty($jseo_filterparam)) {
-        $jseo_filterparam = 'all';
+        $jseo_filterparam = 'uiux-design';
     }
 
     function jseo_show_function() {
@@ -25,14 +25,14 @@
         $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design';
         $jseo_customordered_terms = get_terms_ordered( 'portfolio_category', $jseo_term_args, $custom_slug_order, 'name');
 
-        if($jseo_filterparam == 'all') {
-            $jseo_catui_output .= '<a class="active" data-slug="all" href="javascript:void(0);">All</a>';
-            $jseo_hoverDescription = 'All projects are being displayed.';
-            $jseo_has_cat = true;
-            $jseo_currentopt_name = 'All';
-        } else {
-            $jseo_catui_output .= '<a data-slug="all" href="javascript:void(0);">All</a>';
-        }
+        // if($jseo_filterparam == 'all') {
+        //     $jseo_catui_output .= '<a class="active" data-slug="all" href="javascript:void(0);">All</a>';
+        //     $jseo_hoverDescription = 'All projects are being displayed.';
+        //     $jseo_has_cat = true;
+        //     $jseo_currentopt_name = 'All';
+        // } else {
+        //     $jseo_catui_output .= '<a data-slug="all" href="javascript:void(0);">All</a>';
+        // }
         
 
         if ( !empty($jseo_customordered_terms) ) {
@@ -65,12 +65,7 @@
         $jseo_markdown = '<div class="jseo_portfolio" id="jseo_portfolio">
         <div class="jseo_portfolio_controls">
             <div class="jseo_pcontrols_left">
-                <button type="button" class="jseo_portfolio_opt" id="jseo_portfolio_prevOpt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_left.png"></button>
-                <button type="button" id="jseo_portfolio_all" class="jseo_portfolio_select">' . 
-                    $jseo_currentopt_name . 
-                    '<div class="jseo_portofolio_description"><span>' . $jseo_hoverDescription . '</span></div>
-                </button>
-                <button type="button" class="jseo_portfolio_opt" id="jseo_portfolio_nextOpt"><img class="jseo_portfolio_opt_img" src="' . get_stylesheet_directory_uri() . '/img/button_right.png"></button>
+                
             </div>
             <div class="jseo_pcontrols_right">' .
                 $jseo_catui_output .

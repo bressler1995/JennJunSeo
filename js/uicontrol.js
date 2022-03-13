@@ -6,20 +6,17 @@ jQuery( document ).ready(function() {
     let jseo_portfolio_content = document.getElementById("jseo_portfolio_content");
 
     let jseo_portfolio_catui = document.getElementById("jseo_portfolio_catui");
-    let jseo_portfolio_nextOpt = document.getElementById("jseo_portfolio_nextOpt");
-    let jseo_portfolio_prevOpt = document.getElementById("jseo_portfolio_prevOpt");
     let uicurrent = -1;
     let uilength = - 1;
 
     let jseo_pagination = document.getElementById("jseo_pagination");
     let jseo_footer = document.getElementById("jseo_footer");
-    let jseo_portfolio_all = document.getElementById("jseo_portfolio_all");
+    // let jseo_portfolio_all = document.getElementById("jseo_portfolio_all");
 
     let jseo_lightbox = document.getElementById("jseo_lightbox");
     let jseo_lbui_close = document.getElementById("jseo_lbui_close");
     let jseo_lbui_zoom = document.getElementById("jseo_lbui_zoom");
     let jseo_lightbox_ui_top = document.getElementById("jseo_lightbox_ui_top");
-    let jseo_lightbox_video_text = document.getElementById("jseo_lightbox_video_text");
     let jseo_lightbox_image = document.getElementById("jseo_lightbox_image");
     let jseo_lightbox_video = document.getElementById("jseo_lightbox_video");
     let jseo_lightbox_video_container = document.getElementById("jseo_lightbox_video_container");
@@ -45,6 +42,9 @@ jQuery( document ).ready(function() {
     let jseo_lbimage_button = document.getElementById("jseo_lbimage_button");
     let jseo_lbvideo_button = document.getElementById("jseo_lbvideo_button");
     let jseo_lbpdf_button = document.getElementById("jseo_lbpdf_button");
+
+    let jseo_lightbox_video_text = document.getElementById("jseo_lightbox_video_text");
+    let jseo_lightbox_image_text = document.getElementById("jseo_lightbox_image_text");
 
     let current_post_storage = [];
     let current_entry_max = 0;
@@ -79,46 +79,55 @@ jQuery( document ).ready(function() {
 
     let moveListener = (event) => {
         if(down == true && jseo_lightbox_zoom == 1) {
-            downXDelta = event.clientX - downXStart;
-            downYDelta = event.clientY - downYStart;
+            // downXDelta = event.clientX - downXStart;
+            // downYDelta = event.clientY - downYStart;
 
-            if(downXDelta > downXStart) {
-                if(directionX == -1) {
-                    downXStart = event.clientX;
-                }
-                directionX = 1;
-            }
+            var rect = jseo_lbimage_img.getBoundingClientRect();
+            downXPer = (event.clientX / jseo_lightbox_image_media.clientWidth) * 100;
+            downYPer = (event.clientY / jseo_lightbox_image_media.clientHeight) * 100;
 
-            if(downXDelta < downXStart) {
-                if(directionX == 1) {
-                    downXStart = event.clientX;
-                }
-                directionX = -1;
-            }
+            console.log(downXPer + "%",  + downYPer + "%")
 
-            if(downYDelta > downYStart) {
-                if(directionY == -1) {
-                    downYStart = event.clientY;
-                }
-                directionY = 1;
-            }
+            // if(downXDelta > downXStart) {
+            //     if(directionX == -1) {
+            //         downXStart = event.clientX;
+            //     }
+            //     directionX = 1;
+            // }
 
-            if(downYDelta < downYStart) {
-                if(directionY == 1) {
-                    downYStart = event.clientY;
-                }
-                directionY = -1;
-            }
+            // if(downXDelta < downXStart) {
+            //     if(directionX == 1) {
+            //         downXStart = event.clientX;
+            //     }
+            //     directionX = -1;
+            // }
 
-            if(jseo_lbimage_x + (downXDelta * 0.01) >= -120  && jseo_lbimage_x + (downXDelta * 0.01) <= 20) {
-                jseo_lbimage_x += downXDelta * 0.01;
-            }
+            // if(downYDelta > downYStart) {
+            //     if(directionY == -1) {
+            //         downYStart = event.clientY;
+            //     }
+            //     directionY = 1;
+            // }
 
-            if(jseo_lbimage_y + (downYDelta * 0.01) >= -120  && jseo_lbimage_y + (downYDelta * 0.01) <= 20) {
-                jseo_lbimage_y += downYDelta * 0.01;
-            }
+            // if(downYDelta < downYStart) {
+            //     if(directionY == 1) {
+            //         downYStart = event.clientY;
+            //     }
+            //     directionY = -1;
+            // }
 
-            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.5)';
+            // if(jseo_lbimage_x + (downXDelta * 0.01) >= -120  && jseo_lbimage_x + (downXDelta * 0.01) <= 20) {
+            //     jseo_lbimage_x += downXDelta * (1 / 100);
+            // }
+
+            // if(jseo_lbimage_y + (downYDelta * 0.01) >= -120  && jseo_lbimage_y + (downYDelta * 0.01) <= 20) {
+            //     jseo_lbimage_y += downYDelta * (1 / 100);
+            // }
+
+            var scaleX = scaleValue(downXPer, [0,100], [-120, 20]);
+            var scaleY = scaleValue(downYPer, [0,100], [-120, 20]);
+
+            jseo_lbimage_img.style.transform = 'translateX(' + scaleX + '%) translateY(' + scaleY + '%) scale(2.5)';
         }
     }
 
@@ -171,6 +180,12 @@ jQuery( document ).ready(function() {
         });
       }
 
+      if(jseo_lightbox_image_text != null) {
+        jseo_lightbox_image_text.addEventListener("mouseenter", function(){
+            down = false;
+        });
+      }
+
       if(jseo_single_content != null) {
         jQuery(document).on('click', 'a[href^="#"]', function (event) {
             event.preventDefault();
@@ -215,10 +230,10 @@ jQuery( document ).ready(function() {
                 }
 
                 this.classList.add("active");
-                if(jseo_portfolio_all != null) {
-                    jseo_portfolio_all.innerHTML = this.innerHTML;
-                    jseo_portfolio_all.innerHTML = jseo_portfolio_all.innerHTML + '<div class="jseo_portofolio_description"><span>' + this.innerHTML + ' projects are being displayed.</span></div>';
-                }
+                // if(jseo_portfolio_all != null) {
+                //     jseo_portfolio_all.innerHTML = this.innerHTML;
+                //     jseo_portfolio_all.innerHTML = jseo_portfolio_all.innerHTML + '<div class="jseo_portofolio_description"><span>' + this.innerHTML + ' projects are being displayed.</span></div>';
+                // }
             });
         }
 
@@ -278,12 +293,12 @@ jQuery( document ).ready(function() {
                 }
 
                 if(jseo_portfolio_content.classList.contains("grid")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
                     let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li></ul></div></div>';
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                 }
             } 
         }
@@ -356,12 +371,13 @@ jQuery( document ).ready(function() {
 
                     clearContentClasses();
 
-                    if(slug == 'all' || slug == 'graphic-design' || slug == 'visual-design') {
+                    if(slug == 'all' || slug == 'graphic-design') {
                         jseo_portfolio_content.classList.add("grid");
                     } else if(slug == 'motion-design') {
-                        jseo_portfolio_content.classList.add("voffset");
-                    } else if(slug == 'uiux-design') {
                         jseo_portfolio_content.classList.add("vplain");
+                    } else if(slug == 'uiux-design') {
+                        
+                        jseo_portfolio_content.classList.add("voffset");
                     } else {
                         slug = 'all';
                         jseo_portfolio_content.classList.add("grid");
@@ -403,12 +419,12 @@ jQuery( document ).ready(function() {
                             }
 
                             if(jseo_portfolio_content.classList.contains("grid")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_meta"><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/calendar.svg" + '">' + current_post_storage[z]['the_date'] + '</div><div class="jseo_portfolio_meta_item"><img src="' + themeDirURI + "/svg/user.svg" + '">' + current_post_storage[z]['the_author'] + '</div></div> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
                                 let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div><div class="vplain_telemetry_column"><ul class="vplain_telemetry_list"><li><img src="' + themeDirURI + "/svg/calendar.svg" + '"><span>' + current_post_storage[z]['the_date'] + '</span></li><li><img src="' + themeDirURI + "/svg/user.svg" + '"><span>' + current_post_storage[z]['the_author'] + '</span></li></ul></div></div>';
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="' + current_post_storage[z]['the_permalink']  + '" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
                             }
                         } 
                     }
@@ -441,26 +457,10 @@ jQuery( document ).ready(function() {
 
     if(jseo_portfolio_content != null) {
         if(filterParam == '' || filterParam == null) {
-            load_portfolio('all');
+            load_portfolio('uiux-design');
         } else {
             load_portfolio(filterParam);
         }
-    }
-
-    function inject_portfolio_ui_controls() {
-        console.log("Injecting portfolio UI controls...");
-
-        jseo_portfolio_prevOpt.addEventListener("click", function(){
-
-        });
-
-        jseo_portfolio_nextOpt.addEventListener("click", function(){
-            
-        });
-    }
-
-    if(jseo_portfolio_catui != null && jseo_portfolio_prevOpt != null && jseo_portfolio_nextOpt != null) {
-        inject_portfolio_ui_controls();
     }
 
     function grid_animation() {
@@ -891,7 +891,7 @@ jQuery( document ).ready(function() {
                 }
             }
 
-            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.0)';
+            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.5)';
         }
         
     }
@@ -1077,6 +1077,12 @@ jQuery( document ).ready(function() {
         return (
             rect.top < window.innerHeight && rect.bottom >= 0
         );
+    }
+
+    function scaleValue(value, from, to) {
+        var scale = (to[1] - to[0]) / (from[1] - from[0]);
+        var capped = Math.min(from[1], Math.max(from[0], value)) - from[0];
+        return ~~(capped * scale + to[0]);
     }
 
 });

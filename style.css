@@ -437,14 +437,6 @@ input, textarea  {
     box-sizing: border-box;
 }
 
-.jseo_pcontrols_left {
-    display: flex;
-    flex-flow: row wrap;
-    box-sizing: border-box;
-    padding:0;
-    margin:0;
-}
-
 .jseo_portfolio_controls {
     display: flex;
     flex-flow: row wrap;
@@ -452,7 +444,7 @@ input, textarea  {
     position: relative;
     width:100%;
     height: auto;
-    margin-bottom: 50px;
+    margin-bottom: 55px;
 }
 
 .jseo_portfolio_opt {
@@ -1030,8 +1022,10 @@ input, textarea  {
 
 .jseo_pcontrols_right {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
+    flex-flow: column wrap;
+    width: 100%;
+    padding:0;
+    margin:0;
 }
 
 .jseo_portfolio_catui {
@@ -1040,6 +1034,7 @@ input, textarea  {
     padding:0;
     width: 100%;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .jseo_portfolio_catui a {
@@ -1048,18 +1043,16 @@ input, textarea  {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 19px;
     color: #222;
-    font-weight: 400;
-    padding: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
+    font-weight: 500;
     margin-right: 7px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     border-radius: 5px;
     color:#222;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .jseo_portfolio_catui a:hover, .jseo_portfolio_catui a:active, .jseo_portfolio_catui a:focus {
@@ -1520,6 +1513,10 @@ input, textarea  {
 }
 
 .jseo_lightbox_image_text h3, .jseo_lightbox_video_text h3, .jseo_lightbox_pdf_text h3 {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
     display: block;
     font-size: 18.5px;
     line-height: 22px;
@@ -1535,6 +1532,10 @@ input, textarea  {
 }
 
 .jseo_lightbox_image_text p, .jseo_lightbox_video_text p, .jseo_lightbox_pdf_text p {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
     display: block;
     font-size: 14.2px;
     line-height: 25px;
@@ -1550,6 +1551,10 @@ input, textarea  {
 }
 
 .jseo_lightbox_image_text a, .jseo_lightbox_video_text a, .jseo_lightbox_pdf_text a {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
     -webkit-transition: all 0.3s 0s ease;
     -moz-transition: all 0.3s 0s ease;
     -o-transition: all 0.3s 0s ease;
@@ -2080,7 +2085,7 @@ input, textarea  {
     justify-content: center;
     padding: 0;
     margin:0;
-    margin-bottom: 45px
+    margin-bottom: 45px;
 }
 
 .jseo_content_problem .jseo_content_problem_col {
@@ -2088,6 +2093,16 @@ input, textarea  {
     flex-flow: column wrap;
     box-sizing: border-box;
     align-items: flex-start;
+}
+
+.jseo_content_problem .jseo_content_problem_col p.the_problem_caption {
+    display: block;
+    font-size: 14px !important;
+    line-height: 23px !important;
+    margin-top: 15px !important;
+    width: 100%;
+    color: #666;
+    font-weight: 300;
 }
 
 .jseo_content_w_image {
@@ -2716,6 +2731,26 @@ input, textarea  {
     background-color: #EEE;
 }
 
+#wpfront-scroll-top-container {
+    -webkit-transition: background 0.5s 0s ease;
+    -moz-transition: background 0.5s 0s ease;
+    -o-transition: background 0.5s 0s ease;
+    transition: background 0.5s 0s ease;
+    transform-origin: center;
+    padding: 15px;
+    background-color: #e891cf;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    -webkit-box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.25); 
+    box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.25);
+    z-index: 5 !important;
+}
+
+#wpfront-scroll-top-container:hover {
+    background-color: rgba(232, 145, 207, 0.7);
+}
+
 @media (orientation: landscape) and (max-width: 896.9px) and (max-height: 420px) {
     .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
         height: 40% !important;
@@ -2736,6 +2771,12 @@ input, textarea  {
 }
 
 @media (max-width: 767.9px) {
+
+    .jseo_portfolio_catui a {
+        padding: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
 
     .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
         height: 60%;
@@ -2837,7 +2878,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
-        left: -32px;
+        left: -30px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
@@ -2883,14 +2924,6 @@ input, textarea  {
     .jseo_portfolio_catui {
         justify-content: center;
         margin-top: 20px;
-    }
-
-    .jseo_pcontrols_left {
-        width: 100%;
-    }
-
-    .jseo_pcontrols_right {
-        width: 100%;
     }
 
     .jseo_portfolio_select {
@@ -3009,6 +3042,12 @@ input, textarea  {
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
 
+    .jseo_portfolio_catui a {
+        padding: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
     .jseo_lightbox_image_media, .jseo_lightbox_video_media, .jseo_lightbox_pdf_media {
         height: 70%;
     }
@@ -3096,7 +3135,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
-        left: -40px;
+        left: -32px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
@@ -3109,8 +3148,8 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
-        margin: 35px;
-        width: calc(50% - 70px);
+        margin: 30px;
+        width: calc(50% - 60px);
     }
 
     .jseo_portfolio_content.voffset {
@@ -3127,7 +3166,7 @@ input, textarea  {
         padding: 20px;
         padding-top: 35px;
         padding-bottom: 35px;
-        padding-left: 90px;
+        padding-left: 80px;
         border-radius: 5px;
     }
 
@@ -3142,19 +3181,11 @@ input, textarea  {
     }
 
     .jseo_portfolio_catui {
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .jseo_portfolio_content.grid {
         border-radius: 5px;
-    }
-
-    .jseo_pcontrols_left {
-        width: 270px;
-    }
-
-    .jseo_pcontrols_right {
-        width: calc(100% - 270px);
     }
 
     .jseo_portfolio_select {
@@ -3282,6 +3313,10 @@ input, textarea  {
         padding-left: 0;
     }
 
+    .jseo_content_problem .jseo_content_problem_col p.the_problem_caption {
+        text-align: left !important;
+    }
+
     .jseo_minibanner .jseo_mb_col h4, .jseo_minibanner .jseo_mb_col p {
         text-align: center;
     }
@@ -3378,6 +3413,12 @@ input, textarea  {
 
 @media (min-width: 1025px) {
 
+    .jseo_portfolio_catui a {
+        padding: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
     .jseo_about_whole {
         flex-flow: column wrap;
     }
@@ -3428,6 +3469,10 @@ input, textarea  {
     .jseo_content_problem .jseo_content_problem_col:last-of-type {
         padding-left: 12px;
     }  
+
+    .jseo_content_problem .jseo_content_problem_col p.the_problem_caption {
+        text-align: center !important;
+    }
 
     .jseo_single_intro_col {
         padding: 15px;
@@ -3490,8 +3535,8 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
-      margin: 40px;
-      width: calc(33.3% - 80px);
+      margin: 35px;
+      width: calc(33.3% - 70px);
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry {
@@ -3501,23 +3546,15 @@ input, textarea  {
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
         padding-top: 25px;
         padding-bottom: 25px;
-        left: -45px;
+        left: -40px;
     }
 
     .jseo_portfolio_catui {
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .jseo_portfolio_content.grid {
         border-radius: 5px;
-    }
-
-    .jseo_pcontrols_left {
-        width: 330px;
-    }
-
-    .jseo_pcontrols_right {
-        width: calc(100% - 330px);
     }
 
     .jseo_portfolio_select {
@@ -3657,7 +3694,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.voffset .jseo_column {
-        margin-bottom: 100px;
+        margin-bottom: 105px;
     }
 
     .jseo_portfolio_content.voffset .jseo_column:last-of-type {
