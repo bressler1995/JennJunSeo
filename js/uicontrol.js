@@ -127,7 +127,7 @@ jQuery( document ).ready(function() {
             var scaleX = scaleValue(downXPer, [0,100], [-160, 35]);
             var scaleY = scaleValue(downYPer, [0,100], [-160, 35]);
 
-            jseo_lbimage_img.style.transform = 'translateX(' + scaleX + '%) translateY(' + scaleY + '%) scale(2.8)';
+            jseo_lbimage_img.style.transform = 'translateX(' + scaleX + '%) translateY(' + scaleY + '%) scale(2.7)';
         }
     }
 
@@ -891,7 +891,7 @@ jQuery( document ).ready(function() {
                 }
             }
 
-            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.8)';
+            jseo_lbimage_img.style.transform = 'translateX(' + jseo_lbimage_x + '%) translateY(' + jseo_lbimage_y + '%) scale(2.7)';
         }
         
     }
