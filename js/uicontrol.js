@@ -124,8 +124,8 @@ jQuery( document ).ready(function() {
             //     jseo_lbimage_y += downYDelta * (1 / 100);
             // }
 
-            var scaleX = scaleValue(downXPer, [0,100], [-160, 35]);
-            var scaleY = scaleValue(downYPer, [0,100], [-160, 35]);
+            var scaleX = scaleValue(downXPer, [0,100], [-170, 35]);
+            var scaleY = scaleValue(downYPer, [0,100], [-170, 35]);
 
             jseo_lbimage_img.style.transform = 'translateX(' + scaleX + '%) translateY(' + scaleY + '%) scale(2.7)';
         }
