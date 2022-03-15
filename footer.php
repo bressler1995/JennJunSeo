@@ -38,7 +38,7 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 				<div id="jseo_lightbox_image_text" class="jseo_lightbox_image_text">
 					<h3 id="jseo_lbimage_title">Lorem Ipsum</h3>
 					<p id="jseo_lbimage_description" class="hidelbdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					<a id="jseo_lbimage_button" class="hidelbbutton" href="#" target="_blank">Read More</a>
+					<a id="jseo_lbimage_button" class="hidelbbutton" href="#" target="_blank">Full Content</a>
 				</div>
 			</div>
 			<div id="jseo_lightbox_video" class="jseo_lightbox_video">
@@ -51,7 +51,7 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 					<div id="jseo_lightbox_video_text" class="jseo_lightbox_video_text">
 						<h3 id="jseo_lbvideo_title">Lorem Ipsum</h3>
 						<p id="jseo_lbvideo_description" class="hidelbdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						<a id="jseo_lbvideo_button" class="hidelbbutton" href="#" target="_blank">Read More</a>
+						<a id="jseo_lbvideo_button" class="hidelbbutton" href="#" target="_blank">Full Content</a>
 					</div>
 				</div>
 			</div>
@@ -79,7 +79,7 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 					<div class="jseo_lightbox_pdf_text">
 						<h3 id="jseo_lbpdf_title">Lorem Ipsum</h3>
 						<p id="jseo_lbpdf_description" class="hidelbdesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						<a id="jseo_lbpdf_button" class="hidelbbutton" href="#" target="_blank">Read More</a>
+						<a id="jseo_lbpdf_button" class="hidelbbutton" href="#" target="_blank">Full Content</a>
 					</div>
 				</div>
 			</div>

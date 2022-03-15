@@ -66,7 +66,6 @@
         $content_the_problem = '';
         $content_solution = '';
         $content_research = '';
-        $content_user_study = '';
         $content_branding = '';
         $content_wireframes = '';
         $content_design_iterations = '';
@@ -78,7 +77,6 @@
         $content_the_problem_output = '';
         $content_solution_output = '';
         $content_research_output = '';
-        $content_user_study_output = '';
         $content_branding_output = '';
         $content_wireframes_output = '';
         $content_design_iterations_output = '';
@@ -90,7 +88,6 @@
         $theproblem_displayed = false;
         $solution_displayed = false;
         $research_displayed = false;
-        $userstudy_displayed = false;
         $branding_displayed = false;
         $wireframes_displayed = false;
         $results_displayed = false;
@@ -150,7 +147,6 @@
                 $content_the_problem = get_sub_field('the_problem');
                 $content_solution = get_sub_field('solution');
                 $content_research = get_sub_field('research');
-                $content_user_study = get_sub_field('user_study');
                 $content_branding = get_sub_field('branding');
                 $content_wireframes = get_sub_field('wireframes');
                 $content_design_iterations = get_sub_field('design_iterations');
@@ -159,15 +155,28 @@
                 $content_final_thoughts = get_sub_field('final_thoughts');
             }
 
-            //WYSIWYG
+            //WYSIWYG Updated
             if($content_client_needs == '' || empty($content_client_needs) == true || isset($content_client_needs) == false) {
                 $content_client_needs_output = '';
             } else {
-                $clientneeds_displayed = true;
-                $content_client_needs_output .= '<div class="jseo_content_standard_text" id="clientsneeds">';
-                $content_client_needs_output .= "<h3>Client's Needs</h3>";
-                $content_client_needs_output .= '<div class="contentspace">' . $content_client_needs . '</div>';
-                $content_client_needs_output .= '</div>';
+                $the_content = $content_client_needs['client_needs_content'];
+                $the_darkmode = '';
+
+                if($content_client_needs['client_needs_dark_mode'] != '' && empty($content_client_needs['client_needs_dark_mode']) == false && isset($content_client_needs['client_needs_dark_mode']) == true) {
+                    if($content_client_needs['client_needs_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $clientneeds_displayed = true;
+                    //only needs to have content present to display
+                    $content_client_needs_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="clientsneeds">';
+                    $content_client_needs_output .= "<h3>Client's Needs</h3>";
+                    $content_client_needs_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_client_needs_output .= '</div>';
+                }
+
             }
 
             //Problem 2 Columns
@@ -177,9 +186,13 @@
 
                 $content_present = false;
                 $content_screen_present = false;
-                $content_problem_pass = false;
                 $temp_problem_caption = -1;
                 $temp_problem_caption_output = '';
+                $the_problem_darkmode = '';
+                $the_problem_content_pass = false;
+
+                $problem_col_one_style = '';
+                $problem_col_two_style = '';
 
                 if($content_the_problem['problem_content'] != '' && empty($content_the_problem['problem_content']) == false && isset($content_the_problem['problem_screenshot']) == true) {
                     $content_present = true;
@@ -194,19 +207,31 @@
                     $temp_problem_caption_output = '<p class="the_problem_caption">' . $temp_problem_caption . '</p>';
                 }
 
-                if($content_present == true && $content_screen_present == true) {
-                    $content_problem_pass = true;
+                if($content_the_problem['problem_dark_mode'] != '' && empty($content_the_problem['problem_dark_mode']) == false && isset($content_the_problem['problem_dark_mode']) == true) {
+                     if($content_the_problem['problem_dark_mode'] == 'Yes') {
+                         $the_problem_darkmode = 'darkmode';
+                     }
                 }
 
-                if($content_problem_pass == true) {
+                if($content_present == true && $content_screen_present == true) {
+                    $problem_col_one_style = '';
+                    $problem_col_two_style = '';
+                    $the_problem_content_pass = true;
+                } else if($content_present == true && $content_screen_present == false) {
+                    $problem_col_one_style = 'width: 100% !important; padding-right: 0 !important;';
+                    $problem_col_two_style = 'width: 0% !important; display: none !important; padding-left: 0 !important; margin: 0 !important;'; 
+                    $the_problem_content_pass = true;
+                }
+
+                if($the_problem_content_pass == true) {
                     $theproblem_displayed = true;
 
-                    $content_the_problem_output .= '<div class="jseo_content_problem" id="theproblem">
-                        <div class="jseo_content_problem_col">
+                    $content_the_problem_output .= '<div class="jseo_content_problem ' . $the_problem_darkmode . '" id="theproblem">
+                        <div style="' . $problem_col_one_style . '" class="jseo_content_problem_col">
                              <h3 class="maintitle">The Problem</h3>' 
                             . $content_the_problem['problem_content'] . 
                         '</div>
-                        <div class="jseo_content_problem_col">
+                        <div style="' . $problem_col_two_style . '" class="jseo_content_problem_col">
                             <a data-title="The Problem" data-cfile="-1" data-video="-1" data-featured="'. $content_the_problem['problem_screenshot'] . '" data-desc="' . $temp_problem_caption . '" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $content_the_problem['problem_screenshot'] . '"></a>' . 
                             $temp_problem_caption_output . 
                         '</div>
@@ -218,81 +243,73 @@
                 
             }
 
-            //WYSIWYG
+            //WYSIWYG Updated
             if($content_solution == '' || empty($content_solution) == true || isset($content_solution) == false) {
                 $content_solution_output = '';
             } else {
-                $solution_displayed = true;
-                $content_solution_output .= '<div class="jseo_content_standard_text" id="solution">';
-                $content_solution_output .= "<h3>Solution</h3>";
-                $content_solution_output .= '<div class="contentspace">' . $content_solution . '</div>';
-                $content_solution_output .= '</div>';
-            }
+                $the_content = $content_solution['solution_content'];
+                $the_darkmode = '';
 
-            //WYSIWYG
-            if($content_research == '' || empty($content_research) == true || isset($content_research) == false) {
-                $content_research_output = '';
-            } else {
-                $research_displayed = true;
-                $content_research_output .= '<div class="jseo_content_standard_text" id="research">';
-                $content_research_output .= "<h3>Research</h3>";
-                $content_research_output .= '<div class="contentspace">' . $content_research . '</div>';
-                $content_research_output .= '</div>';
-            }
-
-            //WYSIWYG with images
-            if($content_user_study == '' || empty($content_user_study) == true || isset($content_user_study) == false) {
-                $content_user_study_output = '';
-            } else {
-                $study_content = $content_user_study['user_study_content'];
-                $study_images = $content_user_study['user_study_images'];
-
-                if(empty($study_content) == false && $study_content != '' && isset($study_content) == true) {
-                    $userstudy_displayed = true;
-                    //only needs to have content present to display
-                    $content_user_study_output .= '<div class="jseo_content_w_image" id="userstudy">';
-                    $content_user_study_output .= '<h3 class="maintitle">User Study</h3>';
-                    $content_user_study_output .= '<div class="contentwidget">' . $study_content . '</div>';
-
-                    if(empty($study_images) == false && isset($study_images) == true) {
-                        if(count($study_images) > 0) {
-                            $content_user_study_output .= '<div class="jseo_contentwimg_gallery">';
-                            for($y = 0; $y < count($study_images); $y++) {
-                                $content_user_study_output .= '<a data-title="User Study ' . ($y + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $study_images[$y]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $study_images[$y]['url'] . '"></a>';
-                            }
-                            $content_user_study_output .= '</div>';
-                        }
+                if($content_solution['solution_dark_mode'] != '' && empty($content_solution['solution_dark_mode']) == false && isset($content_solution['solution_dark_mode']) == true) {
+                    if($content_solution['solution_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
                     }
+                }
 
-                    $content_user_study_output .= '</div>';
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $solution_displayed = true;
+                    //only needs to have content present to display
+                    $content_solution_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="solution">';
+                    $content_solution_output .= "<h3>Solution</h3>";
+                    $content_solution_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_solution_output .= '</div>';
                 }
 
             }
 
-            //WYSIWYG with images
+            //WYSIWYG Updated
+            if($content_research == '' || empty($content_research) == true || isset($content_research) == false) {
+                $content_research_output = '';
+            } else {
+                $the_content = $content_research['research_content'];
+                $the_darkmode = '';
+
+                if($content_research['research_dark_mode'] != '' && empty($content_research['research_dark_mode']) == false && isset($content_research['research_dark_mode']) == true) {
+                    if($content_research['research_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $research_displayed = true;
+                    //only needs to have content present to display
+                    $content_research_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="research">';
+                    $content_research_output .= "<h3>Research</h3>";
+                    $content_research_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_research_output .= '</div>';
+                }
+
+            }
+
+            //WYSIWYG Updated
             if($content_branding == '' || empty($content_branding) == true || isset($content_branding) == false) {
                 $content_branding_output = '';
             } else {
                 $the_content = $content_branding['branding_content'];
-                $the_images = $content_branding['branding_images'];
+                $the_darkmode = '';
+
+                if($content_branding['branding_dark_mode'] != '' && empty($content_branding['branding_dark_mode']) == false && isset($content_branding['branding_dark_mode']) == true) {
+                    if($content_branding['branding_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
 
                 if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
                     $branding_displayed = true;
                     //only needs to have content present to display
-                    $content_branding_output .= '<div class="jseo_content_w_image" id="branding">';
-                    $content_branding_output .= '<h3 class="maintitle">Branding</h3>';
-                    $content_branding_output .= '<div class="contentwidget">' . $the_content . '</div>';
-
-                    if(empty($the_images) == false && isset($the_images) == true) {
-                        if(count($the_images) > 0) {
-                            $content_branding_output .= '<div class="jseo_contentwimg_gallery">';
-                            for($w = 0; $w < count($the_images); $w++) {
-                                $content_branding_output .= '<a data-title="Branding ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
-                            }
-                            $content_branding_output .= '</div>';
-                        }
-                    }
-
+                    $content_branding_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="branding">';
+                    $content_branding_output .= '<h3>Branding</h3>';
+                    $content_branding_output .= '<div class="contentspace">' . $the_content . '</div>';
                     $content_branding_output .= '</div>';
                 }
 
@@ -304,10 +321,56 @@
             } else {
                 $the_content = $content_wireframes['wireframes_content'];
                 $the_images = $content_wireframes['wireframes_images'];
+                $the_buttons = $content_wireframes['wireframes_buttons'];
+                $the_buttons_output = '';
+                $the_darkmode = '';
+                // d($the_buttons);
+
+                if($content_wireframes['wireframes_dark_mode'] != '' && empty($content_wireframes['wireframes_dark_mode']) == false && isset($content_wireframes['wireframes_dark_mode']) == true) {
+                    if($content_wireframes['wireframes_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($the_buttons != '' && empty($the_buttons) == false && isset($the_buttons) == true) {
+                    if(count($the_buttons) > 0) {
+                        $the_buttons_output .= '<div class="jseo_single_altbuttons">';
+                        for($tb = 0; $tb < count($the_buttons); $tb++) {
+                            $current_tb = $the_buttons[$tb];
+                            $current_tb_text = $current_tb['button_text'];
+                            $current_tb_link = $current_tb['button_link'];
+                            $current_tb_color = $current_tb['button_color'];
+                            $current_tb_color_style = '';
+
+                            if($current_tb_color == 'Pink') {
+                                $current_tb_color_style = 'background-color: #E891CF;';
+                            } else if($current_tb_color == 'Purple') {
+                                if($content_wireframes['wireframes_dark_mode'] == 'Yes') {
+                                    $current_tb_color_style = 'background-color: transparent; border:1px solid #FFF; padding-top: 14px; padding-bottom: 14px;';
+                                } else if($content_wireframes['wireframes_dark_mode'] == 'No') {
+                                    $current_tb_color_style = 'background-color: #302E4A;';
+                                }
+                            } else {
+                                $current_tb_color_style = 'background-color: #E891CF;';
+                            }
+
+                            if(empty($current_tb_link) == true || isset($current_tb_link) == false || $current_tb_link == '') {
+                                $current_tb_link = 'https://jennjunseo.com';
+                            }
+
+                            if(empty($current_tb_text) == true || isset($current_tb_text) == false || $current_tb_text == '') {
+                                $current_tb_text = 'Click Me';
+                            }
+
+                            $the_buttons_output .= '<a style="' . $current_tb_color_style . '" href="' . $current_tb_link . '" target="_blank">' . $current_tb_text . '</a>';
+                        }
+                        $the_buttons_output .= '</div>';
+                    }
+                }
 
                 if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
                     $wireframes_displayed = true;
-                    $content_wireframes_output .= '<div class="jseo_content_w_image" id="wireframes">';
+                    $content_wireframes_output .= '<div class="jseo_content_w_image ' . $the_darkmode . '" id="wireframes">';
                     //only needs to have content present to display
                     $content_wireframes_output .= '<h3 class="maintitle">Wireframes</h3>';
                     $content_wireframes_output .= '<div class="contentwidget">' . $the_content . '</div>';
@@ -316,44 +379,74 @@
                         if(count($the_images) > 0) {
                             $content_wireframes_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_wireframes_output .= '<a data-title="Wireframes ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_wireframes_output .= '<a data-title="Wireframes ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="true" data-permalink="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_wireframes_output .= '</div>';
                         }
                     }
-
+                    $content_wireframes_output .= $the_buttons_output;
                     $content_wireframes_output .= '</div>';
                 }
 
                 
             }
 
-             //WYSIWYG with images
-             if($content_design_iterations == '' || empty($content_design_iterations) == true || isset($content_design_iterations) == false) {
+            //WYSIWYG Updated
+            if($content_design_iterations == '' || empty($content_design_iterations) == true || isset($content_design_iterations) == false) {
                 $content_design_iterations_output = '';
             } else {
                 $the_content = $content_design_iterations['design_iterations_content'];
-                $the_images = $content_design_iterations['design_iterations_images'];
+                $the_bna = $content_design_iterations['design_iterations_before_n_afters'];
+                $the_bna_output = '';
+                $the_darkmode = '';
+
+                if($content_design_iterations['design_iterations_dark_mode'] != '' && empty($content_design_iterations['design_iterations_dark_mode']) == false && isset($content_design_iterations['design_iterations_dark_mode']) == true) {
+                    if($content_design_iterations['design_iterations_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($the_bna != '' && empty($the_bna) == false && isset($the_bna) == true) {
+                    if(count($the_bna) > 0) {
+                        $the_bna_output .= '<div class="jseo_single_bnasection">';
+
+                        for($tbna = 0; $tbna < count($the_bna); $tbna++) {
+                            $current_tbna = $the_bna[$tbna];
+                            $current_tbna_before = $current_tbna['before_image'];
+                            $current_tbna_after = $current_tbna['after_image'];
+                            $current_tbna_description = $current_tbna['description'];
+                            $current_tbna_desc_output = '';
+
+                            if($current_tbna_description != '' && empty($current_tbna_description) == false && isset($current_tbna_description) == true) {
+                                $current_tbna_desc_output = '<p>' . $current_tbna_description . '</p>';
+                            }
+
+                            if(empty($current_tbna_before) == false && empty($current_tbna_after) == false && isset($current_tbna_before) == true && isset($current_tbna_after) == true && $current_tbna_before != '' && $current_tbna_after != '') {
+                                $the_bna_output .= '<div class="the_bna_item">
+                                    <div class="the_bna_images">
+                                        <a data-title="Before ' . ($tbna + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $current_tbna_before . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem"><img src="' . $current_tbna_before . '"></a>
+                                        <a data-title="After ' . ($tbna + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $current_tbna_after . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem"><img src="' . $current_tbna_after . '"></a>
+                                    </div>
+                                    <div class="the_bna_text">' . 
+                                        $current_tbna_desc_output . 
+                                    '</div>
+                                </div>';
+                            }
+                        }
+
+                        $the_bna_output .= '</div>';
+                    }
+                }
 
                 if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
                     //only needs to have content present to display
-                    $content_design_iterations_output .= '<div class="jseo_content_w_image" id="designiterations">';
-                    $content_design_iterations_output .= '<h3 class="maintitle">Design Iterations</h3>';
-                    $content_design_iterations_output .= '<div class="contentwidget">' . $the_content . '</div>';
-
-                    if(empty($the_images) == false && isset($the_images) == true) {
-                        if(count($the_images) > 0) {
-                            $content_design_iterations_output .= '<div class="jseo_contentwimg_gallery">';
-                            for($w = 0; $w < count($the_images); $w++) {
-                                $content_design_iterations_output .= '<a data-title="Design Iterations ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
-                            }
-                            $content_design_iterations_output .= '</div>';
-                        }
-                    }
-
+                    $content_design_iterations_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="designiterations">';
+                    $content_design_iterations_output .= '<h3>Design Iterations</h3>';
+                    $content_design_iterations_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_design_iterations_output .= $the_bna_output;
                     $content_design_iterations_output .= '</div>';
                 }
-                
+
             }
 
             //WYSIWYG with images
@@ -362,10 +455,55 @@
             } else {
                 $the_content = $content_mockups['mockups_content'];
                 $the_images = $content_mockups['mockups_images'];
+                $the_darkmode = '';
+                $the_buttons = $content_mockups['mockups_buttons'];
+                $the_buttons_output = '';
+
+                if($content_mockups['mockups_dark_mode'] != '' && empty($content_mockups['mockups_dark_mode']) == false && isset($content_mockups['mockups_dark_mode']) == true) {
+                    if($content_mockups['mockups_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($the_buttons != '' && empty($the_buttons) == false && isset($the_buttons) == true) {
+                    if(count($the_buttons) > 0) {
+                        $the_buttons_output .= '<div class="jseo_single_altbuttons">';
+                        for($tb = 0; $tb < count($the_buttons); $tb++) {
+                            $current_tb = $the_buttons[$tb];
+                            $current_tb_text = $current_tb['button_text'];
+                            $current_tb_link = $current_tb['button_link'];
+                            $current_tb_color = $current_tb['button_color'];
+                            $current_tb_color_style = '';
+
+                            if($current_tb_color == 'Pink') {
+                                $current_tb_color_style = 'background-color: #E891CF;';
+                            } else if($current_tb_color == 'Purple') {
+                                if($content_mockups['mockups_dark_mode'] == 'Yes') {
+                                    $current_tb_color_style = 'background-color: transparent; border:1px solid #FFF; padding-top: 14px; padding-bottom: 14px;';
+                                } else if($content_mockups['mockups_dark_mode'] == 'No') {
+                                    $current_tb_color_style = 'background-color: #302E4A;';
+                                }
+                            } else {
+                                $current_tb_color_style = 'background-color: #E891CF;';
+                            }
+
+                            if(empty($current_tb_link) == true || isset($current_tb_link) == false || $current_tb_link == '') {
+                                $current_tb_link = 'https://jennjunseo.com';
+                            }
+
+                            if(empty($current_tb_text) == true || isset($current_tb_text) == false || $current_tb_text == '') {
+                                $current_tb_text = 'Click Me';
+                            }
+
+                            $the_buttons_output .= '<a style="' . $current_tb_color_style . '" href="' . $current_tb_link . '" target="_blank">' . $current_tb_text . '</a>';
+                        }
+                        $the_buttons_output .= '</div>';
+                    }
+                }
 
                 if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
                     //only needs to have content present to display
-                    $content_mockups_output .= '<div class="jseo_content_w_image" id="mockup">';
+                    $content_mockups_output .= '<div class="jseo_content_w_image ' . $the_darkmode . '" id="mockup">';
                     $content_mockups_output .= '<h3 class="maintitle">Mock-Up</h3>';
                     $content_mockups_output .= '<div class="contentwidget">' . $the_content . '</div>';
 
@@ -373,36 +511,63 @@
                         if(count($the_images) > 0) {
                             $content_mockups_output .= '<div class="jseo_contentwimg_gallery">';
                             for($w = 0; $w < count($the_images); $w++) {
-                                $content_mockups_output .= '<a data-title="Mockup ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
+                                $content_mockups_output .= '<a data-title="Mockup ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="true" data-permalink="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
                             }
                             $content_mockups_output .= '</div>';
                         }
                     }
 
+                    $content_mockups_output .= $the_buttons_output;
                     $content_mockups_output .= '</div>';
                 }
 
             }
 
-            //WYSIWYG
+            //WYSIWYG Updated
             if($content_results == '' || empty($content_results) == true || isset($content_results) == false) {
                 $content_results_output = '';
             } else {
-                $results_displayed = true;
-                $content_results_output .= '<div class="jseo_content_standard_text" id="results">';
-                $content_results_output .= "<h3>Results</h3>";
-                $content_results_output .= '<div class="contentspace">' . $content_results . '</div>';
-                $content_results_output .= '</div>';
+                $the_content = $content_results['results_content'];
+                $the_darkmode = '';
+
+                if($content_results['results_dark_mode'] != '' && empty($content_results['results_dark_mode']) == false && isset($content_results['results_dark_mode']) == true) {
+                    if($content_results['results_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $results_displayed = true;
+                    //only needs to have content present to display
+                    $content_results_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="results">';
+                    $content_results_output .= "<h3>Results</h3>";
+                    $content_results_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_results_output .= '</div>';
+                }
+
             }
 
-            //WYSIWYG
+            //WYSIWYG Updated
             if($content_final_thoughts == '' || empty($content_final_thoughts) == true || isset($content_final_thoughts) == false) {
                 $content_final_thoughts_output = '';
             } else {
-                $content_final_thoughts_output .= '<div class="jseo_content_standard_text" id="finalthoughts">';
-                $content_final_thoughts_output .= "<h3>Final Thoughts</h3>";
-                $content_final_thoughts_output .= '<div class="contentspace">' . $content_final_thoughts . '</div>';
-                $content_final_thoughts_output .= '</div>';
+                $the_content = $content_final_thoughts['final_thoughts_content'];
+                $the_darkmode = '';
+
+                if($content_final_thoughts['final_thoughts_dark_mode'] != '' && empty($content_final_thoughts['final_thoughts_dark_mode']) == false && isset($content_final_thoughts['final_thoughts_dark_mode']) == true) {
+                    if($content_final_thoughts['final_thoughts_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    //only needs to have content present to display
+                    $content_final_thoughts_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="finalthoughts">';
+                    $content_final_thoughts_output .= "<h3>Final Thoughts</h3>";
+                    $content_final_thoughts_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_final_thoughts_output .= '</div>';
+                }
+
             }
 
 
@@ -485,10 +650,10 @@
         <div class="hero_overlay" style="opacity: <?php echo $the_custom_overlay ?> !important;"></div>
         <div class="jseo_single_container">
             <h1><?php echo $the_title ?></h1>
-            <div class="jseo_single_meta">
+            <!-- <div class="jseo_single_meta">
                 <div class="jseo_single_metaitem"><img src="<?php echo get_stylesheet_directory_uri() . '/svg/user.svg' ?>"><span><?php echo $author_name ?></span></div>
                 <div class="jseo_single_metaitem"><img src="<?php echo get_stylesheet_directory_uri() . '/svg/calendar.svg' ?>"><span><?php echo  $the_date ?></span></div>
-            </div>
+            </div> -->
         </div>
     </div>
     
@@ -571,7 +736,7 @@
                                             }
 
                                             if($the_company_description != '' && empty($the_company_description) == false) {
-                                                $the_company_description = (strlen($the_company_description) > 60) ? substr($the_company_description,0,60).'...' : $the_company_description;
+                                                $the_company_description = (strlen($the_company_description) > 70) ? substr($the_company_description,0,70).'...' : $the_company_description;
                                             } else {
                                                 $the_company_description = 'No company description provided...';
                                             }
@@ -583,10 +748,10 @@
                                                 $related_output .= '<div class="the_related_content">';
                                                 $related_output .= '<a href="' . $the_related_permalink . '" class="jseo_related_link">' . $the_related_title . '</a>';
                                                 $related_output .= '<p class="jseo_related_excerpt">' . $the_company_description . '</p>';
-                                                $related_output .= '<div class="jseo_related_meta">
-                                                    <span><img src="' . get_stylesheet_directory_uri() . '/svg/calendar.svg">' . $the_related_date . '</span>
-                                                    <span><img src="' . get_stylesheet_directory_uri() . '/svg/user.svg">' . $author_rel_name . '</span>
-                                                </div>';
+                                                // $related_output .= '<div class="jseo_related_meta">
+                                                //     <span><img src="' . get_stylesheet_directory_uri() . '/svg/calendar.svg">' . $the_related_date . '</span>
+                                                //     <span><img src="' . get_stylesheet_directory_uri() . '/svg/user.svg">' . $author_rel_name . '</span>
+                                                // </div>';
                                                 $related_output .= '</div></div>';
                                             }
                                             
@@ -634,7 +799,6 @@
                     echo $content_the_problem_output;
                     echo $content_solution_output;
                     echo $content_research_output;
-                    echo $content_user_study_output;
                     echo $content_branding_output;
                     echo $content_wireframes_output;
                     echo $content_design_iterations_output;
@@ -665,7 +829,6 @@
                                 $the_problem_classes = '';
                                 $solution_classes = '';
                                 $research_classes = '';
-                                $userstudy_classes = '';
                                 $branding_classes = '';
                                 $wireframes_classes = '';
                                 $results_classes = '';
@@ -684,10 +847,6 @@
 
                                 if($research_displayed == false) {
                                     $research_classes = 'hideme';
-                                }
-
-                                if($userstudy_displayed == false) {
-                                    $userstudy_classes = 'hideme';
                                 }
 
                                 if($branding_displayed == false) {
@@ -716,10 +875,6 @@
                             </a>
                             <a class="<?php echo $research_classes ?>" href="#research">
                                 <span>Research</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $userstudy_classes ?>" href="#userstudy">
-                                <span>User Study</span>
                                 <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
                             </a>
                             <a class="<?php echo $branding_classes ?>" href="#branding">
@@ -814,7 +969,7 @@
                             }
 
                             if($the_company_description != '' && empty($the_company_description) == false) {
-                                $the_company_description = (strlen($the_company_description) > 60) ? substr($the_company_description,0,60).'...' : $the_company_description;
+                                $the_company_description = (strlen($the_company_description) > 70) ? substr($the_company_description,0,70).'...' : $the_company_description;
                             } else {
                                 $the_company_description = 'No company description provided...';
                             }
@@ -826,10 +981,10 @@
                                 $related_output .= '<div class="the_related_content">';
                                 $related_output .= '<a href="' . $the_related_permalink . '" class="jseo_related_link">' . $the_related_title . '</a>';
                                 $related_output .= '<p class="jseo_related_excerpt">' . $the_company_description . '</p>';
-                                $related_output .= '<div class="jseo_related_meta">
-                                    <span><img src="' . get_stylesheet_directory_uri() . '/svg/calendar.svg">' . $the_related_date . '</span>
-                                    <span><img src="' . get_stylesheet_directory_uri() . '/svg/user.svg">' . $author_rel_name . '</span>
-                                </div>';
+                                // $related_output .= '<div class="jseo_related_meta">
+                                //     <span><img src="' . get_stylesheet_directory_uri() . '/svg/calendar.svg">' . $the_related_date . '</span>
+                                //     <span><img src="' . get_stylesheet_directory_uri() . '/svg/user.svg">' . $author_rel_name . '</span>
+                                // </div>';
                                 $related_output .= '</div></div>';
                             }
                             

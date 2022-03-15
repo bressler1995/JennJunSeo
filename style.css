@@ -742,13 +742,13 @@ input, textarea  {
     width: 100%;
     font-family: 'Moon' !important;
     font-size: 28px;
-    line-height: 32px;
+    line-height: 36px;
     color:#FFF;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
+    letter-spacing: 1.2px;
     padding: 0;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     text-decoration: none;
 }
 
@@ -761,7 +761,7 @@ input, textarea  {
     line-height: 24px;
     color:#FFF;
     font-weight: 300;
-    margin-bottom: 13px !important;
+    margin-bottom: 22px !important;
 }
 
 .jseo_portfolio_content.voffset .jseo_portfolio_meta {
@@ -1046,7 +1046,7 @@ input, textarea  {
     font-size: 14px;
     line-height: 19px;
     color: #222;
-    font-weight: 500;
+    font-weight: 600;
     margin-right: 7px;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -1072,7 +1072,7 @@ input, textarea  {
     display: block;
     position: relative;
     box-sizing: border-box;
-    background-color: #F1F1F1;
+    background-color: transparent;
     margin-top: 0 !important;
 }
 
@@ -1192,14 +1192,7 @@ input, textarea  {
 .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column {
     display: block;
     box-sizing: border-box;
-}
-
-.jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column:first-of-type {
-    width: 35%;
-}
-
-.jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column:last-of-type {
-    width: 65%;
+    width: 100%;
 }
 
 .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
@@ -1207,6 +1200,7 @@ input, textarea  {
     color:#FFF;
     font-weight: 400;
     width: 100%;
+    text-align: right;
 }
 
 .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column ul.vplain_telemetry_list {
@@ -1435,8 +1429,7 @@ input, textarea  {
 }
 
 .jseo_lightbox_image img.zoom {
-    transform: translateX(-50%) translateY(-50%) scale(2.5);
-
+    transform: translateX(-50%) translateY(-50%) scale(2.8);
 }
 
 .jseo_lightbox_image.show {
@@ -2076,6 +2069,30 @@ input, textarea  {
     margin-bottom: 45px;
 }
 
+.darkmode {
+    background-color: #302E4A !important;
+    padding: 19px !important;
+    padding-top: 29px !important;
+    padding-bottom: 29px !important;
+    border-radius: 7px !important;
+}
+
+.darkmode h1, .darkmode h2, .darkmode h3, .darkmode h4, .darkmode h5, .darkmode h6 {
+    color: #FFF !important;
+}
+
+.darkmode p.the_problem_caption {
+    color: #FFF !important;
+}
+
+.darkmode ul li {
+    color: #FFF !important;
+}
+
+.darkmode p:not(.the_problem_caption), .darkmode span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
 .jseo_content_problem {
     display: flex;
     flex-flow: row wrap;
@@ -2095,6 +2112,31 @@ input, textarea  {
     align-items: flex-start;
 }
 
+.jseo_content_problem .jseo_content_problem_col ul {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin-top: 3px;
+    padding-top: 0;
+    margin-bottom: 15px;
+    list-style: disc;
+}
+
+.jseo_content_problem .jseo_content_problem_col ul li {
+    display: list-item;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 5px;
+    list-style: disc;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 25px;
+    color: #666;
+    font-weight: 300;
+}
+
 .jseo_content_problem .jseo_content_problem_col p.the_problem_caption {
     display: block;
     font-size: 14px !important;
@@ -2103,6 +2145,132 @@ input, textarea  {
     width: 100%;
     color: #666;
     font-weight: 300;
+}
+
+.jseo_single_altbuttons {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin-top: 17px;
+}
+
+.jseo_single_altbuttons a {
+    -webkit-transition: all 0.3s 0s ease;
+    -moz-transition: all 0.3s 0s ease;
+    -o-transition: all 0.3s 0s ease;
+    transition: all 0.3s 0s ease;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 15px;
+    padding-right: 22px;
+    padding-left: 22px;
+    border-radius: 5px;
+    color: #FFF;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.jseo_single_altbuttons a:hover, .jseo_single_altbuttons a:active, .jseo_single_altbuttons a:focus {
+    color: #FFF;
+    opacity: 0.7;
+}
+
+.the_bna_item {
+    display: flex;
+    flex-flow: column wrap;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    padding:0;
+    margin-top: 20px;
+}
+
+.the_bna_item .the_bna_images {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.the_bna_item .the_bna_images a {
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 12px;
+    width: calc(50% - 12px);
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 5px;
+    border: 1px solid #E1E1E1;
+}
+
+.the_bna_item .the_bna_images a:hover:after, .the_bna_item .the_bna_images a:active:after, .the_bna_item .the_bna_images a:focus:after {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.the_bna_item .the_bna_images a:after {
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    background-color: rgba(74, 176, 237, 0.85);
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.the_bna_item .the_bna_images a img {
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 101%;
+    height: 101%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 2;
+}
+
+.the_bna_item .the_bna_text {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    box-sizing: border-box;
+    padding:0;
+    margin: 0;
+}
+
+.the_bna_item .the_bna_text p {
+    display: block;
+    box-sizing: border-box;
+    margin-top: 0 !important;
+    margin-bottom: 7px !important;
+    font-size: 15px;
+    line-height: 26px;
+    color: #666;
+    font-weight: 300;
+    width: 100%;
+    text-align: left;
 }
 
 .jseo_content_w_image {
@@ -2320,6 +2488,7 @@ input, textarea  {
     margin-right: 12px;
     margin-top: 12px;
     object-fit: cover;
+    border: 1px solid #E1E1E1;
 }
 
 .jseo_content_standard_text div.contentspace a:hover, .jseo_content_standard_text div.contentspace a:active, .jseo_content_standard_text div.contentspace a:focus {
@@ -2396,6 +2565,8 @@ input, textarea  {
     padding: 0;
     background-color: #000;
     overflow: hidden;
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
 }
 
 .jseo_contentwimg_gallery a:hover:after, .jseo_contentwimg_gallery a:active:after, .jseo_contentwimg_gallery a:focus:after {
@@ -2420,11 +2591,11 @@ input, textarea  {
     z-index: 3;
 }
 
-.jseo_contentwimg_gallery img {
+.jseo_contentwimg_gallery a img {
     display: block;
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 101%;
+    height: 101%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -2448,8 +2619,8 @@ input, textarea  {
     width: 100%;
     color: #222;
     text-transform: uppercase;
-    font-size: 17px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: 600;
     letter-spacing: 1.2px;
     margin-top: 0;
@@ -2477,7 +2648,7 @@ input, textarea  {
     padding:0;
     margin:0;
     box-sizing: border-box;
-    padding-top: 5px;
+    padding-top: 12px;
     flex-flow: column wrap;
     align-items: flex-start;
 }
@@ -2772,6 +2943,10 @@ input, textarea  {
 
 @media (max-width: 767.9px) {
 
+    .the_bna_item .the_bna_images a {
+        padding-bottom: 55%;
+    }
+
     .jseo_portfolio_catui a {
         padding: 8px;
         padding-left: 12px;
@@ -2811,7 +2986,7 @@ input, textarea  {
 
     .jseo_content_standard_text div.contentspace img.size-full {
         width: calc(100% - 12px);
-        height: 300px;
+        height: auto;
     }
 
     .jseo_content_standard_text div.contentspace img.size-large {
@@ -2821,7 +2996,7 @@ input, textarea  {
     
     .jseo_content_standard_text div.contentspace img.size-medium {
         width: calc(100% - 12px);
-        height: 300px;
+        height: 250px;
     }
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
@@ -2845,8 +3020,8 @@ input, textarea  {
     }
 
     .jseo_single_hero h1 {
-        font-size: 42px;
-        line-height: 48px;
+        font-size: 38px;
+        line-height: 42px;
         letter-spacing: 1.2px;
     }
 
@@ -2882,12 +3057,12 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
-        font-size: 40px;
-        font-size: 42px;
+        font-size: 44px;
+        font-size: 48px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry {
-        padding: 20px;
+        padding: 25px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
@@ -2908,8 +3083,8 @@ input, textarea  {
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f2 {
         width: 100%;
         padding: 20px;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 35px;
+        padding-bottom: 35px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
@@ -3042,6 +3217,10 @@ input, textarea  {
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
 
+    .the_bna_item .the_bna_images a {
+        padding-bottom: 45%;
+    }
+
     .jseo_portfolio_catui a {
         padding: 10px;
         padding-left: 17px;
@@ -3069,12 +3248,12 @@ input, textarea  {
 
     .jseo_content_standard_text div.contentspace img.size-full {
         width: calc(100% - 12px);
-        height: 350px;
+        height: auto;
     }
 
     .jseo_content_standard_text div.contentspace img.size-large {
         width: calc(100% - 12px);
-        height: 350px;
+        height: 320px;
     }
     
     .jseo_content_standard_text div.contentspace img.size-medium {
@@ -3084,7 +3263,7 @@ input, textarea  {
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
         width: calc(33% - 12px);
-        height: 160px;
+        height: 140px;
     }
 
     .jseo_single_intro_col {
@@ -3102,8 +3281,8 @@ input, textarea  {
     }
 
     .jseo_single_hero h1 {
-        font-size: 48px;
-        line-height: 54px;
+        font-size: 44px;
+        line-height: 48px;
         letter-spacing: 1.2px;
     }
 
@@ -3139,12 +3318,12 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
-        font-size: 46px;
-        font-size: 48px;
+        font-size: 50px;
+        font-size: 52px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry {
-        padding: 20px;
+        padding: 25px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column {
@@ -3164,9 +3343,9 @@ input, textarea  {
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f2 {
         width: 60%;
         padding: 20px;
-        padding-top: 35px;
-        padding-bottom: 35px;
-        padding-left: 80px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 90px;
         border-radius: 5px;
     }
 
@@ -3383,12 +3562,12 @@ input, textarea  {
     }
 
     .jseo_related_item .the_related_image a.jseo_related_linkimage {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
 
     .jseo_related_item .the_related_content {
-        width: calc(100% - 70px);
+        width: calc(100% - 80px);
         padding-left: 15px;
     }
 
@@ -3413,6 +3592,10 @@ input, textarea  {
 
 @media (min-width: 1025px) {
 
+    .the_bna_item .the_bna_images a {
+        padding-bottom: 32%;
+    }
+
     .jseo_portfolio_catui a {
         padding: 10px;
         padding-left: 17px;
@@ -3436,7 +3619,7 @@ input, textarea  {
 
     .jseo_content_standard_text div.contentspace img.size-full {
         width: calc(100% - 12px);
-        height: 400px;
+        height: auto;
     }
 
     .jseo_content_standard_text div.contentspace img.size-large {
@@ -3446,12 +3629,12 @@ input, textarea  {
     
     .jseo_content_standard_text div.contentspace img.size-medium {
         width: calc(33% - 12px);
-        height: 300px;
+        height: 280px;
     }
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
         width: calc(20% - 12px);
-        height: 200px;
+        height: 180px;
     }
 
     .jseo_content_problem .jseo_content_problem_col:last-of-type a {
@@ -3502,8 +3685,8 @@ input, textarea  {
     }
 
     .jseo_single_hero h1 {
-        font-size: 52px;
-        line-height: 56px;
+        font-size: 50px;
+        line-height: 54px;
         letter-spacing: 1.2px;
     }
 
@@ -3540,7 +3723,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry {
-        padding: 15px;
+        padding: 25px;
     }
 
     .jseo_portfolio_content.vplain .jseo_column div.vplain_information {
@@ -3671,9 +3854,9 @@ input, textarea  {
 
     .jseo_portfolio_content.voffset .jseo_column .jseo_voffset_f2 {
         width: 75%;
-        padding: 25px;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding: 35px;
+        padding-top: 55px;
+        padding-bottom: 55px;
         padding-left: 140px;
         border-radius: 5px;
     }
@@ -3706,8 +3889,8 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.vplain .jseo_column .vplain_telemetry_column span.numforlooks {
-      font-size: 50px;
-      font-size: 52px;
+      font-size: 55px;
+      font-size: 57px;
     }
 
     .jseo_related_item .the_related_image a.jseo_related_linkimage {
