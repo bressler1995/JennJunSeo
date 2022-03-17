@@ -759,8 +759,8 @@ input, textarea  {
 .jseo_portfolio_content.voffset .jseo_portfolio_description {
     font-size: 15px;
     line-height: 24px;
-    color:#FFF;
-    font-weight: 300;
+    color:rgba(255, 255, 255, 0.85);
+    font-weight: 400;
     margin-bottom: 22px !important;
 }
 
@@ -1130,7 +1130,7 @@ input, textarea  {
   padding: 12px;
   position: absolute;
   bottom: 35px;
-  color: #FFF;
+  color: rgba(255, 255, 255, 0.85);
   border-radius: 3px;
   -webkit-box-shadow: 5px 5px 10px 2px rgba(0,0,0,0.20); 
   box-shadow: 5px 5px 10px 2px rgba(0,0,0,0.20);
@@ -1165,7 +1165,7 @@ input, textarea  {
   width: 100%;
   font-size: 15px;
   line-height: 23px;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -1877,7 +1877,7 @@ input, textarea  {
     width: 100%;
     font-size: 16px;
     line-height: 24px;
-    font-weight: 300;
+    font-weight: 400;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -2267,8 +2267,8 @@ input, textarea  {
     margin-bottom: 7px !important;
     font-size: 15px;
     line-height: 26px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
     width: 100%;
     text-align: left;
 }
@@ -2313,8 +2313,8 @@ input, textarea  {
     text-align: left;
     font-size: 15px;
     line-height: 26px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
     margin-top: 0;
     margin-bottom: 12px;
 }
@@ -2384,8 +2384,8 @@ input, textarea  {
     text-align: left;
     font-size: 15px;
     line-height: 26px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
     margin-top: 0;
     margin-bottom: 12px;
 }
@@ -2397,8 +2397,8 @@ input, textarea  {
     text-align: left;
     font-size: 15px;
     line-height: 26px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
     margin-top: 0;
     margin-bottom: 12px;
 }
@@ -2436,8 +2436,8 @@ input, textarea  {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     line-height: 25px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
 }
 
 .jseo_content_w_image div.contentwidget ul li {
@@ -2449,8 +2449,8 @@ input, textarea  {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     line-height: 25px;
-    color: #666;
-    font-weight: 300;
+    color: #555;
+    font-weight: 400;
 }
 
 .jseo_content_standard_text div.contentspace ul li a {
