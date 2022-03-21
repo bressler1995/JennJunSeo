@@ -1,11 +1,11 @@
 /* 
 Theme Name: The Jenn Theme
 Theme URI: https://github.com/elementor/hello-theme/
-Description: Ahhhh unemployment *yawn.  On a serious note, don't delete hello elementor as this child theme, has a dependency on hello elementor as its parent theme.  It makes things a little easier development-wise.
-Author: Brian Ressler
+Description: A theme with mockups designed by Jennifer Seo and development by Brian Ressler. Warning: Do not delete Hello Elementor.  That is the parent theme that this child theme inherits basic functions from.
+Author: Brian C. Ressler
 Author URI: https://briancressler.com
 Template: hello-elementor
-Version: 1.0.0
+Version: 1.0.1
 Text Domain: hello-elementor-child
 License: GNU General Public License v3 or later.
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -16,55 +16,12 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
     Add your custom styles here
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-
-@font-face {
-    font-family: 'Moon';
-    font-style: normal;
-    font-weight: 400;
-    src: url('fonts/Moon2.0-Regular.woff') format('woff');
-}   
-    
-@font-face {
-    font-family: 'Moon';
-    font-style: normal;
-    font-weight: 600;
-    src: url('fonts/Moon2.0-Bold.woff') format('woff');
-}
-    
-    
-@font-face {
-    font-family: 'Moon';
-    font-style: normal;
-    font-weight: 300;
-    src: url('fonts/Moon2.0-Light.woff') format('woff');
-}
-
-/* @font-face {
-    font-family: 'jseo';
-    src: url('fonts/fontello-866a89a9/font/jseo.eot?24438948');
-    src: url('fonts/fontello-866a89a9/font/jseo.eot?24438948#iefix') format('embedded-opentype'),
-         url('fonts/fontello-866a89a9/font/jseo.woff?24438948') format('woff'),
-         url('fonts/fontello-866a89a9/font/jseo.ttf?24438948') format('truetype'),
-         url('fonts/fontello-866a89a9/font/jseo.svg?24438948#jseo') format('svg');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 body, html {
     background-color: #F5F5F5 !important;
     overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Moon' !important;
-}
-
 .menu-item a {
-    font-family: 'Montserrat', sans-serif;
-}
-
-.elementor-text-editor p, p, span {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -72,18 +29,6 @@ input:focus, input:active, textarea:focus, textarea:active {
     /* background-color: #E9E9E9 !important; */
     border-color:#4AB0ED !important;
     box-shadow: none !important;
-}
-
-.elementor-button-text, button {
-    font-family: 'Montserrat', sans-serif !important;
-}
-
-a {
-    font-family: 'Montserrat', sans-serif;
-}
-
-input, textarea  {
-    font-family: 'Montserrat', sans-serif !important;
 }
 
 .eccent_navigation {
@@ -240,7 +185,7 @@ input, textarea  {
     line-height: 28px;
     font-weight: 400 !important;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.7px;
 }
 
 .eccent_menu_mobile li a:hover, .eccent_menu_mobile li a:active, .eccent_menu_mobile li a:focus {
@@ -320,7 +265,7 @@ input, textarea  {
 }
 
 .eccent_footer_half span {
-    font-family: 'Moon' !important;
+    font-family: 'Lato', sans-serif !important;
     display: block;
     width:100%;
     color:#302E4A;
@@ -725,7 +670,7 @@ input, textarea  {
     display: block;
     color: #FFF;
     font-size: 15px;
-    line-height: 23px;
+    line-height: 19px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif !important;
     text-align: center;
@@ -740,15 +685,15 @@ input, textarea  {
     transition: all 0.3s ease;
     display: block;
     width: 100%;
-    font-family: 'Moon' !important;
-    font-size: 28px;
-    line-height: 36px;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 24px;
+    line-height: 30px;
     color:#FFF;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.7px;
     padding: 0;
-    margin-bottom: 12px;
+    margin-bottom: 7px;
     text-decoration: none;
 }
 
@@ -1143,14 +1088,14 @@ input, textarea  {
     -o-transition: all 0.3s 0s ease;
     transition: all 0.3s 0s ease;
     display: block;
-    font-family: 'Moon' !important;
-    font-size: 18px;
-    line-height: 22px;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 17px;
+    line-height: 21px;
     font-weight: 600;
     text-transform: uppercase;
     margin:0;
-    margin-bottom: 7px !important;
-    letter-spacing: 1.2px;
+    margin-bottom: 5px !important;
+    letter-spacing: 0.7px;
     width: 100%;
     text-decoration: none;
     color: #FFF !important;
@@ -1511,8 +1456,8 @@ input, textarea  {
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
     display: block;
-    font-size: 18.5px;
-    line-height: 22px;
+    font-size: 17px;
+    line-height: 21px;
     color: #FFF;
     margin: 0;
     margin-bottom: 8px;
@@ -1520,7 +1465,7 @@ input, textarea  {
     max-width: 1200px;
     text-transform: capitalize;
     font-weight: 600;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.7px;
     text-align: center;
 }
 
@@ -1530,11 +1475,12 @@ input, textarea  {
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
     display: block;
-    font-size: 14.2px;
+    font-size: 14px;
     line-height: 25px;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
     text-align: center;
+    margin-bottom: 10px !important;
 }
 
 .jseo_lightbox_image_text p.hidelbdesc, .jseo_lightbox_video_text p.hidelbdesc, .jseo_lightbox_pdf_text p.hidelbdesc {
@@ -1784,21 +1730,21 @@ input, textarea  {
     flex-flow: row wrap;
     box-sizing: border-box;
     padding:0;
-    padding-bottom: 45px;
-    margin-bottom: 45px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
     border-bottom: 1px solid #E1E1E1;
 }
 
 .jseo_single_intro_col h5 {
     display: block;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 7px;
     text-align: center;
     color: #222;
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 700;
     font-size: 15px;
-    line-height: 21px;
+    line-height: 20px;
 }
 
 .jseo_single_intro_col p {
@@ -1824,8 +1770,8 @@ input, textarea  {
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 6px;
-    margin-bottom: 5px;
+    padding: 3px;
+    margin-bottom: 3px;
     text-align: center;
     font-size: 13px;
     line-height: 17px;
@@ -1862,12 +1808,12 @@ input, textarea  {
 .jseo_minibanner .jseo_mb_col h4 {
     display: block;
     width: 100%;
-    font-size: 28px;
-    line-height: 32px;
+    font-size: 26px;
+    line-height: 30px;
     text-transform: capitalize;
-    font-weight: 600;
+    font-weight: 700;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     letter-spacing: 0.7px;
 }
 
@@ -1904,13 +1850,12 @@ input, textarea  {
     width: 100%;
     color: #FFF;
     text-transform: uppercase;
-    font-size: 17px;
-    line-height: 21px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
     margin-top: 0;
     margin-bottom: 3px;
-    font-weight: 600;
 }
 
 .jseo_single_sidedivider {
@@ -2154,7 +2099,7 @@ input, textarea  {
     justify-content: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
-    margin-top: 17px;
+    margin-top: 27px;
 }
 
 .jseo_single_altbuttons a {
@@ -2183,6 +2128,48 @@ input, textarea  {
     opacity: 0.7;
 }
 
+.jseo_single_embeds {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    padding:0;
+    margin-top: 10px;
+}
+
+.jseo_single_embeds.single p {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding:0;
+}
+
+.jseo_single_embeds div.embeditem  {
+  display: block;
+  position: relative;
+  background-color: #666;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #E1E1E1;
+}
+
+.jseo_single_embeds.single div.embeditem {
+    width: 100%;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.jseo_single_embeds div.embeditem iframe {
+    display: block;
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    top:50%;
+    left:50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+}
+
 .the_bna_item {
     display: flex;
     flex-flow: column wrap;
@@ -2198,7 +2185,7 @@ input, textarea  {
     flex-flow: row wrap;
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .the_bna_item .the_bna_images a {
@@ -2284,27 +2271,27 @@ input, textarea  {
 .jseo_content_w_image h3.maintitle {
     display: block;
     width: 100%;
-    font-size: 23px;
-    line-height: 27px;
-    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 800;
     color: #222;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
     text-align: left;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
 }
 
 .jseo_content_problem .jseo_content_problem_col h3.maintitle {
     display: block;
     width: 100%;
-    font-size: 23px;
-    line-height: 27px;
-    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 800;
     color: #222;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
     text-align: left;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
 }
 
 .jseo_content_problem .jseo_content_problem_col p {
@@ -2316,7 +2303,7 @@ input, textarea  {
     color: #555;
     font-weight: 400;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .jseo_content_problem .jseo_content_problem_col:last-of-type a {
@@ -2367,14 +2354,14 @@ input, textarea  {
 .jseo_content_standard_text h3 {
     display: block;
     width: 100%;
-    font-size: 23px;
-    line-height: 27px;
-    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 800;
     color: #222;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
     text-align: left;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
 }
 
 .jseo_content_standard_text div.contentspace p {
@@ -2489,6 +2476,8 @@ input, textarea  {
     margin-top: 12px;
     object-fit: cover;
     border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .jseo_content_standard_text div.contentspace a:hover, .jseo_content_standard_text div.contentspace a:active, .jseo_content_standard_text div.contentspace a:focus {
@@ -2619,10 +2608,10 @@ input, textarea  {
     width: 100%;
     color: #222;
     text-transform: uppercase;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
     margin-top: 0;
     margin-bottom: 3px;
 }
@@ -2667,10 +2656,10 @@ input, textarea  {
     color: #222;
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
-    line-height: 20px;
+    line-height: 19px;
     font-weight: 600;
     margin: 0;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
     
 }
 
@@ -2729,7 +2718,7 @@ input, textarea  {
     width: auto;
     font-size: 13.0px;
     line-height: 20px;
-    font-family: 'Moon' !important;
+    font-family: 'Lato', sans-serif !important;
     text-transform: uppercase;
     letter-spacing: 0.7px;
     margin-right: 10px;
@@ -2862,7 +2851,7 @@ input, textarea  {
     left:0;
     z-index: 4;
     font-size: 15px;
-    line-height: 23px;
+    line-height: 19px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif;
     transform: translateY(-50%);
@@ -2937,11 +2926,15 @@ input, textarea  {
 
     .jseo_lightbox_image_text p, .jseo_lightbox_video_text p, .jseo_lightbox_pdf_text p {
         font-size: 12.5px !important;
-        line-height: 20px !important;
+        line-height: 19px !important;
     }
 }
 
 @media (max-width: 767.9px) {
+
+    .jseo_single_embeds div.embeditem {
+        padding-bottom: 65%;
+    }
 
     .the_bna_item .the_bna_images a {
         padding-bottom: 55%;
@@ -3020,8 +3013,8 @@ input, textarea  {
     }
 
     .jseo_single_hero h1 {
-        font-size: 38px;
-        line-height: 42px;
+        font-size: 36px;
+        line-height: 40px;
         letter-spacing: 1.2px;
     }
 
@@ -3217,6 +3210,10 @@ input, textarea  {
 
 @media (min-width: 768px) and (max-width: 1024.9px) {
 
+    .jseo_single_embeds div.embeditem {
+        padding-bottom: 75%;
+    }
+
     .the_bna_item .the_bna_images a {
         padding-bottom: 45%;
     }
@@ -3281,8 +3278,8 @@ input, textarea  {
     }
 
     .jseo_single_hero h1 {
-        font-size: 44px;
-        line-height: 48px;
+        font-size: 42px;
+        line-height: 46px;
         letter-spacing: 1.2px;
     }
 
@@ -3345,7 +3342,7 @@ input, textarea  {
         padding: 20px;
         padding-top: 40px;
         padding-bottom: 40px;
-        padding-left: 90px;
+        padding-left: 85px;
         border-radius: 5px;
     }
 
@@ -3450,7 +3447,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.voffset .jseo_column {
-        margin-bottom: 100px;
+        margin-bottom: 120px;
     }
 
     .jseo_portfolio_content.voffset .jseo_column:last-of-type {
@@ -3588,6 +3585,13 @@ input, textarea  {
         padding-bottom: 14px;
         font-size: 13px;
     }
+
+    .jseo_single_embeds.multiple div.embeditem {
+        margin-right: 0px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
 }
 
 @media (min-width: 1025px) {
@@ -3686,7 +3690,7 @@ input, textarea  {
 
     .jseo_single_hero h1 {
         font-size: 50px;
-        line-height: 54px;
+        line-height: 52px;
         letter-spacing: 1.2px;
     }
 
@@ -3857,7 +3861,7 @@ input, textarea  {
         padding: 35px;
         padding-top: 55px;
         padding-bottom: 55px;
-        padding-left: 140px;
+        padding-left: 150px;
         border-radius: 5px;
     }
 
@@ -3877,7 +3881,7 @@ input, textarea  {
     }
 
     .jseo_portfolio_content.voffset .jseo_column {
-        margin-bottom: 105px;
+        margin-bottom: 110px;
     }
 
     .jseo_portfolio_content.voffset .jseo_column:last-of-type {
@@ -3937,6 +3941,16 @@ input, textarea  {
     
     .jseo_lightbox_image_text, .jseo_lightbox_video_text, .jseo_lightbox_pdf_text {
         height: 32%;
+    }
+
+    .jseo_single_embeds div.embeditem {
+        padding-bottom: 45%;
+    }
+
+    .jseo_single_embeds.multiple div.embeditem {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        width: calc(50% - 12px);
     }
 }
 

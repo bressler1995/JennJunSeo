@@ -64,9 +64,6 @@
 
         $jseo_markdown = '<div class="jseo_portfolio" id="jseo_portfolio">
         <div class="jseo_portfolio_controls">
-            <div class="jseo_pcontrols_left">
-                
-            </div>
             <div class="jseo_pcontrols_right">' .
                 $jseo_catui_output .
             '</div>

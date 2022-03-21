@@ -75,11 +75,11 @@ function my_acf_admin_head() {
 	}
 
 	.acf-field-62085450b8d22 > .acf-label label, .acf-field-6212baba5e39b > .acf-label label, .acf-field-6212b41822185 > .acf-label label, .acf-field-6212c3fb7359c > .acf-label label {
-		font-size: 20px;
+		font-size: 22px;
 	}
 
 	.acf-field-6212c9077ef1a > .acf-label label, .acf-field-6212c92d7ef1b > .acf-label label, .acf-field-6212c4487359d > .acf-label label, .acf-field-6212c72d498a3 > .acf-label label, .acf-field-6212c9c36dbea > .acf-label label, .acf-field-6212ca53bfd70 > .acf-label label, .acf-field-6212cac2f4558 > .acf-label label, .acf-field-6212cfc06a3e1 > .acf-label label, .acf-field-6212d03bb6a90 > .acf-label label, .acf-field-6212d2ef16c2b > .acf-label label, .acf-field-6212d324c67e4 > .acf-label label {
-		font-size: 16px;
+		font-size: 18px;
 	}
 
     </style>

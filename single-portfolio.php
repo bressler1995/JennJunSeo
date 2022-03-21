@@ -320,15 +320,41 @@
                 $content_wireframes_output = '';
             } else {
                 $the_content = $content_wireframes['wireframes_content'];
-                $the_images = $content_wireframes['wireframes_images'];
                 $the_buttons = $content_wireframes['wireframes_buttons'];
+                $the_embeds = $content_wireframes['wireframes_embeds'];
                 $the_buttons_output = '';
+                $the_embeds_output = '';
                 $the_darkmode = '';
-                // d($the_buttons);
+                // echo d($the_embeds);
 
                 if($content_wireframes['wireframes_dark_mode'] != '' && empty($content_wireframes['wireframes_dark_mode']) == false && isset($content_wireframes['wireframes_dark_mode']) == true) {
                     if($content_wireframes['wireframes_dark_mode'] == 'Yes') {
                         $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($the_embeds != '' && empty($the_embeds) == false && isset($the_embeds) == true) {
+                    if(count($the_embeds) == 1) {
+                        $embed_html = $the_embeds[0]['embed_html'];
+                        $the_embeds_output .= '<div class="jseo_single_embeds single">';
+
+                        if($embed_html != '' && empty($embed_html) == false && isset($embed_html) == true) {
+                            $the_embeds_output .= '<div class="embeditem">' . $embed_html . '</div>';
+                        }
+
+                        $the_embeds_output .= '</div>';
+
+                        
+                    } else if(count($the_embeds) > 1) {
+                        $the_embeds_output .= '<div class="jseo_single_embeds multiple">';
+                        for($tem = 0; $tem < count($the_embeds); $tem++) {
+                            $embed_html = $the_embeds[$tem]['embed_html'];
+
+                            if($embed_html != '' && empty($embed_html) == false && isset($embed_html) == true) {
+                                $the_embeds_output .= '<div class="embeditem">' . $embed_html . '</div>';
+                            }
+                        }
+                        $the_embeds_output .= '</div>';
                     }
                 }
 
@@ -374,17 +400,9 @@
                     //only needs to have content present to display
                     $content_wireframes_output .= '<h3 class="maintitle">Wireframes</h3>';
                     $content_wireframes_output .= '<div class="contentwidget">' . $the_content . '</div>';
-
-                    if(empty($the_images) == false && isset($the_images) == true) {
-                        if(count($the_images) > 0) {
-                            $content_wireframes_output .= '<div class="jseo_contentwimg_gallery">';
-                            for($w = 0; $w < count($the_images); $w++) {
-                                $content_wireframes_output .= '<a data-title="Wireframes ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="true" data-permalink="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
-                            }
-                            $content_wireframes_output .= '</div>';
-                        }
-                    }
+                    $content_wireframes_output .= $the_embeds_output;
                     $content_wireframes_output .= $the_buttons_output;
+                    
                     $content_wireframes_output .= '</div>';
                 }
 
@@ -454,14 +472,40 @@
                 $content_mockups_output = '';
             } else {
                 $the_content = $content_mockups['mockups_content'];
-                $the_images = $content_mockups['mockups_images'];
-                $the_darkmode = '';
                 $the_buttons = $content_mockups['mockups_buttons'];
+                $the_embeds = $content_mockups['mockups_embeds'];
                 $the_buttons_output = '';
+                $the_embeds_output = '';
+                $the_darkmode = '';
 
                 if($content_mockups['mockups_dark_mode'] != '' && empty($content_mockups['mockups_dark_mode']) == false && isset($content_mockups['mockups_dark_mode']) == true) {
                     if($content_mockups['mockups_dark_mode'] == 'Yes') {
                         $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($the_embeds != '' && empty($the_embeds) == false && isset($the_embeds) == true) {
+                    if(count($the_embeds) == 1) {
+                        $embed_html = $the_embeds[0]['embed_html'];
+                        $the_embeds_output .= '<div class="jseo_single_embeds single">';
+
+                        if($embed_html != '' && empty($embed_html) == false && isset($embed_html) == true) {
+                            $the_embeds_output .= '<div class="embeditem">' . $embed_html . '</div>';
+                        }
+
+                        $the_embeds_output .= '</div>';
+
+                        
+                    } else if(count($the_embeds) > 1) {
+                        $the_embeds_output .= '<div class="jseo_single_embeds multiple">';
+                        for($tem = 0; $tem < count($the_embeds); $tem++) {
+                            $embed_html = $the_embeds[$tem]['embed_html'];
+
+                            if($embed_html != '' && empty($embed_html) == false && isset($embed_html) == true) {
+                                $the_embeds_output .= '<div class="embeditem">' . $embed_html . '</div>';
+                            }
+                        }
+                        $the_embeds_output .= '</div>';
                     }
                 }
 
@@ -506,17 +550,7 @@
                     $content_mockups_output .= '<div class="jseo_content_w_image ' . $the_darkmode . '" id="mockup">';
                     $content_mockups_output .= '<h3 class="maintitle">Mock-Up</h3>';
                     $content_mockups_output .= '<div class="contentwidget">' . $the_content . '</div>';
-
-                    if(empty($the_images) == false && isset($the_images) == true) {
-                        if(count($the_images) > 0) {
-                            $content_mockups_output .= '<div class="jseo_contentwimg_gallery">';
-                            for($w = 0; $w < count($the_images); $w++) {
-                                $content_mockups_output .= '<a data-title="Mockup ' . ($w + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $the_images[$w]['url'] . '" data-desc="-1" data-hasarticle="true" data-permalink="' . $the_images[$w]['url'] . '" class="single_lightboxitem" href="javascript:void(0)"><img src="' . $the_images[$w]['url'] . '"></a>';
-                            }
-                            $content_mockups_output .= '</div>';
-                        }
-                    }
-
+                    $content_mockups_output .= $the_embeds_output;
                     $content_mockups_output .= $the_buttons_output;
                     $content_mockups_output .= '</div>';
                 }
@@ -738,7 +772,7 @@
                                             if($the_company_description != '' && empty($the_company_description) == false) {
                                                 $the_company_description = (strlen($the_company_description) > 70) ? substr($the_company_description,0,70).'...' : $the_company_description;
                                             } else {
-                                                $the_company_description = 'No company description provided...';
+                                                $the_company_description = 'No company description is available for this item...';
                                             }
                                             
                                             if(has_post_thumbnail($the_related_id)) {
@@ -971,7 +1005,7 @@
                             if($the_company_description != '' && empty($the_company_description) == false) {
                                 $the_company_description = (strlen($the_company_description) > 70) ? substr($the_company_description,0,70).'...' : $the_company_description;
                             } else {
-                                $the_company_description = 'No company description provided...';
+                                $the_company_description = 'No company description is available for this item...';
                             }
                             
                             if(has_post_thumbnail($the_related_id)) {

@@ -71,6 +71,58 @@ jQuery( document ).ready(function() {
         down = true;
         downXStart = event.clientX;
         downYStart = event.clientY;
+
+        if(down == true && jseo_lightbox_zoom == 1) {
+            // downXDelta = event.clientX - downXStart;
+            // downYDelta = event.clientY - downYStart;
+
+            var rect = jseo_lbimage_img.getBoundingClientRect();
+            downXPer = (event.clientX / jseo_lightbox_image_media.clientWidth) * 100;
+            downYPer = (event.clientY / jseo_lightbox_image_media.clientHeight) * 100;
+
+            console.log(downXPer + "%",  + downYPer + "%")
+
+            // if(downXDelta > downXStart) {
+            //     if(directionX == -1) {
+            //         downXStart = event.clientX;
+            //     }
+            //     directionX = 1;
+            // }
+
+            // if(downXDelta < downXStart) {
+            //     if(directionX == 1) {
+            //         downXStart = event.clientX;
+            //     }
+            //     directionX = -1;
+            // }
+
+            // if(downYDelta > downYStart) {
+            //     if(directionY == -1) {
+            //         downYStart = event.clientY;
+            //     }
+            //     directionY = 1;
+            // }
+
+            // if(downYDelta < downYStart) {
+            //     if(directionY == 1) {
+            //         downYStart = event.clientY;
+            //     }
+            //     directionY = -1;
+            // }
+
+            // if(jseo_lbimage_x + (downXDelta * 0.01) >= -120  && jseo_lbimage_x + (downXDelta * 0.01) <= 20) {
+            //     jseo_lbimage_x += downXDelta * (1 / 100);
+            // }
+
+            // if(jseo_lbimage_y + (downYDelta * 0.01) >= -120  && jseo_lbimage_y + (downYDelta * 0.01) <= 20) {
+            //     jseo_lbimage_y += downYDelta * (1 / 100);
+            // }
+
+            var scaleX = scaleValue(downXPer, [0,100], [-170, 35]);
+            var scaleY = scaleValue(downYPer, [0,100], [-170, 35]);
+
+            jseo_lbimage_img.style.transform = 'translateX(' + scaleX + '%) translateY(' + scaleY + '%) scale(2.7)';
+        }
     }
 
     let upListener = (e) => {
@@ -271,6 +323,7 @@ jQuery( document ).ready(function() {
                 let jseo_current_featured = current_post_storage[z]['the_featured_image'];
                 let jseo_current_video = current_post_storage[z]['the_video'];
                 let jseo_current_file = current_post_storage[z]['the_custom_file'];
+                let jseo_current_lbdesc = current_post_storage[z]['the_lightbox_description'];
                 let jseo_current_output = '';
 
                 if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
@@ -292,13 +345,17 @@ jQuery( document ).ready(function() {
                     }
                 }
 
+                if(jseo_current_lbdesc == "-1" || jseo_current_lbdesc == -1 || jseo_current_lbdesc == "" || jseo_current_lbdesc == null) {
+                    jseo_current_lbdesc = 'No description available for this item...';
+                }
+
                 if(jseo_portfolio_content.classList.contains("grid")) {
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
                     let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div></div>';
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
                 }
             } 
         }
@@ -397,6 +454,7 @@ jQuery( document ).ready(function() {
                             let jseo_current_featured = current_post_storage[z]['the_featured_image'];
                             let jseo_current_video = current_post_storage[z]['the_video'];
                             let jseo_current_file = current_post_storage[z]['the_custom_file'];
+                            let jseo_current_lbdesc = current_post_storage[z]['the_lightbox_description'];
                             let jseo_current_output = '';
 
                             if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
@@ -418,13 +476,17 @@ jQuery( document ).ready(function() {
                                 }
                             }
 
+                            if(jseo_current_lbdesc == "-1" || jseo_current_lbdesc == -1 || jseo_current_lbdesc == "" || jseo_current_lbdesc == null) {
+                                jseo_current_lbdesc = 'No description available for this item...';
+                            }
+
                             if(jseo_portfolio_content.classList.contains("grid")) {
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
                                 let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div></div>';
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'].substring(0, 100) + '</p></div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
                             }
                         } 
                     }
@@ -1084,5 +1146,9 @@ jQuery( document ).ready(function() {
         var capped = Math.min(from[1], Math.max(from[0], value)) - from[0];
         return ~~(capped * scale + to[0]);
     }
+
+    function truncate(str, n){
+        return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+    };
 
 });
