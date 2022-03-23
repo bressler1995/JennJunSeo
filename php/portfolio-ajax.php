@@ -146,6 +146,8 @@
                 $the_video = get_field('the_video', $the_id);
                 $the_lightbox_description = get_field('lightbox_description', $the_id);
                 $the_brightness = get_field('brightness', $the_id);
+                $the_mini_banner = get_field('mini_banner', $the_id);
+                $the_content_cneeds = get_field('content_fields', $the_id);
 
                 if($the_custom_file) {
                     $the_custom_file = $the_custom_file;
@@ -163,6 +165,38 @@
                     $the_lightbox_description = $the_lightbox_description;
                 } else {
                     $the_lightbox_description = -1;
+                }
+
+                if($the_mini_banner) {
+                    $the_mini_banner_companydesc = $the_mini_banner['mbanner_company_description'];
+
+                    if($the_mini_banner_companydesc != '' && empty($the_mini_banner_companydesc) == false && isset($the_mini_banner_companydesc) == true) {
+                        $the_mini_banner = $the_mini_banner_companydesc;
+                    } else {
+                        $the_mini_banner = -1;  
+                    }
+                } else {
+                    $the_mini_banner = -1;
+                }
+
+                if($the_content_cneeds) {
+                    $temp_cneeds = $the_content_cneeds['client_needs'];
+
+                    if($temp_cneeds != '' && empty($temp_cneeds) == false && isset($temp_cneeds) == true) {
+                        $temp_cneeds_content = $temp_cneeds['client_needs_content'];
+
+                        if($temp_cneeds_content != '' && empty($temp_cneeds_content) == false && isset($temp_cneeds_content) == true) {
+                            $noimages = preg_replace("/<img[^>]+\>/i", "(image) ", $temp_cneeds_content); 
+                            $the_content_cneeds = strip_tags($noimages);
+                        } else {
+                            $the_content_cneeds = -1;  
+                        }
+                        
+                    } else {
+                        $the_content_cneeds = -1;  
+                    }
+                } else {
+                    $the_content_cneeds = -1;
                 }
 
                 if($the_brightness) {
@@ -183,6 +217,8 @@
                         "the_video"=>$the_video,
                         "the_lightbox_description"=>$the_lightbox_description,
                         "the_brightness"=>$the_brightness,
+                        'the_company_description'=>$the_mini_banner,
+                        'the_client_needs'=>$the_content_cneeds,
                         "the_date"=>$the_date,
                         "the_author"=>$the_author_name,
                         'has_article'=>$has_article

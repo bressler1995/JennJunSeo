@@ -324,6 +324,8 @@ jQuery( document ).ready(function() {
                 let jseo_current_video = current_post_storage[z]['the_video'];
                 let jseo_current_file = current_post_storage[z]['the_custom_file'];
                 let jseo_current_lbdesc = current_post_storage[z]['the_lightbox_description'];
+                let jseo_current_companydesc = current_post_storage[z]['the_company_description'];
+                let jseo_current_cneeds = current_post_storage[z]['the_client_needs'];
                 let jseo_current_output = '';
 
                 if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
@@ -349,13 +351,35 @@ jQuery( document ).ready(function() {
                     jseo_current_lbdesc = 'No description available for this item...';
                 }
 
+                if(jseo_current_cneeds == "-1" || jseo_current_cneeds == -1 || jseo_current_cneeds == "" || jseo_current_cneeds == null) {
+                    cneeds_present = false;
+                    jseo_current_cneeds = '';
+                } else {
+                    cneeds_present = true;
+                    jseo_current_cneeds = jseo_current_cneeds;
+                    console.log(jseo_current_cneeds);
+                }
+
+                if(jseo_current_companydesc == "-1" || jseo_current_companydesc == -1 || jseo_current_companydesc == "" || jseo_current_companydesc == null) {
+                    jseo_current_companydesc = 'No written information available for this case study... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+               
+                    if(cneeds_present == true) {
+                        jseo_current_companydesc = jseo_current_cneeds;
+                    }
+                } else {
+                    if(cneeds_present == true) {
+                        jseo_current_companydesc = jseo_current_companydesc + ' ' + jseo_current_cneeds;
+                    }
+                }
+
                 if(jseo_portfolio_content.classList.contains("grid")) {
                     jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                 } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p><div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_companydesc, 450) + '</p><div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                 } else if(jseo_portfolio_content.classList.contains("vplain")) {
+                    let vplain_variables = 'data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '"';
                     let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div></div>';
-                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
+                    jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a ' + vplain_variables + ' href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a ' + vplain_variables + ' href="javascript:void(0)" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
                 }
             } 
         }
@@ -455,7 +479,10 @@ jQuery( document ).ready(function() {
                             let jseo_current_video = current_post_storage[z]['the_video'];
                             let jseo_current_file = current_post_storage[z]['the_custom_file'];
                             let jseo_current_lbdesc = current_post_storage[z]['the_lightbox_description'];
+                            let jseo_current_companydesc = current_post_storage[z]['the_company_description'];
+                            let jseo_current_cneeds = current_post_storage[z]['the_client_needs'];
                             let jseo_current_output = '';
+                            let cneeds_present = false;
 
                             if(jseo_current_featured != "-1" && jseo_current_video == "-1" && jseo_current_file == "-1") {
                                 //Featured
@@ -480,13 +507,35 @@ jQuery( document ).ready(function() {
                                 jseo_current_lbdesc = 'No description available for this item...';
                             }
 
+                            if(jseo_current_cneeds == "-1" || jseo_current_cneeds == -1 || jseo_current_cneeds == "" || jseo_current_cneeds == null) {
+                                cneeds_present = false;
+                                jseo_current_cneeds = '';
+                            } else {
+                                cneeds_present = true;
+                                jseo_current_cneeds = jseo_current_cneeds;
+                                console.log(jseo_current_cneeds);
+                            }
+
+                            if(jseo_current_companydesc == "-1" || jseo_current_companydesc == -1 || jseo_current_companydesc == "" || jseo_current_companydesc == null) {
+                                jseo_current_companydesc = 'No written information available for this case study... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+                           
+                                if(cneeds_present == true) {
+                                    jseo_current_companydesc = jseo_current_cneeds;
+                                }
+                            } else {
+                                if(cneeds_present == true) {
+                                    jseo_current_companydesc = jseo_current_companydesc + ' ' + jseo_current_cneeds;
+                                }
+                            }
+
                             if(jseo_portfolio_content.classList.contains("grid")) {
                                 jseo_portfolio_content.innerHTML += '<div class="jseo_column jseo_grid_link"><a data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '" href="javascript:void(0)"><img class="the_featured_image" style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"><div class="jseo_portfolio_title">' + jseo_current_output + '<span>' + current_post_storage[z]['the_title'] + '</span></div></a></div>';
                             } else if(jseo_portfolio_content.classList.contains("voffset")) {
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + current_post_storage[z]['the_excerpt'] + '</p> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column voff_animation"><div class="jseo_voffset_f1"><a href="' + current_post_storage[z]['the_permalink'] + '"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '"></a></div><div class="jseo_voffset_f2"><a class="jseo_portfolio_title" href="' + current_post_storage[z]['the_permalink'] + '">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_companydesc, 450) + '</p> <div class="jseo_portfolio_button_options"><a href="' + current_post_storage[z]['the_permalink'] + '">Read More</a></div> </div></div>';
                             } else if(jseo_portfolio_content.classList.contains("vplain")) {
+                                let vplain_variables = 'data-title="' + current_post_storage[z]['the_title'] + '" data-desc="' + current_post_storage[z]['the_lightbox_description'] + '" data-cfile="' + current_post_storage[z]['the_custom_file'] + '" data-video="' + current_post_storage[z]['the_video'] + '" data-featured="' + current_post_storage[z]['the_featured_image'] + '" data-hasarticle="' + current_post_storage[z]['has_article'] + '" data-permalink="' + current_post_storage[z]['the_permalink'] + '"';
                                 let telemetry = '<div class="vplain_telemetry"><div class="vplain_telemetry_column"><span class="numforlooks">' + thenumformatted + '</span></div></div>';
-                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a href="' + current_post_storage[z]['the_permalink'] + '" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
+                                jseo_portfolio_content.innerHTML += '<div class="jseo_column vplain_animation"><a ' + vplain_variables + ' href="javascript:void(0)" class="vplain_image"><img style="filter: brightness(' + current_post_storage[z]['the_brightness'] + '%);" src="' + current_post_storage[z]['the_featured_image'] + '">' + telemetry + '</a> <div class="vplain_information"><a ' + vplain_variables + ' href="javascript:void(0)" class="jseo_portfolio_title">' + current_post_storage[z]['the_title'] + '</a><p class="jseo_portfolio_description">' + truncate(jseo_current_lbdesc, 90) + '</p></div></div>';
                             }
                         } 
                     }
@@ -1071,7 +1120,19 @@ jQuery( document ).ready(function() {
         let vplain_link = document.getElementsByClassName("vplain_animation");
         
         for(i = 0; i < vplain_link.length; i++) {
+            let jseo_vplain_link_a = vplain_link[i].getElementsByTagName('a');
+
             doSetVPlainTimeOut(vplain_link[i], i);
+
+            if (jseo_vplain_link_a != null) {
+                if(jseo_vplain_link_a.length == 2) {
+                    console.log(jseo_vplain_link_a[0]);
+                    console.log(jseo_vplain_link_a[1]);
+                    jseo_vplain_link_a[0].addEventListener("click", jseo_lbui_showfunc);
+                    jseo_vplain_link_a[1].addEventListener("click", jseo_lbui_showfunc);
+                }
+            }
+
         }
     }
 
