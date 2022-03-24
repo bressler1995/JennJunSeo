@@ -218,7 +218,7 @@
                     $problem_col_two_style = '';
                     $the_problem_content_pass = true;
                 } else if($content_present == true && $content_screen_present == false) {
-                    $problem_col_one_style = 'width: 100% !important; padding-right: 0 !important;';
+                    $problem_col_one_style = 'width: 100% !important; padding-right: 0 !important; padding-bottom: 5px !important;';
                     $problem_col_two_style = 'width: 0% !important; display: none !important; padding-left: 0 !important; margin: 0 !important;'; 
                     $the_problem_content_pass = true;
                 }
