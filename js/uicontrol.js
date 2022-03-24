@@ -796,7 +796,7 @@ jQuery( document ).ready(function() {
                     let cfile_split = jseo_current_file.split("jennjunseo.com/");
                     if(cfile_split != null) {
                         if(cfile_split.length == 2) {
-                            jseo_pdfreader_container.innerHTML = '<iframe src="https://jennjunseo.com/staging/pdfjs/web/viewer.html?file=/' + cfile_split[1] + '">';
+                            jseo_pdfreader_container.innerHTML = '<iframe src="https://jennjunseo.com/pdfjs/web/viewer.html?file=/' + cfile_split[1] + '">';
                         }
                     }
                 }
