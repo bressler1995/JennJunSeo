@@ -417,10 +417,17 @@
                 $the_bna = $content_design_iterations['design_iterations_before_n_afters'];
                 $the_bna_output = '';
                 $the_darkmode = '';
+                $the_alt_layout = '';
 
                 if($content_design_iterations['design_iterations_dark_mode'] != '' && empty($content_design_iterations['design_iterations_dark_mode']) == false && isset($content_design_iterations['design_iterations_dark_mode']) == true) {
                     if($content_design_iterations['design_iterations_dark_mode'] == 'Yes') {
                         $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if($content_design_iterations['design_iterations_alt_layout'] != '' && empty($content_design_iterations['design_iterations_alt_layout']) == false && isset($content_design_iterations['design_iterations_alt_layout']) == true) {
+                    if($content_design_iterations['design_iterations_alt_layout'] == 'Yes') {
+                        $the_alt_layout = ' altlayout';
                     }
                 }
 
@@ -440,7 +447,7 @@
                             }
 
                             if(empty($current_tbna_before) == false && empty($current_tbna_after) == false && isset($current_tbna_before) == true && isset($current_tbna_after) == true && $current_tbna_before != '' && $current_tbna_after != '') {
-                                $the_bna_output .= '<div class="the_bna_item">
+                                $the_bna_output .= '<div class="the_bna_item' . $the_alt_layout . '">
                                     <div class="the_bna_images">
                                         <a data-title="Before ' . ($tbna + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $current_tbna_before . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem"><img src="' . $current_tbna_before . '"></a>
                                         <a data-title="After ' . ($tbna + 1) . '" data-cfile="-1" data-video="-1" data-featured="' . $current_tbna_after . '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem"><img src="' . $current_tbna_after . '"></a>
