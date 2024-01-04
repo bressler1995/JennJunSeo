@@ -22,7 +22,7 @@
         );
 
         $jseo_taxcategories = get_terms($jseo_term_args);
-        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design';
+        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design, Games';
         $jseo_customordered_terms = get_terms_ordered( 'portfolio_category', $jseo_term_args, $custom_slug_order, 'name');
 
         // if($jseo_filterparam == 'all') {
@@ -147,7 +147,7 @@
                 $the_terms_string = join(', ', wp_list_pluck($the_current_terms, 'name'));
                 $has_article = 'false';
 
-                if(str_contains($the_terms_string, 'UI/UX Design')) {
+                if(str_contains($the_terms_string, 'UI/UX Design') || str_contains($the_terms_string, 'Games')) {
                     $has_article = 'true';
                 }
 

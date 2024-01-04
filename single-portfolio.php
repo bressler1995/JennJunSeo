@@ -20,6 +20,7 @@
         $author_id = get_post_field( 'post_author', $the_id );
         $author_name = get_the_author_meta('display_name');
         $the_date = get_the_date("m/d/Y", $the_id );
+        $is_game = false;
 
         $jseo_term_args = array(
             'taxonomy' => 'portfolio_category',
@@ -27,7 +28,7 @@
         );
 
         $jseo_taxcategories = get_terms($jseo_term_args);
-        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design';
+        $custom_slug_order = 'UI/UX Design, Graphic Design, Motion Design, Games';
         $jseo_customordered_terms = get_terms_ordered( 'portfolio_category', $jseo_term_args, $custom_slug_order, 'name');
         
         $the_terms = get_terms(array(
@@ -35,6 +36,16 @@
             'hide_empty' => false,
         ));
 
+        $the_post_terms = get_the_terms($the_id, 'portfolio_category');
+        
+        if(empty($the_post_terms) == false) {
+            foreach ($the_post_terms as $term) {
+               if($term->name == 'Games') {
+                    $is_game = true;
+                    // echo $is_game;
+               }
+            }
+        }
 
         //Hero Variables
         $the_custom_image = '';
@@ -810,7 +821,15 @@
                 <div class="jseo_about_whole">
                     <div style="background-color: <?php echo $mb_background_color ?>;" class="jseo_minibanner" id="about">
                         <div class="jseo_mb_col">
-                            <h4 style="color: <?php echo $mb_text_color ?>;">About The Company</h4>
+                            <h4 style="color: <?php echo $mb_text_color ?>;">
+                                <?php
+                                    if($is_game == true) {
+                                        echo 'About This Game';
+                                    } else {
+                                        echo 'About The Company';
+                                    }
+                                ?>
+                            </h4>
                             <p style="color: <?php echo $mb_text_color ?>;"><?php echo $mb_company_description ?></p>
                         </div>
                         <div class="jseo_mb_col"><img src="<?php echo $mb_transparent_image ?>"></div>
@@ -970,6 +989,12 @@
                 </div>
                 <div class="jseo_single_related hide_sidewidget_onmobile">
                 <?php
+                    $related_term = 'uiux-design';
+
+                    if($is_game == true) {
+                        $related_term = 'games';
+                    }
+
                     $related_args = array(
                         'post_type' => 'portfolio',
                         'posts_per_page' => 5,
@@ -977,7 +1002,7 @@
                             array(
                                 'taxonomy' => 'portfolio_category',
                                 'field' => 'slug',
-                                'terms' => 'uiux-design',
+                                'terms' => $related_term,
                             )
                         ),
                         'orderby' => 'rand',

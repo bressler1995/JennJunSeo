@@ -457,7 +457,8 @@ jQuery( document ).ready(function() {
                     } else if(slug == 'motion-design') {
                         jseo_portfolio_content.classList.add("vplain");
                     } else if(slug == 'uiux-design') {
-                        
+                        jseo_portfolio_content.classList.add("voffset");
+                    } else if (slug == 'games') {
                         jseo_portfolio_content.classList.add("voffset");
                     } else {
                         slug = 'all';
