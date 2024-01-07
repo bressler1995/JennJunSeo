@@ -87,3 +87,17 @@ function my_acf_admin_head() {
 }
 
 add_action('acf/input/admin_head', 'my_acf_admin_head');
+
+function add_post_password_placeholder($output) {
+    // Here you can customize the form HTML.
+    $post = get_post();
+    $label = 'pwbox-' . ( empty($post->ID) ? rand() : $post->ID );
+    $output = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form" method="post">
+    <p>' . __( 'This content is protected. Please enter the password that you were sent below:' ) . '</p>
+    <p><input name="post_password" id="' . $label . '" type="password" placeholder="Your Password" size="20" /><input type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post password form' ) . '" /></p></form>
+    ';
+
+    return $output;
+}
+
+add_filter('the_password_form', 'add_post_password_placeholder');

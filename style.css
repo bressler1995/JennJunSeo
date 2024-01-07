@@ -1971,6 +1971,73 @@ input:focus, input:active, textarea:focus, textarea:active {
     padding-bottom: 90px;
 }
 
+.jseo_single_content .post-password-form {
+    display: block;
+    width: 100%;
+}
+
+.jseo_single_content .post-password-form p:first-of-type {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    line-height: 26px;
+    color: #555;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.jseo_single_content .post-password-form p:last-of-type {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    height: auto;
+}
+
+.jseo_single_content .post-password-form p:last-of-type input[type=password] {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    min-height: 47px;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 6px 16px;
+    border-radius: 3px;
+    border: 0.7px solid #DDD;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.jseo_single_content .post-password-form p:last-of-type input[type=submit] {
+    display: inline-block;
+    margin-left: 15px;
+    background-color: #E891CF;
+    color: #FFF;
+    min-height: 47px;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    text-transform: uppercase;
+    padding: 6px 22px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    -webkit-transition: all 0.3s 0s ease;
+    -moz-transition: all 0.3s 0s ease;
+    -o-transition: all 0.3s 0s ease;
+    transition: all 0.3s 0s ease;
+}
+
+.jseo_single_content .post-password-form p:last-of-type input[type=submit]:hover, .jseo_single_content .post-password-form p:last-of-type input[type=submit]:active, .jseo_single_content .post-password-form p:last-of-type input[type=submit]:focus {
+    opacity: 0.7;
+    color: #FFF;
+}
+
 .jseo_single_cats {
     display: flex;
     flex-flow: row wrap;

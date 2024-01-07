@@ -122,6 +122,8 @@
 
                 $the_post_object = array();
                 $the_id = get_the_ID();
+                $the_post = get_post($the_id);
+                $is_protected = false;
                 $the_featured_image = get_the_post_thumbnail_url($the_id);
                 $the_permalink = get_permalink($the_id);
                 $the_title = get_the_title($the_id);
@@ -134,7 +136,15 @@
                 $the_terms_string = join(', ', wp_list_pluck($the_current_terms, 'name'));
                 $has_article = 'false';
 
+                if(!empty($the_post->post_password)) {
+                    $is_protected = true;
+                }
+
                 if(str_contains($the_terms_string, 'UI/UX Design')) {
+                    $has_article = 'true';
+                }
+
+                if(str_contains($the_terms_string, 'Games')) {
                     $has_article = 'true';
                 }
 
@@ -171,7 +181,11 @@
                     $the_mini_banner_companydesc = $the_mini_banner['mbanner_company_description'];
 
                     if($the_mini_banner_companydesc != '' && empty($the_mini_banner_companydesc) == false && isset($the_mini_banner_companydesc) == true) {
-                        $the_mini_banner = $the_mini_banner_companydesc;
+                        if($is_protected == true) {
+                            $the_mini_banner = 'This post is protected for security reasons, possibly due to the presence of sensitive information covered by a Non-Disclosure Agreement (NDA) or other confidentiality measures. To access the content, please click on the post and enter the password that has been sent to you.';
+                        } else {
+                            $the_mini_banner = $the_mini_banner_companydesc;
+                        }
                     } else {
                         $the_mini_banner = -1;  
                     }

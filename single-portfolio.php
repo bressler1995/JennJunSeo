@@ -9,8 +9,10 @@
         exit; // Exit if accessed directly.
     }
 
+    global $post;
     get_header();
 
+   if (! post_password_required( $post )):
 
     while ( have_posts() ) :
         the_post();
@@ -51,7 +53,7 @@
         $the_custom_image = '';
         $the_custom_overlay = '';
 
-        //Min Banner Variables
+        //Mini Banner Variables
         $mb_background_color = '';
         $mb_text_color = '';
         $mb_company_description = '';
@@ -980,13 +982,14 @@
                                 for($z = 0; $z < count($the_portfolio_names); $z++) {
                                     echo '<a href="' . $the_portfolio_links[$z] . '">' . $the_portfolio_names[$z] . '</a>';
                                 }
-
-                            endwhile;
-                            wp_reset_postdata();
                             ?>
                         </div>
                     </div>
                 </div>
+<?php
+    endwhile;
+    wp_reset_postdata();
+?>
                 <div class="jseo_single_related hide_sidewidget_onmobile">
                 <?php
                     $related_term = 'uiux-design';
@@ -1064,9 +1067,61 @@
                 </div>
 
             </div>
-
+            
         </div>
     </div>
+
+    <?php else: ?>
+    <?php 
+        while ( have_posts() ) :
+            the_post();
+            $the_id = get_the_ID();
+            $the_title = get_the_title();
+
+            //Hero Variables
+            $the_custom_image = '';
+            $the_custom_overlay = '';
+
+            if( have_rows('hero_section')) {
+                while(have_rows('hero_section') ) {
+                        the_row();
+                        $the_custom_image = get_sub_field('custom_background_image');
+                        $the_custom_overlay = get_sub_field('custom_overlay_opacity');
+                } 
+    
+            }
+
+            if($the_custom_overlay != -1 && $the_custom_overlay != '-1' && $the_custom_overlay != 0 && $the_custom_overlay != '0' && empty($the_custom_overlay == false)) {
+                $the_custom_overlay = ((int)$the_custom_overlay) / 100;
+            } else {
+                $the_custom_overlay = '0.85';
+            }
+    
+            if(empty($the_custom_image) == true || isset($the_custom_image) == false || $the_custom_image == "") {
+                $the_custom_image = get_stylesheet_directory_uri() . '/img/singleportplaceholder.jpg';
+            }
+    ?>
+        <!-- Hero: No need to hide with pass protection -->
+        <div style="background-image: url(<?php echo $the_custom_image ?>) !important;" class="jseo_single_hero">
+            <div class="hero_overlay" style="opacity: <?php echo $the_custom_overlay ?> !important;"></div>
+            <div class="jseo_single_container">
+                <h1><?php echo $the_title ?></h1>
+                <!-- <div class="jseo_single_meta">
+                    <div class="jseo_single_metaitem"><img src="<?php echo get_stylesheet_directory_uri() . '/svg/user.svg' ?>"><span><?php echo $author_name ?></span></div>
+                    <div class="jseo_single_metaitem"><img src="<?php echo get_stylesheet_directory_uri() . '/svg/calendar.svg' ?>"><span><?php echo  $the_date ?></span></div>
+                </div> -->
+            </div>
+        </div>
+        <div id="jseo_single_content" class="jseo_single_content">
+            <div class="jseo_single_container">
+            <?php echo get_the_password_form(); ?>
+    <?php 
+        endwhile;
+        wp_reset_postdata();
+    ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
 <?php
 
