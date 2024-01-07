@@ -2486,6 +2486,24 @@ input:focus, input:active, textarea:focus, textarea:active {
     overflow: hidden;
 }
 
+.jseo_content_standard_text div.contentspace figure {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    height: auto;
+    margin-left: 0;
+    margin-right: 12px;
+    margin-top: 12px;
+    float: left;
+    clear: none !important;
+}
+
+.jseo_content_standard_text div.contentspace figure img {
+    float: initial;
+    margin-right: 0;
+    margin-top: 0;
+}
+
 .jseo_content_w_image div.contentwidget img {
     display: block;
     float: left;
@@ -2496,6 +2514,24 @@ input:focus, input:active, textarea:focus, textarea:active {
     border: 1px solid #E1E1E1;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.jseo_content_standard_text div.contentwidget figure {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    height:auto;
+    margin-left: 0;
+    margin-right: 12px;
+    margin-top: 12px;
+    float: left;
+    clear: none !important;
+}
+
+.jseo_content_w_image div.contentwidget figure img {
+    float: initial;
+    margin-right: 0;
+    margin-top: 0;
 }
 
 .jseo_content_standard_text div.contentspace a:hover, .jseo_content_standard_text div.contentspace a:active, .jseo_content_standard_text div.contentspace a:focus {
@@ -3005,19 +3041,51 @@ input:focus, input:active, textarea:focus, textarea:active {
         height: auto;
     }
 
+    .jseo_content_standard_text div.contentspace figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
+
     .jseo_content_standard_text div.contentspace img.size-large {
         width: calc(100% - 12px);
         height: 300px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-large) {
+        width: calc(100% - 12px) !important;
     }
     
     .jseo_content_standard_text div.contentspace img.size-medium {
         width: calc(100% - 12px);
         height: 250px;
     }
+
+    .jseo_content_standard_text div.contentspace figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-medium) {
+        width: calc(100% - 12px) !important;
+    }
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
         width: calc(50% - 12px);
         height: 150px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-thumbnail) {
+        width: calc(50% - 12px) !important;
     }
 
     /* wireframe and mockup */
@@ -3297,19 +3365,51 @@ input:focus, input:active, textarea:focus, textarea:active {
         height: auto;
     }
 
+    .jseo_content_standard_text div.contentspace figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
+
     .jseo_content_standard_text div.contentspace img.size-large {
         width: calc(100% - 12px);
         height: 320px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-large) {
+        width: calc(100% - 12px) !important;
     }
     
     .jseo_content_standard_text div.contentspace img.size-medium {
         width: calc(50% - 12px);
         height: 200px;
     }
+
+    .jseo_content_standard_text div.contentspace figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-medium) {
+        width: calc(50% - 12px) !important;
+    }
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
         width: calc(33% - 12px);
         height: 140px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-thumbnail) {
+        width: calc(33% - 12px) !important;
     }
 
     /* mockup and wireframe */
@@ -3737,19 +3837,51 @@ input:focus, input:active, textarea:focus, textarea:active {
         height: auto;
     }
 
+    .jseo_content_standard_text div.contentspace figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
+
     .jseo_content_standard_text div.contentspace img.size-large {
         width: calc(50% - 12px);
         height: 350px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-large) {
+        width: calc(50% - 12px) !important;
     }
     
     .jseo_content_standard_text div.contentspace img.size-medium {
         width: calc(33% - 12px);
         height: 280px;
     }
+
+    .jseo_content_standard_text div.contentspace figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-medium) {
+        width: calc(33% - 12px) !important;
+    }
     
     .jseo_content_standard_text div.contentspace img.size-thumbnail {
         width: calc(20% - 12px);
         height: 180px;
+    }
+
+    .jseo_content_standard_text div.contentspace figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_standard_text div.contentspace figure:has(.size-thumbnail) {
+        width: calc(20% - 12px) !important;
     }
 
     /* wireframe and mockup */
