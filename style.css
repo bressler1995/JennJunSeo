@@ -3093,20 +3093,52 @@ input:focus, input:active, textarea:focus, textarea:active {
         width: calc(100% - 12px);
         height: auto;
     }
+
+    .jseo_content_w_image div.contentwidget figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
     
     .jseo_content_w_image div.contentwidget img.size-large {
         width: calc(100% - 12px);
         height: 300px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-large) {
+        width: calc(100% - 12px) !important;
     }
         
     .jseo_content_w_image div.contentwidget img.size-medium {
         width: calc(100% - 12px);
         height: 250px;
     }
+
+    .jseo_content_w_image div.contentwidget figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-medium) {
+        width: calc(100% - 12px) !important;
+    }
         
     .jseo_content_w_image div.contentwidget img.size-thumbnail {
         width: calc(50% - 12px);
         height: 150px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-thumbnail) {
+        width: calc(50% - 12px) !important;
     }
 
     .jseo_single_intro_col {
@@ -3418,19 +3450,51 @@ input:focus, input:active, textarea:focus, textarea:active {
         height: auto;
     }
 
+    .jseo_content_w_image div.contentwidget figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
+
     .jseo_content_w_image div.contentwidget img.size-large {
         width: calc(100% - 12px);
         height: 320px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-large) {
+        width: calc(100% - 12px) !important;
     }
     
     .jseo_content_w_image div.contentwidget img.size-medium {
         width: calc(50% - 12px);
         height: 200px;
     }
+
+    .jseo_content_w_image div.contentwidget figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-medium) {
+        width: calc(50% - 12px) !important;
+    }
     
     .jseo_content_w_image div.contentwidget img.size-thumbnail {
         width: calc(33% - 12px);
         height: 140px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-thumbnail) {
+        width: calc(33% - 12px) !important;
     }
 
     .jseo_single_intro_col {
@@ -3890,19 +3954,51 @@ input:focus, input:active, textarea:focus, textarea:active {
         height: auto;
     }
 
+    .jseo_content_w_image div.contentwidget figure img.size-full {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-full) {
+        width: calc(100% - 12px) !important;
+    }
+
     .jseo_content_w_image div.contentwidget img.size-large {
         width: calc(50% - 12px);
         height: 350px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-large {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-large) {
+        width: calc(50% - 12px) !important;
     }
     
     .jseo_content_w_image div.contentwidget img.size-medium {
         width: calc(33% - 12px);
         height: 280px;
     }
+
+    .jseo_content_w_image div.contentwidget figure img.size-medium {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-medium) {
+        width: calc(33% - 12px) !important;
+    }
     
     .jseo_content_w_image div.contentwidget img.size-thumbnail {
         width: calc(20% - 12px);
         height: 180px;
+    }
+
+    .jseo_content_w_image div.contentwidget figure img.size-thumbnail {
+        width: 100%;
+    }
+
+    .jseo_content_w_image div.contentwidget figure:has(.size-thumbnail) {
+        width: calc(20% - 12px) !important;
     }
 
     .jseo_content_problem .jseo_content_problem_col:last-of-type a {
