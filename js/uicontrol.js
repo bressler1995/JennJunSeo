@@ -1010,93 +1010,70 @@ jQuery( document ).ready(function() {
 
     function inject_single_lightbox() {
 
-        let jseo_single_theproblem = document.getElementById("theproblem");
-        let jseo_single_userstudy = document.getElementById("userstudy");
-        let jseo_single_branding = document.getElementById("branding");
-        let jseo_single_wireframes = document.getElementById("wireframes");
-        let jseo_single_designiterations = document.getElementById("designiterations");
-        let jseo_single_mockup = document.getElementById("mockup");
+        let jseo_single_lbitems = document.getElementsByClassName("single_lightboxitem");
 
-        if(jseo_single_theproblem != null) {
-            let single_problem_lightboxitems = jseo_single_theproblem.getElementsByClassName("single_lightboxitem");
-            if(single_problem_lightboxitems != null) {
-                if(single_problem_lightboxitems.length > 0) {
-                    for(i = 0; i < single_problem_lightboxitems.length; i++) {
-                        let current_item = single_problem_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
-                }
-            }
-        }
-
-        if(jseo_single_userstudy != null) {
-            let single_userstudy_lightboxitems = jseo_single_userstudy.getElementsByClassName("single_lightboxitem");
-
-            if(single_userstudy_lightboxitems != null) {
-                if(single_userstudy_lightboxitems.length > 0) {
-                    for(i = 0; i < single_userstudy_lightboxitems.length; i++) {
-                        let current_item = single_userstudy_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
-                }
-            }
-        }
-
-        if(jseo_single_branding != null) {
-            let single_branding_lightboxitems = jseo_single_branding.getElementsByClassName("single_lightboxitem");
-
-            if(single_branding_lightboxitems != null) {
-                if(single_branding_lightboxitems.length > 0) {
-                    for(i = 0; i < single_branding_lightboxitems.length; i++) {
-                        let current_item = single_branding_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
-                }
-            }
-        }
-
-        if(jseo_single_wireframes != null) {
-            let single_wireframes_lightboxitems = jseo_single_wireframes.getElementsByClassName("single_lightboxitem");
-
-            if(single_wireframes_lightboxitems != null) {
-                if(single_wireframes_lightboxitems.length > 0) {
-                    for(i = 0; i < single_wireframes_lightboxitems.length; i++) {
-                        let current_item = single_wireframes_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
-                }
-            }
-        }
-
-        if(jseo_single_designiterations != null) {
-            let single_designiterations_lightboxitems = jseo_single_designiterations.getElementsByClassName("single_lightboxitem");
-
-            if(single_designiterations_lightboxitems != null) {
-                if(single_designiterations_lightboxitems.length > 0) {
-                    for(i = 0; i < single_designiterations_lightboxitems.length; i++) {
-                        let current_item = single_designiterations_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
-                }
-            }
-        }
-
-        if(jseo_single_mockup != null) {
-            let single_mockup_lightboxitems = jseo_single_mockup.getElementsByClassName("single_lightboxitem");
-
-            if(single_mockup_lightboxitems != null) {
-                if(single_mockup_lightboxitems.length > 0) {
-                    for(i = 0; i < single_mockup_lightboxitems.length; i++) {
-                        let current_item = single_mockup_lightboxitems[i];
-                        current_item.addEventListener("click", jseo_lbui_showfunc);
-                    }
+        if(jseo_single_lbitems != null) {
+            if(jseo_single_lbitems.length > 0) {
+                for(i = 0; i < jseo_single_lbitems.length; i++) {
+                    let current_slb_item = jseo_single_lbitems[i];
+                    current_slb_item.addEventListener("click", jseo_lbui_showfunc);
                 }
             }
         }
 
     }
 
+    function inject_content_lblinks() {
+        let standard_text = document.getElementsByClassName("jseo_content_standard_text");
+
+        if(standard_text != null) {
+            if(standard_text.length > 0) {
+                for(i = 0; i < standard_text.length; i++) {
+                    let st_item = standard_text[i];
+                    let st_content = st_item.getElementsByClassName("contentspace");
+
+                    if(st_content != null) {
+                        if(st_content.length == 1) {
+                            let st_content_object = st_content[0];
+                            let st_content_figures = st_content_object.getElementsByTagName("figure");
+
+                            if(st_content_figures != null) {
+                                if(st_content_figures.length > 0) {
+                                    for(stf = 0; stf < st_content_figures.length; stf++) {
+                                        let current_stf = st_content_figures[stf];
+
+                                        if(current_stf.classList.contains("wp-caption") == true) {
+                                            let current_stf_img = current_stf.getElementsByTagName("img");
+                                            let current_stf_caption = current_stf.getElementsByTagName("figcaption");
+                                            let current_stf_caption_text = '';
+                                            let current_stf_imagehtml = '';
+                                            let current_stf_imagesrc = '';
+
+                                            if(current_stf_img != null && current_stf_caption != null) {
+                                                if(current_stf_img.length == 1 && current_stf_caption.length == 1) {
+                                                    current_stf_caption_text = current_stf_caption[0].innerHTML;
+                                                    current_stf_imagehtml = current_stf_img[0].outerHTML;
+                                                    current_stf_imagesrc = current_stf_img[0].src;
+
+                                                    current_stf_img[0].outerHTML = '<a data-title="' + current_stf_caption_text + '" data-cfile="-1" data-video="-1" data-featured="' + current_stf_imagesrc + '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem">' + current_stf_imagehtml + '</a>';
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
     if(jseo_single_content != null) {
+        inject_content_lblinks();
         inject_single_lightbox();
     }
 

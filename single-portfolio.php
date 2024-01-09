@@ -750,6 +750,12 @@
                         </div>
                         <div class="jseo_single_related">
                         <?php
+                            $related_term = 'uiux-design';
+
+                            if($is_game == true) {
+                                $related_term = 'games';
+                            }
+
                             $related_args = array(
                                 'post_type' => 'portfolio',
                                 'posts_per_page' => 5,
@@ -757,7 +763,7 @@
                                             array(
                                                 'taxonomy' => 'portfolio_category',
                                                 'field' => 'slug',
-                                                'terms' => 'uiux-design',
+                                                'terms' => $related_term,
                                             )
                                         ),
                                         'orderby' => 'rand',

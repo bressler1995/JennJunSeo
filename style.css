@@ -2561,14 +2561,48 @@ input:focus, input:active, textarea:focus, textarea:active {
     margin-left: 0;
     margin-right: 12px;
     margin-top: 12px;
+    margin-bottom: 12px;
     float: left;
     clear: none !important;
+}
+
+.jseo_content_standard_text div.contentspace figure figcaption {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #222;
+}
+
+.jseo_content_standard_text div.contentspace figure.alignnone figcaption, .jseo_content_standard_text div.contentspace figure.aligncenter figcaption {
+    text-align: center;
+}
+
+.jseo_content_standard_text div.contentspace figure.alignleft figcaption {
+    text-align: left;
+}
+
+.jseo_content_standard_text div.contentspace figure.alignright figcaption {
+    text-align: right;
 }
 
 .jseo_content_standard_text div.contentspace figure img {
     float: initial;
     margin-right: 0;
     margin-top: 0;
+}
+
+.jseo_content_standard_text div.contentspace figure a.single_lightboxitem {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .jseo_content_w_image div.contentwidget img {
@@ -2591,14 +2625,47 @@ input:focus, input:active, textarea:focus, textarea:active {
     margin-left: 0;
     margin-right: 12px;
     margin-top: 12px;
+    margin-bottom: 12px;
     float: left;
     clear: none !important;
+}
+
+.jseo_content_standard_text div.contentwidget figure figcaption {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+.jseo_content_standard_text div.contentwidget figure.alignnone figcaption, .jseo_content_standard_text div.contentwidget figure.aligncenter figcaption {
+    text-align: center;
+}
+
+.jseo_content_standard_text div.contentwidget figure.alignleft figcaption {
+    text-align: left;
+}
+
+.jseo_content_standard_text div.contentwidget figure.alignright figcaption {
+    text-align: right;
 }
 
 .jseo_content_w_image div.contentwidget figure img {
     float: initial;
     margin-right: 0;
     margin-top: 0;
+}
+
+.jseo_content_w_image div.contentwidget figure a.single_lightboxitem {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .jseo_content_standard_text div.contentspace a:hover, .jseo_content_standard_text div.contentspace a:active, .jseo_content_standard_text div.contentspace a:focus {
