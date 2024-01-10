@@ -2593,6 +2593,7 @@ input:focus, input:active, textarea:focus, textarea:active {
     float: initial;
     margin-right: 0;
     margin-top: 0;
+    z-index: 2;
 }
 
 .jseo_content_standard_text div.contentspace figure a.single_lightboxitem {
@@ -2603,6 +2604,31 @@ input:focus, input:active, textarea:focus, textarea:active {
     box-sizing: border-box;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.jseo_content_standard_text div.contentspace figure a.single_lightboxitem:after {
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    background-color: rgba(74, 176, 237, 0.85);
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.jseo_content_standard_text div.contentspace figure a.single_lightboxitem:hover:after, .jseo_content_standard_text div.contentspace figure a.single_lightboxitem:active:after, .jseo_content_standard_text div.contentspace figure a.single_lightboxitem:focus:after {
+    visibility: visible;
+    opacity: 1;
 }
 
 .jseo_content_w_image div.contentwidget img {
@@ -2656,6 +2682,7 @@ input:focus, input:active, textarea:focus, textarea:active {
     float: initial;
     margin-right: 0;
     margin-top: 0;
+    z-index: 2;
 }
 
 .jseo_content_w_image div.contentwidget figure a.single_lightboxitem {
@@ -2668,12 +2695,45 @@ input:focus, input:active, textarea:focus, textarea:active {
     overflow: hidden;
 }
 
+.jseo_content_w_image div.contentwidget figure a.single_lightboxitem:after {
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    background-color: rgba(74, 176, 237, 0.85);
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.jseo_content_w_image div.contentwidget figure a.single_lightboxitem:hover:after, .jseo_content_w_image div.contentwidget figure a.single_lightboxitem:active:after, .jseo_content_w_image div.contentwidget figure a.single_lightboxitem:focus:after {
+    visibility: visible;
+    opacity: 1;
+}
+
 .jseo_content_standard_text div.contentspace a:hover, .jseo_content_standard_text div.contentspace a:active, .jseo_content_standard_text div.contentspace a:focus {
     opacity: 0.6;
 }
 
 .jseo_content_w_image div.contentwidget a:hover, .jseo_content_w_image div.contentwidget a:active, .jseo_content_w_image div.contentwidget a:focus {
     opacity: 0.6;
+}
+
+.jseo_content_w_image div.contentwidget figure a.single_lightboxitem:hover, .jseo_content_w_image div.contentwidget figure a.single_lightboxitem:active, .jseo_content_w_image div.contentwidget figure a.single_lightboxitem:focus {
+    opacity: 1;
+}
+
+.jseo_content_standard_text div.contentspace figure a.single_lightboxitem:hover, .jseo_content_standard_text div.contentspace figure a.single_lightboxitem:active, .jseo_content_standard_text div.contentspace figure a.single_lightboxitem:focus {
+    opacity: 1;
 }
 
 .jseo_content_standard_text div.contentspace h1, .jseo_content_standard_text div.contentspace h2, .jseo_content_standard_text div.contentspace h3, .jseo_content_standard_text div.contentspace h4, .jseo_content_standard_text div.contentspace h5, .jseo_content_standard_text div.contentspace h6 {

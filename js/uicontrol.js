@@ -1025,6 +1025,7 @@ jQuery( document ).ready(function() {
 
     function inject_content_lblinks() {
         let standard_text = document.getElementsByClassName("jseo_content_standard_text");
+        let widget_text = document.getElementsByClassName("jseo_content_w_image");
 
         if(standard_text != null) {
             if(standard_text.length > 0) {
@@ -1041,6 +1042,50 @@ jQuery( document ).ready(function() {
                                 if(st_content_figures.length > 0) {
                                     for(stf = 0; stf < st_content_figures.length; stf++) {
                                         let current_stf = st_content_figures[stf];
+
+                                        if(current_stf.classList.contains("wp-caption") == true) {
+                                            let current_stf_img = current_stf.getElementsByTagName("img");
+                                            let current_stf_caption = current_stf.getElementsByTagName("figcaption");
+                                            let current_stf_caption_text = '';
+                                            let current_stf_imagehtml = '';
+                                            let current_stf_imagesrc = '';
+
+                                            if(current_stf_img != null && current_stf_caption != null) {
+                                                if(current_stf_img.length == 1 && current_stf_caption.length == 1) {
+                                                    current_stf_caption_text = current_stf_caption[0].innerHTML;
+                                                    current_stf_imagehtml = current_stf_img[0].outerHTML;
+                                                    current_stf_imagesrc = current_stf_img[0].src;
+
+                                                    current_stf_img[0].outerHTML = '<a data-title="' + current_stf_caption_text + '" data-cfile="-1" data-video="-1" data-featured="' + current_stf_imagesrc + '" data-desc="-1" data-hasarticle="false" data-permalink="-1" href="javascript:void(0)" class="single_lightboxitem">' + current_stf_imagehtml + '</a>';
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        if(widget_text != null) {
+            if(widget_text.length > 0) {
+                for(i = 0; i < widget_text.length; i++) {
+                    let wt_item = widget_text[i];
+                    let wt_content = wt_item.getElementsByClassName("contentwidget");
+
+                    if(wt_content != null) {
+                        if(wt_content.length == 1) {
+                            let wt_content_object = wt_content[0];
+                            let wt_content_figures = wt_content_object.getElementsByTagName("figure");
+
+                            if(wt_content_figures != null) {
+                                if(wt_content_figures.length > 0) {
+                                    for(stf = 0; stf < wt_content_figures.length; stf++) {
+                                        let current_stf = wt_content_figures[stf];
 
                                         if(current_stf.classList.contains("wp-caption") == true) {
                                             let current_stf_img = current_stf.getElementsByTagName("img");
