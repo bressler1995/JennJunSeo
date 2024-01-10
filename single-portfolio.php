@@ -74,13 +74,12 @@
         $intro_programs_output = '';
         $intro_timeline_output = '';
 
-        //Content Fields
+        //UX Content Fields
         $content_client_needs = '';
         $content_the_problem = '';
         $content_solution = '';
         $content_research = '';
         $content_branding = '';
-        $content_wireframes = '';
         $content_design_iterations = '';
         $content_mockups = '';
         $content_results = '';
@@ -91,7 +90,6 @@
         $content_solution_output = '';
         $content_research_output = '';
         $content_branding_output = '';
-        $content_wireframes_output = '';
         $content_design_iterations_output = '';
         $content_mockups_output = '';
         $content_results_output = '';
@@ -102,8 +100,25 @@
         $solution_displayed = false;
         $research_displayed = false;
         $branding_displayed = false;
-        $wireframes_displayed = false;
         $results_displayed = false;
+
+        //Game Content Fields
+        $content_my_contribution = '';
+        $content_my_contribution_output = '';
+        $my_contribution_displayed = false;
+
+        $content_game_mocks = '';
+        $content_game_mocks_output = '';
+        $game_mocks_displayed = false;
+
+        $content_ui_elements = '';
+        $content_ui_elements_output = '';
+        $ui_elements_displayed = false;
+
+        //Fields for Both
+        $content_wireframes = '';
+        $content_wireframes_output = '';
+        $wireframes_displayed = false;
 
         for($x = 0; $x < count($jseo_customordered_terms); $x++) {
             // echo d($jseo_customordered_terms[$x]);
@@ -156,6 +171,7 @@
         if( have_rows('content_fields')) {
             while(have_rows('content_fields')) {
                 the_row();
+                // Get UX content fields
                 $content_client_needs = get_sub_field('client_needs');
                 $content_the_problem = get_sub_field('the_problem');
                 $content_solution = get_sub_field('solution');
@@ -166,6 +182,11 @@
                 $content_mockups = get_sub_field('mockups');
                 $content_results = get_sub_field('results');
                 $content_final_thoughts = get_sub_field('final_thoughts');
+
+                // Get Game content fields
+                $content_my_contribution = get_sub_field('my_contribution');
+                $content_game_mocks = get_sub_field('game_mocks');
+                $content_ui_elements = get_sub_field('ui_elements');
             }
 
             //WYSIWYG Updated
@@ -624,6 +645,80 @@
 
             }
 
+            //UX SPECIFIC FIELDS
+
+            //WYSIWYG Updated
+            if($content_my_contribution == '' || empty($content_my_contribution) == true || isset($content_my_contribution) == false) {
+                $content_my_contribution_output = '';
+            } else {
+                $the_content = $content_my_contribution['my_contribution_content'];
+                $the_darkmode = '';
+
+                if($content_my_contribution['my_contribution_dark_mode'] != '' && empty($content_my_contribution['my_contribution_dark_mode']) == false && isset($content_my_contribution['my_contribution_dark_mode']) == true) {
+                    if($content_my_contribution['my_contribution_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $my_contribution_displayed = true;
+                    //only needs to have content present to display
+                    $content_my_contribution_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="mycontribution">';
+                    $content_my_contribution_output .= "<h3>My Contribution</h3>";
+                    $content_my_contribution_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_my_contribution_output .= '</div>';
+                }
+
+            }
+
+            //WYSIWYG Updated
+            if($content_game_mocks == '' || empty($content_game_mocks) == true || isset($content_game_mocks) == false) {
+                $content_game_mocks_output = '';
+            } else {
+                $the_content = $content_game_mocks['game_mocks_content'];
+                $the_darkmode = '';
+
+                if($content_game_mocks['game_mocks_dark_mode'] != '' && empty($content_game_mocks['game_mocks_dark_mode']) == false && isset($content_game_mocks['game_mocks_dark_mode']) == true) {
+                    if($content_game_mocks['game_mocks_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $game_mocks_displayed = true;
+                    //only needs to have content present to display
+                    $content_game_mocks_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="gamemocks">';
+                    $content_game_mocks_output .= "<h3>Game Mocks</h3>";
+                    $content_game_mocks_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_game_mocks_output .= '</div>';
+                }
+
+            }
+
+            //WYSIWYG Updated
+            if($content_ui_elements == '' || empty($content_ui_elements) == true || isset($content_ui_elements) == false) {
+                $content_ui_elements_output = '';
+            } else {
+                $the_content = $content_ui_elements['ui_elements_content'];
+                $the_darkmode = '';
+
+                if($content_ui_elements['ui_elements_dark_mode'] != '' && empty($content_ui_elements['ui_elements_dark_mode']) == false && isset($content_ui_elements['ui_elements_dark_mode']) == true) {
+                    if($content_ui_elements['ui_elements_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $ui_elements_displayed = true;
+                    //only needs to have content present to display
+                    $content_ui_elements_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="uielements">';
+                    $content_ui_elements_output .= "<h3>UI Elements</h3>";
+                    $content_ui_elements_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_ui_elements_output .= '</div>';
+                }
+
+            }
+
 
         }
 
@@ -863,16 +958,23 @@
                 </div>
                 
                 <?php
-                    echo $content_client_needs_output;
-                    echo $content_the_problem_output;
-                    echo $content_solution_output;
-                    echo $content_research_output;
-                    echo $content_branding_output;
-                    echo $content_wireframes_output;
-                    echo $content_design_iterations_output;
-                    echo $content_mockups_output;
-                    echo $content_results_output;
-                    echo $content_final_thoughts_output;
+                    if($is_game == true) {
+                        echo $content_my_contribution_output;
+                        echo $content_game_mocks_output;
+                        echo $content_ui_elements_output;
+                        echo $content_wireframes_output;
+                    } else {
+                        echo $content_client_needs_output;
+                        echo $content_the_problem_output;
+                        echo $content_solution_output;
+                        echo $content_research_output;
+                        echo $content_branding_output;
+                        echo $content_wireframes_output;
+                        echo $content_design_iterations_output;
+                        echo $content_mockups_output;
+                        echo $content_results_output;
+                        echo $content_final_thoughts_output;
+                    }
                 ?>
             </div>
 
@@ -893,6 +995,7 @@
                             </a>
 
                             <?php 
+                                // for some reason design iterations, mockups, and final thoughts were omitted from the toc
                                 $clientneeds_classes = '';
                                 $the_problem_classes = '';
                                 $solution_classes = '';
