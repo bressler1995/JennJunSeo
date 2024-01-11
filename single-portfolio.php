@@ -102,10 +102,19 @@
         $branding_displayed = false;
         $results_displayed = false;
 
+        //Fields for Both
+        $content_wireframes = '';
+        $content_wireframes_output = '';
+        $wireframes_displayed = false;
+
         //Game Content Fields
         $content_my_contribution = '';
         $content_my_contribution_output = '';
         $my_contribution_displayed = false;
+
+        $content_gameplay_video = '';
+        $content_gameplay_video_output = '';
+        $gameplay_video_displayed = false;
 
         $content_game_mocks = '';
         $content_game_mocks_output = '';
@@ -114,11 +123,6 @@
         $content_ui_elements = '';
         $content_ui_elements_output = '';
         $ui_elements_displayed = false;
-
-        //Fields for Both
-        $content_wireframes = '';
-        $content_wireframes_output = '';
-        $wireframes_displayed = false;
 
         for($x = 0; $x < count($jseo_customordered_terms); $x++) {
             // echo d($jseo_customordered_terms[$x]);
@@ -177,14 +181,17 @@
                 $content_solution = get_sub_field('solution');
                 $content_research = get_sub_field('research');
                 $content_branding = get_sub_field('branding');
-                $content_wireframes = get_sub_field('wireframes');
                 $content_design_iterations = get_sub_field('design_iterations');
                 $content_mockups = get_sub_field('mockups');
                 $content_results = get_sub_field('results');
                 $content_final_thoughts = get_sub_field('final_thoughts');
 
+                // Both
+                $content_wireframes = get_sub_field('wireframes');
+
                 // Get Game content fields
                 $content_my_contribution = get_sub_field('my_contribution');
+                $content_gameplay_video = get_sub_field('gameplay_video');
                 $content_game_mocks = get_sub_field('game_mocks');
                 $content_ui_elements = get_sub_field('ui_elements');
             }
@@ -672,6 +679,30 @@
             }
 
             //WYSIWYG Updated
+            if($content_gameplay_video == '' || empty($content_gameplay_video) == true || isset($content_gameplay_video) == false) {
+                $content_gameplay_video_output = '';
+            } else {
+                $the_content = $content_gameplay_video['gameplay_video_content'];
+                $the_darkmode = '';
+
+                if($content_gameplay_video['gameplay_video_dark_mode'] != '' && empty($content_gameplay_video['gameplay_video_dark_mode']) == false && isset($content_gameplay_video['gameplay_video_dark_mode']) == true) {
+                    if($content_gameplay_video['gameplay_video_dark_mode'] == 'Yes') {
+                        $the_darkmode = 'darkmode';
+                    }
+                }
+
+                if(empty($the_content) == false && $the_content != '' && isset($the_content) == true) {
+                    $gameplay_video_displayed = true;
+                    //only needs to have content present to display
+                    $content_gameplay_video_output .= '<div class="jseo_content_standard_text ' . $the_darkmode . '" id="gameplayvideo">';
+                    $content_gameplay_video_output .= "<h3>Gameplay Video</h3>";
+                    $content_gameplay_video_output .= '<div class="contentspace">' . $the_content . '</div>';
+                    $content_gameplay_video_output .= '</div>';
+                }
+
+            }
+
+            //WYSIWYG Updated
             if($content_game_mocks == '' || empty($content_game_mocks) == true || isset($content_game_mocks) == false) {
                 $content_game_mocks_output = '';
             } else {
@@ -960,6 +991,7 @@
                 <?php
                     if($is_game == true) {
                         echo $content_my_contribution_output;
+                        echo $content_gameplay_video_output;
                         echo $content_game_mocks_output;
                         echo $content_ui_elements_output;
                         echo $content_wireframes_output;
@@ -994,72 +1026,66 @@
                                 <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
                             </a>
 
-                            <?php 
-                                // for some reason design iterations, mockups, and final thoughts were omitted from the toc
-                                $clientneeds_classes = '';
-                                $the_problem_classes = '';
-                                $solution_classes = '';
-                                $research_classes = '';
-                                $branding_classes = '';
-                                $wireframes_classes = '';
-                                $results_classes = '';
+                            <?php
 
-                                if($clientneeds_displayed == false) {
-                                    $clientneeds_classes = 'hideme';
-                                }
+                                if($is_game == true) {
 
-                                if($theproblem_displayed == false) {
-                                    $the_problem_classes = 'hideme';
-                                }
+                                    if($my_contribution_displayed == true) {
+                                        echo '<a href="#mycontribution"><span>My Contribution</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
 
-                                if($solution_displayed == false) {
-                                    $solution_classes = 'hideme';
-                                }
+                                    if($gameplay_video_displayed == true) {
+                                        echo '<a href="#gameplayvideo"><span>Gameplay Video</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
 
-                                if($research_displayed == false) {
-                                    $research_classes = 'hideme';
-                                }
+                                    if($game_mocks_displayed == true) {
+                                        echo '<a href="#gamemocks"><span>Game Mocks</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
 
-                                if($branding_displayed == false) {
-                                    $branding_classes = 'hideme';
-                                }
+                                    if($ui_elements_displayed == true) {
+                                        echo '<a href="#uielements"><span>UI Elements</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
 
-                                if($wireframes_displayed == false) {
-                                    $wireframes_classes = 'hideme';
-                                }
+                                    if($wireframes_displayed == true) {
+                                        echo '<a href="#wireframes"><span>Wireframes</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
 
-                                if($results_displayed == false) {
-                                    $results_classes = 'hideme';
+                                } else {
+
+                                    // For some reason design iterations, mockups, and final thoughts were omitted from the UX navigation
+
+                                    if($clientneeds_displayed == true) {
+                                        echo '<a href="#clientsneeds"><span>Client\'s Needs</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($theproblem_displayed == true) {
+                                        echo '<a href="#theproblem"><span>The Problem</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($solution_displayed == true) {
+                                        echo '<a href="#solution"><span>Solution</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($research_displayed == true) {
+                                        echo '<a href="#research"><span>Research</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($branding_displayed == true) {
+                                        echo '<a href="#branding"><span>Branding</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($wireframes_displayed == true) {
+                                        echo '<a href="#wireframes"><span>Wireframes</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+    
+                                    if($results_displayed == true) {
+                                        echo '<a href="#results"><span>Results</span><img src="' . get_stylesheet_directory_uri() . '/svg/anchorgo.svg"></a>';
+                                    }
+
                                 }
+                                
                             ?>
 
-                            <a class="<?php echo $clientneeds_classes ?>" href="#clientsneeds"><span>Client's Needs</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $the_problem_classes ?>" href="#theproblem">
-                                <span>The Problem</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $solution_classes ?>" href="#solution">
-                                <span>Solution</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $research_classes ?>" href="#research">
-                                <span>Research</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $branding_classes ?>" href="#branding">
-                                <span>Branding</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $wireframes_classes ?>" href="#wireframes">
-                                <span>Wireframes</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
-                            <a class="<?php echo $results_classes ?>" href="#results">
-                                <span>Results</span>
-                                <img src="<?php echo get_stylesheet_directory_uri() . '/svg/anchorgo.svg' ?>">
-                            </a>
                         </div>
                     </div>
                 </div>

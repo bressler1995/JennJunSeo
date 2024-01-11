@@ -2553,6 +2553,25 @@ input:focus, input:active, textarea:focus, textarea:active {
     overflow: hidden;
 }
 
+.jseo_content_standard_text div.contentspace div.wp-video {
+    display: block;
+    float: left;
+    width: 100% !important;
+    overflow: hidden;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.jseo_content_standard_text div.contentspace div.wp-video .mejs-container {
+    height: 0 !important;
+    padding-bottom: 56.25%;
+}
+
+.jseo_content_standard_text div.contentspace div.wp-video video.wp-video-shortcode {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .jseo_content_standard_text div.contentspace figure {
     display: flex;
     flex-flow: column wrap;
@@ -2574,7 +2593,14 @@ input:focus, input:active, textarea:focus, textarea:active {
     font-size: 15px;
     line-height: 19px;
     font-weight: 600;
+}
+
+.jseo_content_standard_text:not(.darkmode) div.contentspace figure figcaption {
     color: #222;
+}
+
+.jseo_content_standard_text.darkmode div.contentspace figure figcaption {
+    color: #FFF;
 }
 
 .jseo_content_standard_text div.contentspace figure.alignnone figcaption, .jseo_content_standard_text div.contentspace figure.aligncenter figcaption {
@@ -2643,11 +2669,30 @@ input:focus, input:active, textarea:focus, textarea:active {
     overflow: hidden;
 }
 
-.jseo_content_standard_text div.contentwidget figure {
+.jseo_content_w_image div.contentwidget div.wp-video {
+    display: block;
+    float: left;
+    width: 100% !important;
+    overflow: hidden;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.jseo_content_w_image div.contentwidget div.wp-video .mejs-container {
+    height: 0 !important;
+    padding-bottom: 56.25%;
+}
+
+.jseo_content_w_image div.contentwidget div.wp-video video.wp-video-shortcode {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.jseo_content_w_image div.contentwidget figure {
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
-    height:auto;
+    height: auto;
     margin-left: 0;
     margin-right: 12px;
     margin-top: 12px;
@@ -2656,25 +2701,33 @@ input:focus, input:active, textarea:focus, textarea:active {
     clear: none !important;
 }
 
-.jseo_content_standard_text div.contentwidget figure figcaption {
+.jseo_content_w_image div.contentwidget figure figcaption {
     display: block;
     width: 100%;
     margin-top: 12px;
-    font-size: 14px;
-    line-height: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 19px;
     font-weight: 600;
+}
+
+.jseo_content_w_image:not(.darkmode) div.contentwidget figure figcaption {
     color: #222;
 }
 
-.jseo_content_standard_text div.contentwidget figure.alignnone figcaption, .jseo_content_standard_text div.contentwidget figure.aligncenter figcaption {
+.jseo_content_w_image.darkmode div.contentwidget figure figcaption {
+    color: #FFF;
+}
+
+.jseo_content_w_image div.contentwidget figure.alignnone figcaption, .jseo_content_standard_text div.contentwidget figure.aligncenter figcaption {
     text-align: center;
 }
 
-.jseo_content_standard_text div.contentwidget figure.alignleft figcaption {
+.jseo_content_w_image div.contentwidget figure.alignleft figcaption {
     text-align: left;
 }
 
-.jseo_content_standard_text div.contentwidget figure.alignright figcaption {
+.jseo_content_w_image div.contentwidget figure.alignright figcaption {
     text-align: right;
 }
 
