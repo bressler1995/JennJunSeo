@@ -1040,10 +1040,22 @@ jQuery( document ).ready(function() {
 
                             if(st_content_figures != null) {
                                 if(st_content_figures.length > 0) {
+
+                                    console.log(st_content_figures.length + " Standard Content Figures Found");
+
                                     for(stf = 0; stf < st_content_figures.length; stf++) {
                                         let current_stf = st_content_figures[stf];
 
-                                        if(current_stf.classList.contains("wp-caption") == true) {
+                                        let current_stf_a = current_stf.getElementsByTagName("a");
+                                        let current_stf_already_link = false;
+
+                                        if(current_stf_a != null) {
+                                            if(current_stf_a.length > 0) {
+                                                current_stf_already_link = true;
+                                            }
+                                        }
+
+                                        if(current_stf_already_link == false) {
                                             let current_stf_img = current_stf.getElementsByTagName("img");
                                             let current_stf_caption = current_stf.getElementsByTagName("figcaption");
                                             let current_stf_caption_text = '';
@@ -1060,6 +1072,7 @@ jQuery( document ).ready(function() {
                                                 }
                                             }
                                         }
+                                        
                                     }
 
                                 }
@@ -1084,10 +1097,22 @@ jQuery( document ).ready(function() {
 
                             if(wt_content_figures != null) {
                                 if(wt_content_figures.length > 0) {
+
+                                    console.log(wt_content_figures.length + " Widget Content Figures Found");
+
                                     for(stf = 0; stf < wt_content_figures.length; stf++) {
                                         let current_stf = wt_content_figures[stf];
 
-                                        if(current_stf.classList.contains("wp-caption") == true) {
+                                        let current_stf_a = current_stf.getElementsByTagName("a");
+                                        let current_stf_already_link = false;
+
+                                        if(current_stf_a != null) {
+                                            if(current_stf_a.length > 0) {
+                                                current_stf_already_link = true;
+                                            }
+                                        }
+
+                                        if(current_stf_already_link == false) {
                                             let current_stf_img = current_stf.getElementsByTagName("img");
                                             let current_stf_caption = current_stf.getElementsByTagName("figcaption");
                                             let current_stf_caption_text = '';
@@ -1104,6 +1129,7 @@ jQuery( document ).ready(function() {
                                                 }
                                             }
                                         }
+                                        
                                     }
 
                                 }

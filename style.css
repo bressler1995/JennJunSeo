@@ -2585,6 +2585,12 @@ input:focus, input:active, textarea:focus, textarea:active {
     clear: none !important;
 }
 
+.jseo_content_standard_text div.contentspace figure.gallery-item .gallery-icon {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .jseo_content_standard_text div.contentspace figure figcaption {
     display: block;
     width: 100%;
@@ -2613,6 +2619,11 @@ input:focus, input:active, textarea:focus, textarea:active {
 
 .jseo_content_standard_text div.contentspace figure.alignright figcaption {
     text-align: right;
+}
+
+.jseo_content_standard_text div.contentspace figure.gallery-item .gallery-caption {
+    padding: 0;
+    text-align: center;
 }
 
 .jseo_content_standard_text div.contentspace figure img {
@@ -2701,6 +2712,12 @@ input:focus, input:active, textarea:focus, textarea:active {
     clear: none !important;
 }
 
+.jseo_content_w_image div.contentwidget figure.gallery-item .gallery-icon {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .jseo_content_w_image div.contentwidget figure figcaption {
     display: block;
     width: 100%;
@@ -2729,6 +2746,11 @@ input:focus, input:active, textarea:focus, textarea:active {
 
 .jseo_content_w_image div.contentwidget figure.alignright figcaption {
     text-align: right;
+}
+
+.jseo_content_w_image div.contentwidget figure.gallery-item .gallery-caption {
+    padding: 0;
+    text-align: center;
 }
 
 .jseo_content_w_image div.contentwidget figure img {
